@@ -95,7 +95,7 @@ function Navbar() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <Link to="/">Zumar Cafe</Link>
+          <Link to="/">MsCafe</Link>
         </Logo>
         <NavLinks>
           <NavLink whileHover={{ scale: 1.1 }}>

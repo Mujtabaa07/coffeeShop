@@ -3,7 +3,13 @@ import { useDispatch } from 'react-redux';
 import { login } from '../Store/authSlice';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+const LoginBackGround= styled.section`
+background-image: url('https://img.freepik.com/free-photo/hot-latte-art-coffee-cup-wood-table-coffee-shop_1150-8937.jpg?t=st=1727759954~exp=1727763554~hmac=2715c972f28c255c158e0d14f664f9443fdd95a0e4b21cf6d5b41bc690aaa2d3&w=1380');
+  background-size: cover;
+  background-position: center;
 
+
+`;
 const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -50,6 +56,7 @@ function Login() {
   };
 
   return (
+    <LoginBackGround>
     <LoginContainer>
       <LoginForm
         initial={{ opacity: 0, y: 50 }}
@@ -81,6 +88,7 @@ function Login() {
         </Button>
       </LoginForm>
     </LoginContainer>
+    </LoginBackGround>
   );
 }
 

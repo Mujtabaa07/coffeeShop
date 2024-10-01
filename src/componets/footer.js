@@ -28,7 +28,8 @@ const SocialIcon = styled(motion.a)`
 function Footer() {
   return (
     <FooterContainer>
-      <p>&copy; 2023 Zumar Cafe. All rights reserved.</p>
+      <p>&copy; 2023 MsCafe. All rights reserved.</p>
+      <p >Made by Mscoder</p>
       <SocialIcons>
         <SocialIcon
           href="https://facebook.com"

@@ -20,7 +20,7 @@ const HeroSection = styled.section`
   justify-content: center;
   text-align: center;
   height: 100vh;
-  background-image: url('/images/hero-background.jpg');
+  background-image: url('https://img.freepik.com/free-photo/hot-latte-art-coffee-cup-wood-table-coffee-shop_1150-8937.jpg?t=st=1727759954~exp=1727763554~hmac=2715c972f28c255c158e0d14f664f9443fdd95a0e4b21cf6d5b41bc690aaa2d3&w=1380');
   background-size: cover;
   background-position: center;
   color: white;
@@ -60,8 +60,8 @@ const FeatureCard = styled(motion.div)`
 `;
 
 const FeatureIcon = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 350px;
+  height:350px;
   margin-bottom: 1rem;
 `;
 
@@ -145,7 +145,7 @@ function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Welcome to Zumar Cafe
+          Welcome to MsCafe
         </Title>
         <Subtitle
           initial={{ opacity: 0, y: -30 }}
@@ -160,25 +160,25 @@ function Home() {
       </HeroSection>
       <FeaturesSection ref={featuresRef}>
         <FeatureCard>
-          <FeatureIcon src="/images/coffee-bean.svg" alt="Quality Beans" />
+          <FeatureIcon src="https://img.freepik.com/free-photo/side-view-fresh-coffee-beans-falling-out-black-basket-red-background_141793-27586.jpg?t=st=1727759694~exp=1727763294~hmac=661c2c2b8c561df98b21f74effb9bb02a0875b0584c062f076bceafa5d6f7eda&w=1380" alt="Quality Beans" />
           <FeatureTitle>Premium Beans</FeatureTitle>
           <FeatureDescription>We source the finest coffee beans from around the world.</FeatureDescription>
         </FeatureCard>
         <FeatureCard>
-          <FeatureIcon src="/images/barista.svg" alt="Expert Baristas" />
+          <FeatureIcon src="https://img.freepik.com/free-vector/people-making-different-coffee-methods_23-2148659306.jpg?t=st=1727760094~exp=1727763694~hmac=1308757b9658b2965de4fa54acb3d847813ef088426f2fb78a05d8cb0be1b993&w=826" alt="Expert Baristas" />
           <FeatureTitle>Expert Baristas</FeatureTitle>
           <FeatureDescription>Our skilled baristas craft each cup to perfection.</FeatureDescription>
         </FeatureCard>
         <FeatureCard>
-          <FeatureIcon src="/images/ambiance.svg" alt="Cozy Ambiance" />
+          <FeatureIcon src="https://img.freepik.com/free-photo/modern-coffee-shop-with-comfortable-chairs-elegant-decor-relaxing-ambiance-generated-by-artificial-intelligence_188544-150832.jpg?t=st=1727760180~exp=1727763780~hmac=5b12fc3782c57d5c5a04bcd60e2d275f3c18e52b87d6939948612e1cd4a76d68&w=1380" alt="Cozy Ambiance" />
           <FeatureTitle>Cozy Ambiance</FeatureTitle>
           <FeatureDescription>Enjoy your coffee in our warm and inviting atmosphere.</FeatureDescription>
         </FeatureCard>
       </FeaturesSection>
       <SpecialtySection ref={specialtyRef}>
-        <SpecialtyImage src="/images/specialty-1.jpg" alt="Specialty Coffee 1" />
-        <SpecialtyImage src="/images/specialty-2.jpg" alt="Specialty Coffee 2" />
-        <SpecialtyImage src="/images/specialty-3.jpg" alt="Specialty Coffee 3" />
+        <SpecialtyImage src="https://img.freepik.com/free-photo/brown-coffee-beans-seed_74190-6651.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid " alt="Specialty Coffee 1" />
+        <SpecialtyImage src="https://img.freepik.com/free-photo/coffee-machine-making-perfect-cup-coffee_23-2151699675.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid" alt="Specialty Coffee 2" />
+        <SpecialtyImage src="https://img.freepik.com/free-photo/coffee-cup-with-beans_23-2148453628.jpg?t=st=1727760337~exp=1727763937~hmac=c326eb236a78a478ea9d9703e1bdbb8b390dcc71cefb24d78ca7a85bcb1c1cc5&w=740" alt="Specialty Coffee 3" />
       </SpecialtySection>
     </HomeContainer>
   );

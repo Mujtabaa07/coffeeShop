@@ -59,28 +59,41 @@ Once the server is running, you can view the app at (http://localhost:3000).
 
 ## ScreenShots:
 ## **Home Page:** 
+![Screenshot 2024-10-01 115456](https://github.com/user-attachments/assets/1d60d37c-891d-4b7b-b477-1bfa75d59691)
 ## **Coffee Menu:**
-
+![shop](https://github.com/user-attachments/assets/4d30c92d-8f70-4dd8-8f50-9f3560d37fe5)
 ## Contributing
 We welcome contributions! Follow the steps below to contribute to this project:
 ```bash
 # Click the "Fork" button at the top-right of the repository page to create a copy in your GitHub account.
+```
+```bash
 # Clone the forked repository to your local machine
 git clone https://github.com/your-username/ms-cafe.git
-
+```
+```bash
 # Navigate into the project directory
 cd ms-cafe
+```
+```bash
 # Create a new branch for your feature or fix
 git checkout -b feature/your-feature-name
+```
+```bash
 # Make Your Changes
 Make sure your changes adhere to the project standards and structure.
 # Stage all changes
 git add .
-
+```
+```bash
 # Commit the changes with a descriptive message
 git commit -m "Description of the feature or fix"
+```
+```bash
 # Push your branch to your forked repository
 git push origin feature/your-feature-name
+```
+```bash
 # Go to the original repository on GitHub and open a new Pull Request
 # Provide a clear description of your changes in the Pull Request.
 ```

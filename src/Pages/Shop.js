@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -17,25 +17,17 @@ const Title = styled(motion.h1)`
   text-align: center;
 `;
 
-const BeverageContainer = styled.div`
+const DropdownContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
 `;
 
-const BeverageBox = styled.div`
-  flex: 1;
-  padding: 1rem;
+const Dropdown = styled.select`
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-`;
-
-const BoxTitle = styled.h2`
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
 `;
 
 const ProductGrid = styled.div`
@@ -90,13 +82,13 @@ const products = [
 
 function Shop() {
   const dispatch = useDispatch();
+  const [category, setCategory] = useState('hot');
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
 
-  const hotBeverages = products.filter((product) => product.type === 'hot');
-  const coldBeverages = products.filter((product) => product.type === 'cold');
+  const filteredProducts = products.filter((product) => product.type === category);
 
   return (
     <ShopContainer>
@@ -107,48 +99,29 @@ function Shop() {
       >
         Our Beverage Selection
       </Title>
-      <BeverageContainer>
-        <BeverageBox>
-          <BoxTitle>Hot Beverages</BoxTitle>
-          <ProductGrid>
-            {hotBeverages.map((product) => (
-              <ProductCard
-                key={product.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <ProductImage src={product.image} alt={product.name} />
-                <ProductInfo>
-                  <ProductName>{product.name}</ProductName>
-                  <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
-                  <Button onClick={() => handleAddToCart(product)}>Add to Cart</Button>
-                </ProductInfo>
-              </ProductCard>
-            ))}
-          </ProductGrid>
-        </BeverageBox>
-        <BeverageBox>
-          <BoxTitle>Cold Beverages</BoxTitle>
-          <ProductGrid>
-            {coldBeverages.map((product) => (
-              <ProductCard
-                key={product.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <ProductImage src={product.image} alt={product.name} />
-                <ProductInfo>
-                  <ProductName>{product.name}</ProductName>
-                  <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
-                  <Button onClick={() => handleAddToCart(product)}>Add to Cart</Button>
-                </ProductInfo>
-              </ProductCard>
-            ))}
-          </ProductGrid>
-        </BeverageBox>
-      </BeverageContainer>
+      <DropdownContainer>
+        <Dropdown value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="hot">Hot Beverages</option>
+          <option value="cold">Cold Beverages</option>
+        </Dropdown>
+      </DropdownContainer>
+      <ProductGrid>
+        {filteredProducts.map((product) => (
+          <ProductCard
+            key={product.id}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <ProductImage src={product.image} alt={product.name} />
+            <ProductInfo>
+              <ProductName>{product.name}</ProductName>
+              <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
+              <Button onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+            </ProductInfo>
+          </ProductCard>
+        ))}
+      </ProductGrid>
     </ShopContainer>
   );
 }

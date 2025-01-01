@@ -110,3 +110,21 @@ body.menu-open {
   pointer-events: none;
   animation: steam 2s infinite;
 }
+
+/* Highlighting current page */
+.nav a.active {
+  position: relative;
+  color: #D2691E;
+  font-weight: bold;
+}
+
+.nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #D2691E;
+  transition: width 0.3s ease;
+}

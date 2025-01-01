@@ -17,17 +17,38 @@ const Title = styled(motion.h1)`
   text-align: center;
 `;
 
+const BeverageContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+`;
+
+const BeverageBox = styled.div`
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+`;
+
+const BoxTitle = styled.h2`
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+`;
+
 const ProductGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
 `;
 
 const ProductCard = styled(motion.div)`
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const ProductImage = styled.img`
@@ -52,14 +73,19 @@ const ProductPrice = styled.p`
 `;
 
 const products = [
-  { id: 1, name: 'Espresso', price: 2.5, image: 'https://img.freepik.com/free-photo/caramel-latte-with-chocolade-table_140725-4.jpg?t=st=1727759794~exp=1727763394~hmac=c764d48b2b28767da2c6b996ec20e0d6a5857c19724850db5e46498687e16225&w=740' },
-  { id: 2, name: 'Cappuccino', price: 3.5, image: 'https://img.freepik.com/free-photo/delicious-organic-latte-macchiato-with-milk_23-2148420329.jpg?t=st=1727761406~exp=1727765006~hmac=10f2d9d7a08693daef2ef87ff4edd99d5bc33e1813adb65c8628d088268239b5&w=1380 ' },
-  { id: 3, name: 'Latte', price: 4, image: 'https://img.freepik.com/free-photo/cold-chocolate-cocktail-with-ice-cream_140725-940.jpg?t=st=1727759865~exp=1727763465~hmac=ad44e2430bff005bce4db484fbef6f2ec22f05b97b41c8c6c28ecb8508c2d909&w=740 ' },
-  { id: 4, name: 'Mocha', price: 4.5, image: 'https://img.freepik.com/free-photo/delicious-quality-coffee-cup_23-2150691385.jpg?t=st=1727759888~exp=1727763488~hmac=ea5484acf51753db6069801c3df0caa601e5d09a2265109ba218d040acb3e53c&w=1380  ' },
-  { id: 5, name: 'Americano', price: 3, image: 'https://img.freepik.com/free-photo/delicious-quality-coffee-cup_23-2150691389.jpg?t=st=1727759909~exp=1727763509~hmac=615986b69635b1e5a35b3a09347203d49046878d7525a9588f94211a3947ff58&w=1380  ' },
-  { id: 6, name: 'Macchiato', price: 3.5, image: 'https://img.freepik.com/free-photo/assortment-with-frappe-dark-background_23-2148436976.jpg?t=st=1727761354~exp=1727764954~hmac=20b5ddf356f56d12e139084bc8e2c14ad3c71677269de9680db9dc4d09250774&w=740 ' },
-  { id: 2, name: 'Chai', price: 3, image: 'https://img.freepik.com/free-photo/frappe-glass-slices-bread-with-seeds_23-2148623233.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid' },
-  { id: 2, name: 'Lemon Tea', price: 3.5, image: 'https://img.freepik.com/free-photo/cup-hot-mint-tea_144627-34462.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid ' },
+  { id: 1, name: 'Espresso', price: 2.5, image: 'https://img.freepik.com/free-photo/caramel-latte-with-chocolade-table_140725-4.jpg', type: 'hot' },
+  { id: 2, name: 'Cappuccino', price: 3.5, image: 'https://img.freepik.com/free-photo/delicious-organic-latte-macchiato-with-milk_23-2148420329.jpg', type: 'hot' },
+  { id: 3, name: 'Latte', price: 4, image: 'https://img.freepik.com/free-photo/cold-chocolate-cocktail-with-ice-cream_140725-940.jpg', type: 'hot' },
+  { id: 4, name: 'Mocha', price: 4.5, image: 'https://img.freepik.com/free-photo/delicious-quality-coffee-cup_23-2150691385.jpg', type: 'hot' },
+  { id: 5, name: 'Americano', price: 3, image: 'https://img.freepik.com/free-photo/delicious-quality-coffee-cup_23-2150691389.jpg', type: 'hot' },
+  { id: 6, name: 'Macchiato', price: 3.5, image: 'https://img.freepik.com/free-photo/assortment-with-frappe-dark-background_23-2148436976.jpg', type: 'hot' },
+  { id: 7, name: 'Chai', price: 3, image: 'https://img.freepik.com/free-photo/frappe-glass-slices-bread-with-seeds_23-2148623233.jpg', type: 'hot' },
+  { id: 8, name: 'Lemon Tea', price: 3.5, image: 'https://img.freepik.com/free-photo/cup-hot-mint-tea_144627-34462.jpg', type: 'hot' },
+  { id: 9, name: 'Iced Coffee', price: 4, image: 'https://www.allrecipes.com/thmb/aizVUz1JlBwSPI_hrH4Wu1XFXSE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/21667-easy-iced-coffee-ddmfs-4x3-0093-7becf3932bd64ed7b594d46c02d0889f.jpg', type: 'cold' },
+  { id: 10, name: 'Cold Brew', price: 4.5, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT116wHqWZcj-V5R5ysue8exf2n2ewy1ZTOfA&s', type: 'cold' },
+  { id: 11, name: 'Iced Latte', price: 5, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV-sXM6szwUFzFY9G0NP-rnRcejgVGKXWt3A&s', type: 'cold' },
+  { id: 12, name: 'Iced Mocha', price: 5.5, image: 'https://vibrantlygfree.com/wp-content/uploads/2023/07/iced-mocha-1.jpg', type: 'cold' },
+  { id: 13, name: 'Frappuccino', price: 6, image: 'https://www.aguaeden.es/sites/default/files/blog_migrate/frappuccino.jpg', type: 'cold' },
 ];
 
 function Shop() {
@@ -69,6 +95,9 @@ function Shop() {
     dispatch(addToCart(product));
   };
 
+  const hotBeverages = products.filter((product) => product.type === 'hot');
+  const coldBeverages = products.filter((product) => product.type === 'cold');
+
   return (
     <ShopContainer>
       <Title
@@ -76,25 +105,50 @@ function Shop() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Our Coffee Selection
+        Our Beverage Selection
       </Title>
-      <ProductGrid>
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <ProductImage src={product.image} alt={product.name} />
-            <ProductInfo>
-              <ProductName>{product.name}</ProductName>
-              <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
-              <Button onClick={() => handleAddToCart(product)}>Add to Cart</Button>
-            </ProductInfo>
-          </ProductCard>
-        ))}
-      </ProductGrid>
+      <BeverageContainer>
+        <BeverageBox>
+          <BoxTitle>Hot Beverages</BoxTitle>
+          <ProductGrid>
+            {hotBeverages.map((product) => (
+              <ProductCard
+                key={product.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <ProductImage src={product.image} alt={product.name} />
+                <ProductInfo>
+                  <ProductName>{product.name}</ProductName>
+                  <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
+                  <Button onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+                </ProductInfo>
+              </ProductCard>
+            ))}
+          </ProductGrid>
+        </BeverageBox>
+        <BeverageBox>
+          <BoxTitle>Cold Beverages</BoxTitle>
+          <ProductGrid>
+            {coldBeverages.map((product) => (
+              <ProductCard
+                key={product.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <ProductImage src={product.image} alt={product.name} />
+                <ProductInfo>
+                  <ProductName>{product.name}</ProductName>
+                  <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
+                  <Button onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+                </ProductInfo>
+              </ProductCard>
+            ))}
+          </ProductGrid>
+        </BeverageBox>
+      </BeverageContainer>
     </ShopContainer>
   );
 }

@@ -1,0 +1,38 @@
+name: 'Auto Comment on PR Merge'
+
+on:
+  pull_request_target:
+    types: [closed]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  auto_comment:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create Success Comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.COFFEE_SHOP_GITHUB_TOKEN }}
+          script: |
+            const message = `### 🎉 Congratulations on Your Merged PR! 
+
+            Thank you @${context.payload.pull_request.user.login} for your contribution!
+
+            #### What's Next?
+            - 🌟 Consider contributing to other issues
+            - 📚 Check our [Contributing Guidelines](https://github.com/Mujtabaa07/coffeeShop/blob/main/CONTRIBUTING.md) for more ways to help
+
+            Keep up the fantastic work! 🚀`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });

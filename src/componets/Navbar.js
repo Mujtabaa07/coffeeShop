@@ -4,6 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../Store/authSlice';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../Store/authSlice";
+import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 const NavbarContainer = styled(motion.nav)`
   display: flex;
@@ -19,7 +26,7 @@ const NavbarContainer = styled(motion.nav)`
   right: 0;
   z-index: 1000;
   transition: all 0.3s ease;
-  border-bottom: 2px solid #8B4513;
+  border-bottom: 2px solid #8b4513;
 
   &.scrolled {
     padding: 0.8rem 2rem;
@@ -27,13 +34,13 @@ const NavbarContainer = styled(motion.nav)`
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/coffee-beans-pattern.png') repeat;
+    background: url("/coffee-beans-pattern.png") repeat;
     opacity: 0.05;
     pointer-events: none;
   }
@@ -42,17 +49,17 @@ const NavbarContainer = styled(motion.nav)`
 const Logo = styled(motion.div)`
   font-size: 2rem;
   font-weight: 700;
-  font-family: 'Playfair Display', serif;
-  
+  font-family: "Playfair Display", serif;
+
   a {
-    color: #D2691E;
+    color: #d2691e;
     text-decoration: none;
-    background: linear-gradient(to right, #D2691E, #CD853F);
+    background: linear-gradient(to right, #d2691e, #cd853f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: all 0.3s ease;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    
+
     &:hover {
       opacity: 0.9;
     }
@@ -71,17 +78,17 @@ const NavLinks = styled(motion.div)`
 
 const NavLink = styled(motion.div)`
   position: relative;
-  
+
   a {
-    color: #DEB887;
+    color: #deb887;
     text-decoration: none;
     font-weight: 500;
     font-size: 1.1rem;
     transition: all 0.3s ease;
-    font-family: 'Poppins', sans-serif;
-    
+    font-family: "Poppins", sans-serif;
+
     &:hover {
-      color: #FFE4B5;
+      color: #ffe4b5;
     }
   }
   &.active a {
@@ -90,14 +97,14 @@ const NavLink = styled(motion.div)`
   }
 
   &::after {
-    content: '☕';
+    content: "☕";
     position: absolute;
     font-size: 0.8rem;
     bottom: -15px;
     left: 50%;
     transform: translateX(-50%) scale(0);
     transition: transform 0.3s ease;
-    color: #D2691E;
+    color: #d2691e;
   }
 
   &:hover::after {
@@ -108,10 +115,10 @@ const NavLink = styled(motion.div)`
 const MobileMenuButton = styled(motion.button)`
   display: none;
   background: none;
-  border: 2px solid #D2691E;
+  border: 2px solid #d2691e;
   font-size: 1.8rem;
   cursor: pointer;
-  color: #DEB887;
+  color: #deb887;
   padding: 0.5rem;
   border-radius: 8px;
   transition: all 0.3s ease;
@@ -124,7 +131,7 @@ const MobileMenuButton = styled(motion.button)`
 
   &:hover {
     background: rgba(210, 105, 30, 0.2);
-    color: #FFE4B5;
+    color: #ffe4b5;
   }
 `;
 
@@ -135,9 +142,10 @@ const MobileMenu = styled(motion.div)`
   right: 0;
   background: rgba(44, 19, 11, 0.98);
   padding: 1rem;
+  z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 0 0 15px 15px;
-  border: 2px solid #8B4513;
+  border: 2px solid #8b4513;
   border-top: none;
 `;
 
@@ -146,21 +154,21 @@ const MobileNavLink = styled(motion.div)`
   border-radius: 8px;
   transition: all 0.3s ease;
   margin-bottom: 0.5rem;
-  
+
   a {
-    color: #DEB887;
+    color: #deb887;
     text-decoration: none;
     font-weight: 500;
     display: block;
     transition: all 0.3s ease;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 
   &:hover {
     background: rgba(210, 105, 30, 0.2);
-    
+
     a {
-      color: #FFE4B5;
+      color: #ffe4b5;
       transform: translateX(10px);
     }
   }
@@ -178,8 +186,8 @@ function Navbar() {
       setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLogout = () => {
@@ -196,7 +204,7 @@ function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={scrolled ? 'scrolled' : ''}
+        className={scrolled ? "scrolled" : ""}
       >
         <Logo whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link to="/">MsCafe</Link>
@@ -222,7 +230,7 @@ function Navbar() {
           whileHover={{ scale: 1.05 }}>
             <Link to="/contact">Contact</Link>
           </NavLink>
-          
+
           {isLoggedIn ? (
             <>
               <NavLink className={location.pathname === '/profile' ? 'active' : ''}
@@ -233,10 +241,15 @@ function Navbar() {
               whileHover={{ scale: 1.05 }}>
                 <Link to="/cart">Cart</Link>
               </NavLink>
-              <NavLink className={location.pathname === '/cart' ? 'active' : ''}
+
+            <NavLink className={location.pathname === '/cart' ? 'active' : ''}
                 whileHover={{ scale: 1.05 }} 
+
+              <NavLink
+                whileHover={{ scale: 1.05 }}
+
                 onClick={handleLogout}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
               >
                 Logout
               </NavLink>
@@ -253,7 +266,7 @@ function Navbar() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          {isOpen ? '×' : '☰'}
+          {isOpen ? "×" : "☰"}
         </MobileMenuButton>
       </NavbarContainer>
       <AnimatePresence>
@@ -265,39 +278,58 @@ function Navbar() {
             transition={{ duration: 0.3 }}
           >
             <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/" onClick={toggleMenu}>Home</Link>
+              <Link to="/" onClick={toggleMenu}>
+                Home
+              </Link>
             </MobileNavLink>
             <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/shop" onClick={toggleMenu}>Shop</Link>
+              <Link to="/shop" onClick={toggleMenu}>
+                Shop
+              </Link>
             </MobileNavLink>
             <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/about" onClick={toggleMenu}>About</Link>
+              <Link to="/about" onClick={toggleMenu}>
+                About
+              </Link>
             </MobileNavLink>
             <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/testimonial" onClick={toggleMenu}>Testimonial</Link>
+              <Link to="/testimonial" onClick={toggleMenu}>
+                Testimonial
+              </Link>
             </MobileNavLink>
             <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/contact" onClick={toggleMenu}>Contact</Link>
+              <Link to="/contact" onClick={toggleMenu}>
+                Contact
+              </Link>
             </MobileNavLink>
             {isLoggedIn ? (
               <>
                 <MobileNavLink whileHover={{ scale: 1.02 }}>
-                  <Link to="/profile" onClick={toggleMenu}>Profile</Link>
+                  <Link to="/profile" onClick={toggleMenu}>
+                    Profile
+                  </Link>
                 </MobileNavLink>
                 <MobileNavLink whileHover={{ scale: 1.02 }}>
-                  <Link to="/cart" onClick={toggleMenu}>Cart</Link>
+                  <Link to="/cart" onClick={toggleMenu}>
+                    Cart
+                  </Link>
                 </MobileNavLink>
-                <MobileNavLink 
-                  whileHover={{ scale: 1.02 }} 
-                  onClick={() => { handleLogout(); toggleMenu(); }}
-                  style={{ cursor: 'pointer' }}
+                <MobileNavLink
+                  whileHover={{ scale: 1.02 }}
+                  onClick={() => {
+                    handleLogout();
+                    toggleMenu();
+                  }}
+                  style={{ cursor: "pointer" }}
                 >
                   Logout
                 </MobileNavLink>
               </>
             ) : (
               <MobileNavLink whileHover={{ scale: 1.02 }}>
-                <Link to="/login" onClick={toggleMenu}>Login</Link>
+                <Link to="/login" onClick={toggleMenu}>
+                  Login
+                </Link>
               </MobileNavLink>
             )}
           </MobileMenu>

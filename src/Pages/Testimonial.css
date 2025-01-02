@@ -15,6 +15,7 @@ h1{
 
 .container{
     margin-top: 5%;    
+    margin-bottom: 20px;
 }
 
 .image-text{
@@ -28,7 +29,12 @@ h1{
     border-radius: 15px;
     box-shadow: 0px 2px 6px 3px rgba(0, 0, 0, 0.1);
     animation: fadeInUp 1s ease-in-out; /* Added animation */
+    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.image:hover {
+    transform: none;
+  }
 
 .image-text h2{
     font-size: 25px;
@@ -43,6 +49,13 @@ h1{
 .single{
     position: relative;
     margin-bottom: 50px;
+   
+}
+
+.single:hover  {
+    transform: scale(1.05); 
+    box-shadow: 0px 4px 12px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out; 
 }
 
 .image{
@@ -54,12 +67,15 @@ h1{
     top:15px;
     left:125px;
     border-radius: 50%;
-    animation: bounceIn 1s ease-in-out; /* Added animation */
+    animation: bounceIn 1s ease-in-out; 
 }
 
 .image img{
     width: 100%;
     object-fit: cover;
+}
+.row{
+    margin-bottom: 20px;
 }
 
 .carousel-indicators{

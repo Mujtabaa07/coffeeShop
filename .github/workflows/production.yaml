@@ -1,12 +1,13 @@
 name: Vercel Production Deployment
 
 env:
-    VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+    VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID || 'default_org_id' }}
     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
     push:
         branches:
+            - main
             - master
 
 jobs:
@@ -20,6 +21,9 @@ jobs:
               with:
                 node-version: '18'
 
+            - name: Install Dependencies
+              run: npm ci
+
             - name: Install Vercel CLI
               run: npm install --global vercel@latest
 
@@ -27,19 +31,9 @@ jobs:
               run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
               env:
                 VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-                VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-                VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
             - name: Build Project Artifacts
               run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-              env:
-                VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-                VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-                VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
             - name: Deploy Project Artifacts
               run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-              env:
-                VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-                VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-                VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

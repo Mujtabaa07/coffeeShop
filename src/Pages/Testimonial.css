@@ -52,9 +52,9 @@ h1{
     border: 3px solid #7c2214;
     overflow: hidden;
     top:15px;
-    left:125px;
+    left: 50%;
+    transform: translateX(-50%);
     border-radius: 50%;
-    animation: bounceIn 1s ease-in-out; /* Added animation */
 }
 
 .image img{

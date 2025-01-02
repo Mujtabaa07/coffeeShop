@@ -1,12 +1,12 @@
 /* CafeHome.css */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap");
 
 :root {
-  --primary-coffee: #8B4513;
-  --secondary-coffee: #D2691E;
-  --cream: #FFE4B5;
-  --light-cream: #FDF5E6;
-  --dark-coffee: #2C130B;
+  --primary-coffee: #8b4513;
+  --secondary-coffee: #d2691e;
+  --cream: #ffe4b5;
+  --light-cream: #fdf5e6;
+  --dark-coffee: #2c130b;
 }
 
 /* Custom Scrollbar */
@@ -79,11 +79,11 @@ html {
   .hero-section {
     background-attachment: scroll;
   }
-  
+
   .feature-card {
     margin: 1rem;
   }
-  
+
   .specialty-image {
     width: 250px;
     height: 250px;

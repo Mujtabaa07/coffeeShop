@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
@@ -6,6 +7,16 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import Button from "../componets/Button";
 import "./Home.css";
+
+import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import Button from '../componets/Button';
+import './Home.css';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -284,6 +295,7 @@ function Home() {
         </Link>
         <ScrollIndicator>↓</ScrollIndicator>
       </HeroSection>
+
       <FeaturesSection
         ref={featuresRef}
         className="grid md:grid-cols-3 sm:grid-cols-2 gap-4 grid-cols-1"
@@ -293,6 +305,11 @@ function Home() {
             src="https://img.freepik.com/free-photo/side-view-fresh-coffee-beans-falling-out-black-basket-red-background_141793-27586.jpg?t=st=1727759694~exp=1727763294~hmac=661c2c2b8c561df98b21f74effb9bb02a0875b0584c062f076bceafa5d6f7eda&w=1380"
             alt="Quality Beans"
           />
+
+      <FeaturesSection ref={featuresRef} className="hover:cursor-pointer">
+        <FeatureCard >
+          <FeatureIcon src="https://img.freepik.com/free-photo/side-view-fresh-coffee-beans-falling-out-black-basket-red-background_141793-27586.jpg?t=st=1727759694~exp=1727763294~hmac=661c2c2b8c561df98b21f74effb9bb02a0875b0584c062f076bceafa5d6f7eda&w=1380" alt="Quality Beans" />
+
           <FeatureTitle>Premium Beans</FeatureTitle>
           <FeatureDescription>
             We source the finest coffee beans from around the world.

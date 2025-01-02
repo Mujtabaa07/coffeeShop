@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../Store/authSlice';
 import styled from 'styled-components';
@@ -84,6 +84,10 @@ const NavLink = styled(motion.div)`
       color: #FFE4B5;
     }
   }
+  &.active a {
+    text-decoration: underline;
+    color: #D2691E;
+  }
 
   &::after {
     content: '☕';
@@ -131,9 +135,10 @@ const MobileMenu = styled(motion.div)`
   right: 0;
   background: rgba(44, 19, 11, 0.98);
   padding: 1rem;
+  z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 0 0 15px 15px;
-  border: 2px solid #8B4513;
+  border: 2px solid #8b4513;
   border-top: none;
 `;
 
@@ -167,6 +172,7 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -197,31 +203,47 @@ function Navbar() {
           <Link to="/">MsCafe</Link>
         </Logo>
         <NavLinks>
-          <NavLink whileHover={{ scale: 1.05 }}>
+
+          {/* <!-- ------NavLink:::::Home-------------------> */}
+          <NavLink className={location.pathname === '/' ? 'active' : ''}
+          whileHover={{ scale: 1.05 }}>
             <Link to="/">Home</Link>
           </NavLink>
-          <NavLink whileHover={{ scale: 1.05 }}>
+          {/* <!-- ------NavLink:::::Shop-------------------> */}
+          <NavLink className={location.pathname === '/shop' ? 'active' : ''}
+          whileHover={{ scale: 1.05 }}>
             <Link to="/shop">Shop</Link>
           </NavLink>
-          <NavLink whileHover={{ scale: 1.05 }}>
+
+          {/* <!-- ------NavLink:::::About-------------------> */}
+          <NavLink className={location.pathname === '/about' ? 'active' : ''} 
+          whileHover={{ scale: 1.05 }}>
             <Link to="/about">About</Link>
           </NavLink>
-          <NavLink whileHover={{ scale: 1.05 }}>
+
+          {/* <!-- ------NavLink::::Testinomial-------------------> */}
+          <NavLink className={location.pathname === '/testimonial' ? 'active' : ''}
+          whileHover={{ scale: 1.05 }}>
             <Link to="/testimonial">Testimonial</Link>
           </NavLink>
-          <NavLink whileHover={{ scale: 1.05 }}>
+          
+          {/* <!-- ------NavLink:::::Contacts-------------------> */}
+          <NavLink className={location.pathname === '/contact' ? 'active' : ''}
+          whileHover={{ scale: 1.05 }}>
             <Link to="/contact">Contact</Link>
           </NavLink>
           
           {isLoggedIn ? (
             <>
-              <NavLink whileHover={{ scale: 1.05 }}>
+              <NavLink className={location.pathname === '/profile' ? 'active' : ''}
+              whileHover={{ scale: 1.05 }}>
                 <Link to="/profile">Profile</Link>
               </NavLink>
-              <NavLink whileHover={{ scale: 1.05 }}>
+              <NavLink 
+              whileHover={{ scale: 1.05 }}>
                 <Link to="/cart">Cart</Link>
               </NavLink>
-              <NavLink 
+              <NavLink className={location.pathname === '/cart' ? 'active' : ''}
                 whileHover={{ scale: 1.05 }} 
                 onClick={handleLogout}
                 style={{ cursor: 'pointer' }}
@@ -230,7 +252,8 @@ function Navbar() {
               </NavLink>
             </>
           ) : (
-            <NavLink whileHover={{ scale: 1.05 }}>
+            <NavLink className={location.pathname === '/login' ? 'active' : ''}
+            whileHover={{ scale: 1.05 }}>
               <Link to="/login">Login</Link>
             </NavLink>
           )}
@@ -262,6 +285,9 @@ function Navbar() {
             </MobileNavLink>
             <MobileNavLink whileHover={{ scale: 1.02 }}>
               <Link to="/testimonial" onClick={toggleMenu}>Testimonial</Link>
+            </MobileNavLink>
+            <MobileNavLink whileHover={{ scale: 1.02 }}>
+              <Link to="/premiumbeans" onClick={toggleMenu}>Premium Beans</Link>
             </MobileNavLink>
             <MobileNavLink whileHover={{ scale: 1.02 }}>
               <Link to="/contact" onClick={toggleMenu}>Contact</Link>

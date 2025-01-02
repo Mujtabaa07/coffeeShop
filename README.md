@@ -59,9 +59,13 @@ Once the server is running, you can view the app at (http://localhost:3000).
 
 ## ScreenShots:
 ## **Home Page:** 
-![Screenshot 2024-10-01 115456](https://github.com/user-attachments/assets/1d60d37c-891d-4b7b-b477-1bfa75d59691)
+![homepage](https://github.com/user-attachments/assets/36a7852c-dd6d-40b2-9652-4c4a3f9d46fc)
 ## **Coffee Menu:**
-![shop](https://github.com/user-attachments/assets/4d30c92d-8f70-4dd8-8f50-9f3560d37fe5)
+![coffeemenu](https://github.com/user-attachments/assets/0f9583d8-e2a8-4797-8e13-9d8325f58764)
+## **Login Page**
+![coffeelogin](https://github.com/user-attachments/assets/e29ee634-69c4-45a3-978c-a797cf62487f)
+## **Testimonials**
+![testimonials](https://github.com/user-attachments/assets/af0b4e1f-5363-4b71-8c5c-fe1ba244edb3)
 ## Contributing
 We welcome contributions! Follow the steps below to contribute to this project:
 ```bash
@@ -101,5 +105,25 @@ git push origin feature/your-feature-name
 # Go to the original repository on GitHub and open a new Pull Request
 # Provide a clear description of your changes in the Pull Request.
 ```
-Happy Coding
-☕️
+
+
+<div>
+  <h2 align="center"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Red%20Heart.png" width="35" height="35"> Our Contributors</h2>
+  <div align="center">
+    <h3>Thank you for contributing to our project</h3
+<p align="center">
+      <a href="https://github.com/Mujtabaa07/coffeeShop/graphs/contributors">
+        <img src="https://api.vaunt.dev/v1/github/entities/Mujtabaa07/repositories/coffeeShop/contributors?format=svg&limit=54" width="700" height="250" />
+      </a>
+ </p>
+<a href="https://github.com/Mujtabaa07/coffeeShop/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Mujtabaa07/coffeeShop&max=300" />
+</a>
+    
+
+
+  </div>
+</div>
+
+
+<h3 align="center"> Happy Coding ☕️</h3>

@@ -1,0 +1,48 @@
+name: 'Auto Close Linked Issues'
+
+on:
+  pull_request_target:
+    types: [closed]
+    branches: [main, master]
+
+jobs:
+  close-issues:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Close Linked Issues
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.COFFEE_SHOP_GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            
+            // Get issue numbers from PR title/body
+            const issueNumbers = [
+              ...pr.title.match(/#(\d+)/g) || [],
+              ...pr.body.match(/#(\d+)/g) || []
+            ].map(num => Number(num.replace('#', '')));
+            
+            // Process each linked issue
+            for (const issueNumber of issueNumbers) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                state: 'closed'
+              });
+              
+              // Add completion comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: `✅ This issue has been resolved in PR #${pr.number} by @${pr.user.login}`
+              });
+            }

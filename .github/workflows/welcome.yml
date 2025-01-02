@@ -1,0 +1,36 @@
+name: '👋 Welcome'
+
+on:
+  fork:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+  discussion:
+    types: [created]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Greet New Contributors
+        uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.COFFEE_SHOP_GITHUB_TOKEN }}
+          issue-message: |
+            ### Welcome @${{ github.actor }}! 🌟
+
+            Thank you for opening This issue! We're excited to have you here.
+
+            A few quick things:
+            - 📝 Please check if this issue has been reported before
+            - ✅ Follow our issue template if provided
+            - ⏳ We'll review your issue as soon as possible
+
+            Need help? Check our [Contributing Guidelines](https://github.com/Mujtabaa07/coffeeShop/blob/main/CONTRIBUTING.md)
+             Keep coding! 💻

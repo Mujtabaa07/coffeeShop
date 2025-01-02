@@ -1,19 +1,21 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 const StyledButton = styled(motion.button)`
   padding: 0.5rem 1rem;
+  margin: 1rem 1rem;
   font-size: 1rem;
-  background-color: ${props => props.primary ? '#7c2214' : 'transparent'};
-  color: ${props => props.primary ? 'white' : '#7c2214'};
+  background-color: ${props => props.primary ? '#7c2214' : '#7c2214'};
+  color: ${props => props.primary ? 'white' : 'white'};
   border: 2px solid #7c2214;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: ${props => props.primary ? '#5e1a0f' : 'rgba(124, 34, 20, 0.1)'};
+    background-color: ${props => props.primary ? '#7c2214' : 'white'};
+    color: ${props => props.primary ? 'white' : '#7c2214'}
   }
 `;
 

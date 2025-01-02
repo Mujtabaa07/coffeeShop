@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../Store/authSlice';
@@ -70,12 +69,17 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser && storedUser.username === username && storedUser.email === email && storedUser.password === password) {
-      dispatch(login({ username, email }));
-      navigate('/profile'); // Redirect to home page
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      if (parsedUser.username === username && parsedUser.email === email && parsedUser.password === password) {
+        dispatch(login({ username, email }));
+        navigate('/profile'); // Redirect to profile page
+      } else {
+        setError('Invalid credentials');
+      }
     } else {
-      setError('Invalid credentials');
+      setError('No user data found');
     }
   };
 

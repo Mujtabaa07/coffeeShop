@@ -16,6 +16,7 @@ import Profile from './Pages/profile';
 import Checkout from './Pages/checkOut';
 import Testimonial from './Pages/Testimonial';
 import PremiumBeans from './Pages/PremiumBeans';
+import Reviews from './componets/Reviews'
 
 
 
@@ -50,10 +51,9 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/premiumbeans" element={<PremiumBeans />} />
-
             </Routes>
           </ContentContainer>
-          
+          <Reviews />
           <Footer />
         </AppContainer>
       </Router>

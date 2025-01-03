@@ -2,10 +2,11 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { addToCart } from "../Store/cartSlice";
 import Button from "../componets/Button";
-
+ 
 const ShopContainer = styled.div`
   padding: 6rem 2rem 4rem 2rem; // Added top padding for navbar
   max-width: 1200px;
@@ -115,6 +116,16 @@ const StyledButton = styled.button`
   &:active {
     transform: scale(0.98);
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); 
+  }
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;  /* Default to horizontal layout */
+  gap: 10px;            /* Add space between the buttons */
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack buttons vertically on small screens */
+    gap: 10px;              /* Add space between stacked buttons */
   }
 `;
 
@@ -544,11 +555,16 @@ const products = [
 
 function Shop() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
 
+ const handleBuyNow = (product) => {
+    dispatch(addToCart(product));   
+    navigate("/checkout");
+
+  };
   return (
     <ShopContainer>
       <Title
@@ -575,10 +591,13 @@ function Shop() {
             <ProductInfo>
               <ProductName>{product.name}</ProductName>
               <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
+              <ButtonContainer>
+
               <Button onClick={() => handleAddToCart(product)}>
                 Add to Cart
               </Button>
-              <StyledButton onClick={() => handleAddToCart(product)}>Add to Cart</StyledButton>
+              <StyledButton onClick={() => handleBuyNow(product)}>Buy Now</StyledButton>
+  </ButtonContainer>
 
             </ProductInfo>
           </ProductCard>

@@ -12,20 +12,34 @@ const StyledButton = styled(motion.button)`
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
+    margin-right: ${props => props.noMargin ? '0' : '10px'}; /* Add margin for spacing */
+
 
   &:hover {
     background-color: ${props => props.primary ? '#7c2214' : 'white'};
     color: ${props => props.primary ? 'white' : '#7c2214'}
   }
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;  /* Default to horizontal layout */
+  gap: 10px;            /* Add space between the buttons */
 
-const Button = ({ children, primary, onClick, ...props }) => {
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack buttons vertically on small screens */
+    gap: 10px;              /* Add space between stacked buttons */
+  }
+`;
+
+const Button = ({ children, primary, onClick, noMargin, ...props }) => {
   return (
     <StyledButton
       primary={primary}
       onClick={onClick}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
+      noMargin={noMargin} /* pass the noMargin prop */
+
       {...props}
     >
       {children}

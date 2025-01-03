@@ -52,7 +52,7 @@ function Footer() {
   return (
     <FooterContainer>
       <FooterContent>
-        <p>&copy; 2023 MsCafe. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} MsCafe. All rights reserved.</p>
         <p>Made with ♥ by Mscoder</p>
         <SocialIcons>
           <SocialIcon

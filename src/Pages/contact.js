@@ -26,6 +26,11 @@ const Input = styled.input`
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  transition: transform 0.3s ease-in-out;
+  
+  &:hover {
+    transform: scale(1.05); /* Slightly scales up the input */
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -34,7 +39,13 @@ const TextArea = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 4px;
   min-height: 150px;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05); /* Slightly scales up the textarea */
+  }
 `;
+
 
 function Contact() {
   const [formData, setFormData] = useState({

@@ -1,8 +1,7 @@
-import React from 'react';
-
+import React from 'react'
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-const PremiumContainer = styled.div`
+const ExpertContainer = styled.div`
   padding: 6rem 2rem 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -13,7 +12,7 @@ const PremiumContainer = styled.div`
 
 const FeatureTitle =  styled(motion.h1)`
  font-size: 4rem;
-    margin-top: 2rem;
+    margin-top: -4rem;
     margin-bottom: 1rem;
     color: ##78350f;
     font-family: 'Playfair Display', serif;
@@ -58,25 +57,25 @@ const FeatureDescription = styled(motion.p)`
     margin-right: 50px;
 `;
 
-
-
-function PremiumBeans() {
+function ExpertBaristas() {
   return (
-    <>
-    <PremiumContainer>
+    
+           <>
+           <div>
+    <ExpertContainer>
      <FeatureTitle
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Premium beans
+       Expert Baristas
       </FeatureTitle>
       <ImageContent
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-    <Image src="https://img.freepik.com/free-photo/side-view-fresh-coffee-beans-falling-out-black-basket-red-background_141793-27586.jpg?t=st=1727759694~exp=1727763294~hmac=661c2c2b8c561df98b21f74effb9bb02a0875b0584c062f076bceafa5d6f7eda&w=1380" alt="Quality Beans" />
+    <Image src="https://img.freepik.com/free-vector/people-making-different-coffee-methods_23-2148659306.jpg?t=st=1727760094~exp=1727763694~hmac=1308757b9658b2965de4fa54acb3d847813ef088426f2fb78a05d8cb0be1b993&w=826"  alt="Expert Baristas" />
     </ImageContent >
     <FeatureDescription
           initial={{ opacity: 0, x: -50 }}
@@ -84,17 +83,20 @@ function PremiumBeans() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
        
-        Premium coffee beans are often considered the finest quality beans available, predominantly made from 100% Arabica beans. These beans are prized for their exceptional flavor, rich aroma, and smoother, less bitter taste compared to Robusta beans. Sourced from the highest-grade coffee plants, premium beans undergo meticulous cultivation and harvesting processes. Specialty roasting techniques, typically in small batches, ensure that the beans' unique flavors are expertly developed. Many premium coffee brands are committed to ethical sourcing, collaborating closely with farmers to promote sustainable and fair trade practices. The variety of flavors and roasts available, including single-origin beans, dark roasts, light roasts, and flavored beans, caters to diverse palates. Popular premium coffee brands such as Atlas Coffee Club, Starbucks Espresso, Kicking Horse, and Stumptown Coffee Roasters offer distinctive blends and roasts to satisfy different tastes.
+       Expert baristas excel in making coffee due to their comprehensive knowledge of coffee, practical brewing skills, and passion for the craft.practical brewing skills, and passion for the craft. They ensure optimal flavor extraction by meticulously controlling variables like grind size, water temperature, and brewing time. Their expertise allows them to create a perfect cup of coffee tailored to individual preferences, showcasing their attention to detail and dedication.Their skillset is honed through extensive training and practice. Expert baristas demonstrate exceptional precision in every step of the coffee-making process.A true expert barista has a passion for coffee that drives them to constantly improve and innovate. They experiment with new coffee blends, brewing methods, and flavor combinations to create unique and memorable coffee experiences.
+
+
         
        
        
     </FeatureDescription>
     <button type="button" class="btn btn-warning mx-20">Read More</button>
-    </PremiumContainer>
-
+    </ExpertContainer>
+    </div>
     </>
-     ) 
+      
+    
+  )
 }
 
-export default PremiumBeans
-
+export default ExpertBaristas

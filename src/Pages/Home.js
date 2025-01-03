@@ -289,7 +289,7 @@ function Home() {
         </FeatureCard>
         <FeatureCard>
           <FeatureIcon src="https://img.freepik.com/free-vector/people-making-different-coffee-methods_23-2148659306.jpg?t=st=1727760094~exp=1727763694~hmac=1308757b9658b2965de4fa54acb3d847813ef088426f2fb78a05d8cb0be1b993&w=826" alt="Expert Baristas" />
-          <FeatureTitle>Expert Baristas</FeatureTitle>
+          <Link to="/expertbaristas"><FeatureTitle>Expert Baristas</FeatureTitle></Link>
           <FeatureDescription>Our skilled baristas craft each cup to perfection.</FeatureDescription>
         </FeatureCard>
         <FeatureCard>

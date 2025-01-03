@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../Store/authSlice';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../Store/authSlice";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginBackGround = styled.section`
-  background-image: url('https://img.freepik.com/free-photo/hot-latte-art-coffee-cup-wood-table-coffee-shop_1150-8937.jpg?t=st=1727759954~exp=1727763554~hmac=2715c972f28c255c158e0d14f664f9443fdd95a0e4b21cf6d5b41bc690aaa2d3&w=1380');
+  background-image: url("https://img.freepik.com/free-photo/hot-latte-art-coffee-cup-wood-table-coffee-shop_1150-8937.jpg?t=st=1727759954~exp=1727763554~hmac=2715c972f28c255c158e0d14f664f9443fdd95a0e4b21cf6d5b41bc690aaa2d3&w=1380");
   background-size: cover;
   background-position: center;
 `;
@@ -53,6 +53,14 @@ const RegisterLink = styled(Link)`
   text-decoration: none;
 `;
 
+const ForgetPasswordLink = styled(Link)`
+  display: block;
+  margin-top: 0.5rem;
+  text-align: center;
+  color: #7c2214;
+  text-decoration: none;
+`;
+
 const ErrorMessage = styled.div`
   margin-top: 1rem;
   color: red;
@@ -60,26 +68,26 @@ const ErrorMessage = styled.div`
 `;
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      if (parsedUser.username === username && parsedUser.email === email && parsedUser.password === password) {
-        dispatch(login({ username, email }));
-        navigate('/profile'); // Redirect to profile page
-      } else {
-        setError('Invalid credentials');
-      }
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (
+      storedUser &&
+      storedUser.username === username &&
+      storedUser.email === email &&
+      storedUser.password === password
+    ) {
+      dispatch(login({ username, email }));
+      navigate("/profile"); // Redirect to home page
     } else {
-      setError('No user data found');
+      setError("Invalid credentials");
     }
   };
 
@@ -122,7 +130,12 @@ function Login() {
             Login
           </Button>
           {error && <ErrorMessage>{error}</ErrorMessage>}
-          <RegisterLink to="/register">Don't have an account? Register</RegisterLink>
+          <RegisterLink to="/register">
+            Don't have an account? Register
+          </RegisterLink>
+          <ForgetPasswordLink to="/forget-password">
+            Forgot Password?
+          </ForgetPasswordLink>
         </LoginForm>
       </LoginContainer>
     </LoginBackGround>

@@ -19,7 +19,7 @@ const FooterContent = styled.div`
   
   p {
     margin: 0.5rem 0;
-    font-size: 1rem;
+    font-size: 0.75rem;
     line-height: 1.6;
     
     &:first-child {
@@ -52,8 +52,6 @@ function Footer() {
   return (
     <FooterContainer>
       <FooterContent>
-        <p>&copy; {new Date().getFullYear()} MsCafe. All rights reserved.</p>
-        <p>Made with ♥ by Mscoder</p>
         <SocialIcons>
           <SocialIcon
             href="https://facebook.com"
@@ -83,6 +81,8 @@ function Footer() {
             <i className="fab fa-instagram"></i>
           </SocialIcon>
         </SocialIcons>
+        <p>&copy; {new Date().getFullYear()} MsCafe. All rights reserved.</p>
+        <p>Made with ♥ by Mscoder</p>
       </FooterContent>
     </FooterContainer>
   );

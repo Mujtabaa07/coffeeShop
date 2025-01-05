@@ -96,7 +96,28 @@ function Footer() {
   return (
     <FooterContainer>
       <FooterContent>
-       {/* Social Icons */}
+       
+
+        {/* Informational Sections */}
+        <InfoSection>
+          <InfoColumn>
+            <h3>About Us</h3>
+            <p>Founded in 2010, MsCafe is dedicated to serving the finest coffee with passion and expertise. We source our beans from sustainable farms across the globe.</p>
+          </InfoColumn>
+
+          <InfoColumn>
+            <h3>Contact Us</h3>
+            <p>Email: contact@mscafe.com</p>
+            <p>Phone: (123) 456-7890</p>
+          </InfoColumn>
+
+          <InfoColumn>
+            <h3>Location</h3>
+            <p>123 Coffee St, Bean Town, USA</p>
+            <p><a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+          </InfoColumn>
+        </InfoSection>
+        {/* Social Icons */}
        <SocialIcons>
           <SocialIcon
             href="https://facebook.com"
@@ -129,26 +150,7 @@ function Footer() {
             <i className="fab fa-instagram"></i>
           </SocialIcon>
         </SocialIcons>
-
-        {/* Informational Sections */}
-        <InfoSection>
-          <InfoColumn>
-            <h3>About Us</h3>
-            <p>Founded in 2010, MsCafe is dedicated to serving the finest coffee with passion and expertise. We source our beans from sustainable farms across the globe.</p>
-          </InfoColumn>
-
-          <InfoColumn>
-            <h3>Contact Us</h3>
-            <p>Email: contact@mscafe.com</p>
-            <p>Phone: (123) 456-7890</p>
-          </InfoColumn>
-
-          <InfoColumn>
-            <h3>Location</h3>
-            <p>123 Coffee St, Bean Town, USA</p>
-            <p><a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">View on Map</a></p>
-          </InfoColumn>
-        </InfoSection>
+        <br/>
         <p>&copy; {new Date().getFullYear()} MsCafe. All rights reserved.</p>
         <p>Made with ♥ by Mscoder</p>
       </FooterContent>

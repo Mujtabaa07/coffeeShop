@@ -76,7 +76,7 @@ function PremiumBeans() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-    <Image src="https://img.freepik.com/free-photo/side-view-fresh-coffee-beans-falling-out-black-basket-red-background_141793-27586.jpg?t=st=1727759694~exp=1727763294~hmac=661c2c2b8c561df98b21f74effb9bb02a0875b0584c062f076bceafa5d6f7eda&w=1380" alt="Quality Beans" />
+    <Image src="https://img.freepik.com/premium-photo/roasted-coffee-bean-leaf-background-coffee-house-barista-dominance-brown-tones-high-resolution-illustrations-art-ai_727385-1025.jpg?w=360" />
     </ImageContent >
     <FeatureDescription
           initial={{ opacity: 0, x: -50 }}

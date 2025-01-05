@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { login } from '../Store/authSlice';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../Store/authSlice";
 
 const RegisterBackGround = styled.section`
-  background-image: url('https://img.freepik.com/free-photo/hot-latte-art-coffee-cup-wood-table-coffee-shop_1150-8937.jpg');
+  background-image: url("https://img.freepik.com/free-photo/hot-latte-art-coffee-cup-wood-table-coffee-shop_1150-8937.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -106,14 +106,14 @@ const ErrorMessage = styled.div`
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -128,15 +128,15 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
-    localStorage.setItem('user', JSON.stringify(formData));
+    localStorage.setItem("user", JSON.stringify(formData));
     dispatch(login({ username: formData.username, email: formData.email }));
     setIsSubmitted(true);
-    setError('');
+    setError("");
     setTimeout(() => {
-      navigate('/profile');
+      navigate("/");
     }, 2000);
   };
 
@@ -194,7 +194,9 @@ const Register = () => {
             Register
           </Button>
           {error && <ErrorMessage>{error}</ErrorMessage>}
-          {isSubmitted && <SuccessMessage>Registration successful!</SuccessMessage>}
+          {isSubmitted && (
+            <SuccessMessage>Registration successful!</SuccessMessage>
+          )}
           <LoginLink to="/login">Already have an account? Login</LoginLink>
         </RegisterForm>
       </RegisterContainer>

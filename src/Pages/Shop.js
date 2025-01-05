@@ -121,6 +121,7 @@ const StyledButton = styled.button`
   }
 `;
 
+// Added Cofee data
 const products = [
   {
     id: 1,
@@ -295,6 +296,7 @@ const products = [
   
 ];
 
+// Added Tea data
 const product1=[{
   id: 19,
   name: "Chai",
@@ -350,6 +352,7 @@ const product1=[{
     "Refreshing chilled tea, often sweetened and served with lemon, perfect for hot days.",
 },];
 
+// Added Milkshake & Smoothie data
 const product2=[{
   id: 26,
   name: "Strawberry smoothie",
@@ -442,6 +445,7 @@ const product2=[{
 },
 ];
 
+// Added Cake data
 const product3=[{
   id: 36,
   name: "Oreo cheese cake",
@@ -498,6 +502,7 @@ const product3=[{
 },
 ];
 
+// Added Soup data
 const product4=[{
   id: 42,
   name: "Salad",

@@ -122,7 +122,8 @@ body.menu-open {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;;
+  gap: 3rem;
+;
 }
 
 /*Highlighting current page*/

@@ -70,7 +70,7 @@ const Logo = styled(motion.div)`
 
 const NavLinks = styled(motion.div)`
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -85,7 +85,7 @@ const NavLink = styled(motion.div)`
     color: #deb887;
     text-decoration: none;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
     font-family: "Poppins", sans-serif;
 
@@ -118,7 +118,7 @@ const MobileMenuButton = styled(motion.button)`
   display: none;
   background: none;
   border: 2px solid #d2691e;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   cursor: pointer;
   color: #deb887;
   padding: 0.5rem;

@@ -22,7 +22,7 @@ const cartSlice = createSlice({
       const item = state.items.find(item => item.id === productId);
       if (item) {
         item.quantity = quantity;
-      }
+      }  
     },
     clearCart: (state) => {
       state.items = [];

@@ -14,6 +14,7 @@ const Title = styled(motion.h1)`
   font-size: 2.5rem;
   margin-bottom: 2rem;
   text-align: center;
+  margin-top: 4rem;
 `;
 
 const ProfileInfo = styled(motion.div)`

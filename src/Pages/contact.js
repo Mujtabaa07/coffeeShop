@@ -26,6 +26,11 @@ const Input = styled.input`
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  transition: transform 0.3s ease-in-out;
+  
+  &:hover {
+    transform: scale(1.05); /* Slightly scales up the input */
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -34,7 +39,13 @@ const TextArea = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 4px;
   min-height: 150px;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05); /* Slightly scales up the textarea */
+  }
 `;
+
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -65,8 +76,18 @@ function Contact() {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
+        style={{ fontWeight: 'bold' }}
       >
         Contact Us
+      </Title>
+      <Title
+        className = "mt-1"
+        initial={{ opacity: 0, y: -20}}
+        animate={{ opacity: 1, y: 2 }}
+        transition={{ duration: 0.5 }}
+        style={{ fontSize: "24px" }} 
+      >
+        We would love to hear from you!
       </Title>
       <Form
         onSubmit={handleSubmit}
@@ -74,6 +95,7 @@ function Contact() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
+        <div style={{ display: 'flex',justifyContent:'space-between',gap:'10px' }}>
         <Input
           type="text"
           name="name"
@@ -82,6 +104,7 @@ function Contact() {
           onChange={handleChange}
           required
           pattern="[a-zA-Z\s]+" title="Name must only contain letters"
+          style={{ width: '50%' }}
         />
         <Input
           type="email"
@@ -90,7 +113,9 @@ function Contact() {
           value={formData.email}
           onChange={handleChange}
           required
+          style={{ width: '50%' }}
         />
+        </div>
         <TextArea
           name="message"
           placeholder="Your Message"

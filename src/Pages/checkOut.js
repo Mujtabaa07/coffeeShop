@@ -8,7 +8,7 @@ import { clearCart } from '../Store/cartSlice';
 const CheckoutContainer = styled.div`
   padding: 4rem 2rem;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 3.75rem auto;
 `;
 
 const Title = styled(motion.h1)`

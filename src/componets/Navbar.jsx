@@ -5,7 +5,7 @@ import { logout } from "../Store/authSlice";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { navItems } from "./Navitems";
-import { ProDropdown, OsDropdown, UsLoginDropdown, UsLogoutDropdown } from "./Dropdown";
+import { ProDropdown, OsDropdown, UsLoginDropdown, UsLogoutDropdown } from "./Dropdown.jsx";
 
 const NavbarContainer = styled(motion.nav)`
   display: flex;
@@ -22,7 +22,7 @@ const NavbarContainer = styled(motion.nav)`
   z-index: 1000;
   transition: all 0.3s ease;
   border-bottom: 2px solid #8b4513;
-
+  
   &.scrolled {
     padding: 0.8rem 2rem;
     background: rgba(44, 19, 11, 0.98);
@@ -65,9 +65,9 @@ const Logo = styled(motion.div)`
   }
 
   img {
-    margin-right: 5px; /* Adds space between the image and the text */
-    width: 30px; /* Adjust size of the image */
-    height: 30px; /* Adjust size of the image */
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
   }
 `;
 
@@ -78,7 +78,7 @@ const RightNav = styled(motion.div)`
   padding: 1rem 2rem;
   position: fixed;
   top: 0px;
-  left: 35vw; //Now the Shop section is completely visible at the top-right section of Navbar.
+  left: 35vw;
   right: 0;
   z-index: 1000;
   transition: all 0.3s ease;
@@ -107,7 +107,6 @@ const NavLinks = styled(motion.div)`
   align-items: center;
   gap: 2rem;
   margin: 10px;
-  align-items: center;
 
   @media (max-width: 768px) {
     display: none;
@@ -215,7 +214,6 @@ const MobileNavLink = styled(motion.div)`
 `;
 
 const DropdownMenu = styled(motion.div)`
-  display: none;
   position: absolute;
   top: 100%;
   left: 0;
@@ -309,9 +307,8 @@ function Navbar() {
             {navItems.map((items) => {
               if (items.title === "Product") {
                 return (
-                  <NavLinks>
+                  <NavLinks key={items.id}>
                     <li
-                      key={items.id}
                       className={location.pathname === items.path ? "active" : ""}
                       onMouseEnter={() => setproDropdown(true)}
                       onMouseLeave={() => setproDropdown(false)}
@@ -327,9 +324,8 @@ function Navbar() {
 
               if (items.title === "Stories") {
                 return (
-                  <NavLinks>
+                  <NavLinks key={items.id}>
                     <li
-                      key={items.id}
                       className={location.pathname === items.path ? "active" : ""}
                       onMouseEnter={() => setosDropdown(true)}
                       onMouseLeave={() => setosDropdown(false)}
@@ -345,12 +341,10 @@ function Navbar() {
 
               if (items.title === "User") {
                 return (
-                  <NavLinks>
+                  <NavLinks key={items.id}>
                     {isLoggedIn ? (
                       <>
                         <li
-                          key={items.id}
-                          className={location.pathname === items.path ? "active" : ""}
                           onMouseEnter={() => setusloginDropdown(true)}
                           onMouseLeave={() => setusloginDropdown(false)}
                         >
@@ -368,8 +362,6 @@ function Navbar() {
                       </>
                     ) : (
                       <li
-                        key={items.id}
-                        className={location.pathname === items.path ? "active" : ""}
                         onMouseEnter={() => setuslogoutDropdown(true)}
                         onMouseLeave={() => setuslogoutDropdown(false)}
                       >
@@ -384,8 +376,8 @@ function Navbar() {
               }
 
               return (
-                <NavLinks>
-                  <li key={items.id} className={location.pathname === items.path ? "active" : ""}>
+                <NavLinks key={items.id}>
+                  <li className={location.pathname === items.path ? "active" : ""}>
                     <NavLink whileHover={{ scale: 1.05 }}>
                       <Link to={items.path}>{items.title}</Link>
                     </NavLink>
@@ -393,6 +385,7 @@ function Navbar() {
                 </NavLinks>
               );
             })}
+
             <NavLinks>
               <NavLink className={location.pathname === "/" ? "active" : ""} whileHover={{ scale: 1.05 }}>
                 <Link to="/">Home</Link>
@@ -408,8 +401,6 @@ function Navbar() {
                 </DropdownMenu>
               </ShopLink>
 
-             {/* removed unnecessary links that were already hidden and obsolete.  */}
-
               {isLoggedIn ? (
                 <>
                   <NavLink className={location.pathname === "/profile" ? "active" : ""} whileHover={{ scale: 1.05 }}>
@@ -422,7 +413,7 @@ function Navbar() {
                     whileHover={{ scale: 1.05 }}
                     onClick={() => {
                       handleLogout();
-                      setIsOpen(false); // Ensure mobile menu closes after logout
+                      setIsOpen(false);
                     }}
                     style={{ cursor: "pointer" }}
                   >
@@ -437,86 +428,19 @@ function Navbar() {
             </MobileMenuButton>
           </RightNav>
         </ul>
-      </NavbarContainer>
 
-      <AnimatePresence>
-        {isOpen && (
-          <MobileMenu initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
-            <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/" onClick={toggleMenu}>
-                Home
-              </Link>
-            </MobileNavLink>
-            <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/shop" onClick={toggleMenu}>
-                Shop
-              </Link>
-            </MobileNavLink>
-            <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/about" onClick={toggleMenu}>
-                About
-              </Link>
-            </MobileNavLink>
-            <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/testimonial" onClick={toggleMenu}>
-                Testimonial
-              </Link>
-            </MobileNavLink>
-            <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/premiumbeans" onClick={toggleMenu}>
-                Premium Beans
-              </Link>
-            </MobileNavLink>
-            <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/expertbaristas" onClick={toggleMenu}>
-                Expert Baristas
-              </Link>
-            </MobileNavLink>
-            <MobileNavLink whileHover={{ scale: 1.02 }}>
-              <Link to="/contact" onClick={toggleMenu}>
-                Contact
-              </Link>
-            </MobileNavLink>
-            {isLoggedIn ? (
-              <>
-                <MobileNavLink whileHover={{ scale: 1.02 }}>
-                  <Link to="/profile" onClick={toggleMenu}>
-                    Profile
-                  </Link>
+        <AnimatePresence>
+          {isOpen && (
+            <MobileMenu initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              {navItems.map((items) => (
+                <MobileNavLink key={items.id}>
+                  <Link to={items.path}>{items.title}</Link>
                 </MobileNavLink>
-                <MobileNavLink whileHover={{ scale: 1.02 }}>
-                  <Link to="/cart" onClick={toggleMenu}>
-                    Cart
-                  </Link>
-                </MobileNavLink>
-                <MobileNavLink
-                  whileHover={{ scale: 1.02 }}
-                  onClick={() => {
-                    handleLogout();
-                    toggleMenu();
-                  }}
-                  style={{ cursor: "pointer" }}
-                >
-                  Logout
-                </MobileNavLink>
-              </>
-            ) : (
-              <>
-                <MobileNavLink whileHover={{ scale: 1.02 }}>
-                  <Link to="/login" onClick={toggleMenu}>
-                    Login
-                  </Link>
-                </MobileNavLink>
-                <MobileNavLink whileHover={{ scale: 1.02 }}>
-                  <Link to="/register" onClick={toggleMenu}>
-                    Register
-                  </Link>
-                </MobileNavLink>
-              </>
-            )}
-          </MobileMenu>
-        )}
-      </AnimatePresence>
+              ))}
+            </MobileMenu>
+          )}
+        </AnimatePresence>
+      </NavbarContainer>
     </>
   );
 }

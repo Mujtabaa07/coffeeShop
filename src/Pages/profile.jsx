@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import Button from '../componets/Button'; // Corrected import statement
+import Button from '../componets/Button.jsx'; // Corrected import statement
 
 const ProfileContainer = styled.div`
   padding: 4rem 2rem;

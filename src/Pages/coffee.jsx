@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { addToCart } from "../Store/cartSlice";
-import Button from "../componets/Button";
+import Button from "../componets/Button.jsx";
 
 const CoffeeContainer = styled.div`
   padding: 6rem 2rem 4rem 2rem; // Added top padding for navbar

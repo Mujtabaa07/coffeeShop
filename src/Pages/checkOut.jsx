@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import Button from '../componets/Button';
+import Button from '../componets/Button.jsx';
 import { clearCart } from '../Store/cartSlice';
 
 const CheckoutContainer = styled.div`

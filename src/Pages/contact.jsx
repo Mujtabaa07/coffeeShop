@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import Button from '../componets/Button';
+import Button from '../componets/Button.jsx';
 
 const ContactContainer = styled.div`
   padding: 4rem 2rem;

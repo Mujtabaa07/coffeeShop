@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {productDropdown,ourstoryDropdown,userLoginDropdown,userLogoutDropdown} from "./Navitems";
+import {productDropdown,ourstoryDropdown,userLoginDropdown,userLogoutDropdown} from "./Navitems.jsx";
 import { Link} from "react-router-dom";
 import "./Dropdown.css";
 

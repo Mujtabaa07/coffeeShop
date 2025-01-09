@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { color, motion } from 'framer-motion';
 import Button from '../componets/Button';
 
 const AboutContainer = styled.div`
@@ -8,14 +8,24 @@ const AboutContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   background-color: #fffbeb;
+
+  background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20231205/pngtree-creamy-textured-milk-colored-background-image_13815875.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  padding-top: 1.5rem; /* Adjusted padding for top */
+
 `;
 
 const Title = styled(motion.h1)`
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 3rem;
   text-align: center;
-  color: #78350f;
+  color: #7c2214;
+  letter-spacing: 4px;
   font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 const Content = styled(motion.div)`
@@ -38,6 +48,7 @@ const TextContent = styled(motion.div)`
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
+    font-weight:bold;
   }
 `;
 
@@ -54,6 +65,15 @@ const Image = styled(motion.img)`
   height: auto;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  filter: grayscale(100%) ;
+  transition: all 0.3s ease;
+  border: 4px solid black;
+  &:hover {
+    filter: grayscale(0%);
+    box-shadow: 0 0 20px rgba(255, 10, 0, 0.8);
+    border-width: 6px;
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.05);
+  }
 `;
 
 function About() {

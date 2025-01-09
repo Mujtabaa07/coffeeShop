@@ -95,7 +95,7 @@ const SocialIcons = styled.div`
 `;
 
 const SocialIcon = styled(motion.a)`
-  color: #fffbeb;
+  color: #ffffff;
   font-size: 1.5rem;
   text-decoration: none;
   padding: 0.5rem;

@@ -125,14 +125,14 @@ const FeatureCard = styled(motion.div)`
   padding: 2.5rem;
   border-radius: 15px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(210, 105, 30, 0.2);
   backdrop-filter: blur(10px);
-  transition: all 0.4s ease;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(139, 69, 19, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -143,20 +143,35 @@ const FeatureIcon = styled.img`
   border-radius: 10px;
   margin-bottom: 1.5rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const FeatureTitle = styled.h3`
   font-size: 1.8rem;
   margin-bottom: 1rem;
   color: #8b4513;
+  transition: color 0.3s ease-in-out;
   font-family: "Playfair Display", serif;
+
+  &:hover {
+    color: #e07a5f;
+  }
 `;
 
 const FeatureDescription = styled.p`
   font-size: 1.1rem;
   color: #6b4423;
   line-height: 1.6;
+  transition: color 0.3s ease-in-out;
   font-family: "Poppins", sans-serif;
+
+  &:hover {
+    color: #3d405b;
+  }
 `;
 
 const SpecialtySection = styled.section`

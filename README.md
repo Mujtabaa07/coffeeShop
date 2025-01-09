@@ -41,23 +41,38 @@ Follow the steps below to set up the project locally:
 #### Step 1: Clone the repository
 ```bash
 # Clone the MsCafe repository
-git clone https://github.com/your-username/ms-cafe.git
+
+git clone https://github.com/your-username/coffeeShop.git
 
 # Navigate into the project directory
-cd ms-cafe
+cd coffeeShop
  # Install the required npm packages
 npm install
+
+git clone https://github.com/Mujtabaa07/coffeeShop.git
+```
+```bash
+# Navigate into the project directory
+cd coffeeShop
+```
+```bash
+# Install the required npm packages
+npm install (or) npm i
+```
+```bash
+
 # Start the React development server
 npm start
 ```
 Once the server is running, you can view the app at (http://localhost:3000).
+
 ## Usage
 **To use the app:**
 - **View Coffee Menu:** Browse through the available coffee items on the homepage.
 - **Learn About Coffee:** Check out the sourcing section to learn more about our sustainably sourced beans.
 - **Place an Order:** In future releases, you'll be able to add items to the cart and complete orders.
 
-## ScreenShots:
+## ScreenShots
 ## **Home Page:** 
 ![homepage](https://github.com/user-attachments/assets/2dc9b51d-ce06-4eb6-89fb-774867ede12c)
 ## **Coffee Menu:**
@@ -66,6 +81,7 @@ Once the server is running, you can view the app at (http://localhost:3000).
 ![coffeelogin](https://github.com/user-attachments/assets/c6c7c645-475d-4658-a47c-f0ada0b177d1)
 ## **Testimonials**
 ![testimonials](https://github.com/user-attachments/assets/38d811e3-4acc-4901-9a3d-8e4185c96a2c)
+
 ## Contributing
 We welcome contributions! Follow the steps below to contribute to this project:
 ```bash
@@ -73,15 +89,15 @@ We welcome contributions! Follow the steps below to contribute to this project:
 ```
 ```bash
 # Clone the forked repository to your local machine
-git clone https://github.com/your-username/ms-cafe.git
+git clone https://github.com/Mujtabaa07/coffeeShop.git
 ```
 ```bash
 # Navigate into the project directory
-cd ms-cafe
+cd coffeeShop
 ```
 ```bash
-#install dependencies
-npm install
+# install dependencies
+npm install (or) npm i
 ```
 ```bash
 # Create a new branch for your feature or fix

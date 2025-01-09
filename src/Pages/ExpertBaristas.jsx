@@ -132,7 +132,6 @@ function ExpertBaristas() {
         >
           Expert baristas excel in making coffee due to their comprehensive knowledge of coffee, practical brewing skills, and passion for the craft. They ensure optimal flavor extraction by meticulously controlling variables like grind size, water temperature, and brewing time. Their expertise allows them to create a perfect cup of coffee tailored to individual preferences, showcasing their attention to detail and dedication. The skillset is honed through extensive training and practice. Expert baristas demonstrate exceptional precision in every step of the coffee-making process. A true expert barista has a passion for coffee that drives them to constantly improve and innovate. They experiment with new coffee blends, brewing methods, and flavor combinations to create unique and memorable coffee experiences.
         </FeatureDescription>
-        <Button>Read More</Button>
       </ExpertContainer>
     </>
   );

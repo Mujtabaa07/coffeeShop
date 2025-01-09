@@ -4,8 +4,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Button from "../componets/Button";
-import Faq from "../componets/faq";
+import Button from "../componets/Button.jsx";
+import Faq from "../componets/faq.jsx";
 import "./Home.css";
 
 gsap.registerPlugin(ScrollTrigger);

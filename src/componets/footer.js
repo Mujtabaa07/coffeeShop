@@ -137,7 +137,7 @@ function Footer() {
             aria-label="Twitter"
             role="link"
           >
-            <i class="fa-brands fa-x-twitter" style="color: #000000;"></i>
+            <i class="fa-brands fa-x-twitter" style="color:  #ffffff;"></i>
           </SocialIcon>
           <SocialIcon
             href="https://instagram.com"

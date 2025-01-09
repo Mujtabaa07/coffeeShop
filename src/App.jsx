@@ -1,32 +1,32 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ScrollToTop from './componets/ScrollToTop';
+import ScrollToTop from './componets/ScrollToTop.jsx';
 import { Provider } from 'react-redux';
 import { store } from './Store/index';
 import styled from 'styled-components';
-import Navbar from './componets/Navbar';
-import Footer from './componets/footer';
-import Home from './Pages/Home';
-import Login from './Pages/login';
-import Register from './Pages/Register';
-import Shop from './Pages/Shop';
-import Cart from './Pages/cart';
-import About from './Pages/About';
-import Contact from './Pages/contact';
-import Profile from './Pages/profile';
-import Checkout from './Pages/checkOut';
-import Testimonial from './Pages/Testimonial';
+import Navbar from './componets/Navbar.jsx';
+import Footer from './componets/footer.jsx';
+import Home from './Pages/Home.jsx';
+import Login from './Pages/login.jsx';
+import Register from './Pages/Register.jsx';
+import Shop from './Pages/Shop.jsx';
+import Cart from './Pages/cart.jsx';
+import About from './Pages/About.jsx';
+import Contact from './Pages/contact.jsx';
+import Profile from './Pages/profile.jsx';
+import Checkout from './Pages/checkOut.jsx';
+import Testimonial from './Pages/Testimonial.jsx';
 
-import Cake from './Pages/cake';
-import Coffee from './Pages/coffee';
-import Soup from './Pages/soup';
-import Milkshakes from './Pages/milkshake';
-import PremiumBeans from './Pages/PremiumBeans';
-import ForgetPassword from "./Pages/ForgetPassword";
+import Cake from './Pages/cake.jsx';
+import Coffee from './Pages/coffee.jsx';
+import Soup from './Pages/soup.jsx';
+import Milkshakes from './Pages/milkshake.jsx';
+import PremiumBeans from './Pages/PremiumBeans.jsx';
+import ForgetPassword from "./Pages/ForgetPassword.jsx";
 
-import ExpertBaristas from "./Pages/ExpertBaristas";
-import Reviews from "./componets/Reviews";
+import ExpertBaristas from "./Pages/ExpertBaristas.jsx";
+import Reviews from "./componets/Reviews.jsx";
 
 const AppContainer = styled.div`
   display: flex;

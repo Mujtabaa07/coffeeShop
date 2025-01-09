@@ -143,3 +143,24 @@ body.menu-open {
   background-color: #D2691E;
   transition: width 0.3s ease;
 }
+
+
+.head{
+  display: flex;
+}
+
+/*dropdown menu for shop*/
+.dropdown-menu {
+  display: none;
+  text-decoration: none;
+  /* position: absolute;
+  background: rgba(44, 19, 11, 0.95);
+  border: 2px solid #8B4513;
+  z-index: 1001;
+  border-radius: 8px; */
+}
+
+.nav-link:hover .dropdown-menu {
+  display: flex;
+}
+

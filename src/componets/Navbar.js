@@ -4,9 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Store/authSlice";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
+import { navItems } from "./Navitems";
+import { ProDropdown, OsDropdown, UsLoginDropdown, UsLogoutDropdown } from "./Dropdown";
 
 const NavbarContainer = styled(motion.nav)`
   display: flex;
+  width: 100vw;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
@@ -16,7 +19,6 @@ const NavbarContainer = styled(motion.nav)`
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   z-index: 1000;
   transition: all 0.3s ease;
   border-bottom: 2px solid #8b4513;
@@ -29,6 +31,7 @@ const NavbarContainer = styled(motion.nav)`
   &::before {
     content: "";
     position: absolute;
+    width: 100vw;
     top: 0;
     left: 0;
     right: 0;
@@ -68,9 +71,42 @@ const Logo = styled(motion.div)`
   }
 `;
 
+const RightNav = styled(motion.div)`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 0px;
+  left: 35vw; //Now the Shop section is completely visible at the top-right section of Navbar.
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+
+  &.scrolled {
+    padding: 0.8rem 2rem;
+    background: rgba(44, 19, 11, 0.98);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100px;
+    right: 0;
+    bottom: 0;
+    background: url("/coffee-beans-pattern.png") repeat;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+`;
+
 const NavLinks = styled(motion.div)`
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: 2rem;
+  margin: 10px;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -84,15 +120,17 @@ const NavLink = styled(motion.div)`
   a {
     color: #deb887;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
+    font-weight: bold;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
     font-family: "Poppins", sans-serif;
+    padding: 25px;
 
     &:hover {
       color: #ffe4b5;
     }
   }
+
   &.active a {
     text-decoration: underline;
     color: #d2691e;
@@ -176,7 +214,60 @@ const MobileNavLink = styled(motion.div)`
   }
 `;
 
+const DropdownMenu = styled(motion.div)`
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(44, 19, 11, 0.95);
+  border: 2px solid #8b4513;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: none;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  z-index: 1001;
+
+  a {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #deb887;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: rgba(210, 105, 30, 0.2);
+      color: #ffe4b5;
+    }
+  }
+`;
+
+const ShopLink = styled(NavLink)`
+  position: relative;
+
+  &:hover ${DropdownMenu} {
+    display: flex;
+  }
+
+  &::after {
+    content: '▼';
+    font-size: 0.7rem;
+    margin-left: 0.3rem;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: rotate(180deg);
+  }
+`;
+
 function Navbar() {
+  const [prodropdown, setproDropdown] = useState(false);
+  const [osdropdown, setosDropdown] = useState(false);
+  const [uslogindropdown, setusloginDropdown] = useState(false);
+  const [uslogoutdropdown, setuslogoutDropdown] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -212,118 +303,145 @@ function Navbar() {
           <img src="3817208_coffee_cup_drink_icon.png" alt="Logo" />
           <Link to="/">MsCafe</Link>
         </Logo>
-        <NavLinks>
-          {/* <!-- ------NavLink:::::Home-------------------> */}
-          <NavLink
-            className={location.pathname === "/" ? "active" : ""}
-            whileHover={{ scale: 1.05 }}
-          >
-            <Link to="/">Home</Link>
-          </NavLink>
-          {/* <!-- ------NavLink:::::Shop-------------------> */}
-          <NavLink
-            className={location.pathname === "/shop" ? "active" : ""}
-            whileHover={{ scale: 1.05 }}
-          >
-            <Link to="/shop">Shop</Link>
-          </NavLink>
 
-          {/* <!-- ------NavLink:::::About-------------------> */}
-          <NavLink
-            className={location.pathname === "/about" ? "active" : ""}
-            whileHover={{ scale: 1.05 }}
-          >
-            <Link to="/about">About</Link>
-          </NavLink>
+        <ul>
+          <RightNav>
+            {navItems.map((items) => {
+              if (items.title === "Product") {
+                return (
+                  <NavLinks>
+                    <li
+                      key={items.id}
+                      className={location.pathname === items.path ? "active" : ""}
+                      onMouseEnter={() => setproDropdown(true)}
+                      onMouseLeave={() => setproDropdown(false)}
+                    >
+                      <NavLink whileHover={{ scale: 1.05 }}>
+                        <Link>{items.title}</Link>
+                        {prodropdown && <ProDropdown />}
+                      </NavLink>
+                    </li>
+                  </NavLinks>
+                );
+              }
 
-          {/* <!-- ------NavLink::::Testinomial-------------------> */}
-          <NavLink
-            className={location.pathname === "/testimonial" ? "active" : ""}
-            whileHover={{ scale: 1.05 }}
-          >
-            <Link to="/testimonial">Testimonial</Link>
-          </NavLink>
-          {/* <!-- ------NavLink::::Premium Beans-------------------> */}
-          <NavLink
-            className={location.pathname === "/premiumbeans" ? "active" : ""}
-            whileHover={{ scale: 1.05 }}
-          >
-            <Link to="/premiumbeans">Premium Beans</Link>
-          </NavLink>
-          {/* <!-- ------NavLink::::expertbaristas-------------------> */}
-          <NavLink
-            className={location.pathname === "/expertbaristas" ? "active" : ""}
-            whileHover={{ scale: 1.05 }}
-          >
-            <Link to="/expertbaristas">Expert Baristas</Link>
-          </NavLink>
+              if (items.title === "Stories") {
+                return (
+                  <NavLinks>
+                    <li
+                      key={items.id}
+                      className={location.pathname === items.path ? "active" : ""}
+                      onMouseEnter={() => setosDropdown(true)}
+                      onMouseLeave={() => setosDropdown(false)}
+                    >
+                      <NavLink whileHover={{ scale: 1.05 }}>
+                        <Link>{items.title}</Link>
+                        {osdropdown && <OsDropdown />}
+                      </NavLink>
+                    </li>
+                  </NavLinks>
+                );
+              }
 
-          {/* <!-- ------NavLink:::::Contacts-------------------> */}
-          <NavLink
-            className={location.pathname === "/contact" ? "active" : ""}
-            whileHover={{ scale: 1.05 }}
-          >
-            <Link to="/contact">Contact</Link>
-          </NavLink>
+              if (items.title === "User") {
+                return (
+                  <NavLinks>
+                    {isLoggedIn ? (
+                      <>
+                        <li
+                          key={items.id}
+                          className={location.pathname === items.path ? "active" : ""}
+                          onMouseEnter={() => setusloginDropdown(true)}
+                          onMouseLeave={() => setusloginDropdown(false)}
+                        >
+                          <NavLink whileHover={{ scale: 1.05 }}>
+                            <Link>{items.title}</Link>
+                            {uslogindropdown && <UsLoginDropdown />}
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink whileHover={{ scale: 1.05 }}>
+                            <Link>{items.title}</Link>
+                            {uslogoutdropdown && <UsLogoutDropdown />}
+                          </NavLink>
+                        </li>
+                      </>
+                    ) : (
+                      <li
+                        key={items.id}
+                        className={location.pathname === items.path ? "active" : ""}
+                        onMouseEnter={() => setuslogoutDropdown(true)}
+                        onMouseLeave={() => setuslogoutDropdown(false)}
+                      >
+                        <NavLink whileHover={{ scale: 1.05 }}>
+                          <Link>{items.title}</Link>
+                          {uslogoutdropdown && <UsLogoutDropdown />}
+                        </NavLink>
+                      </li>
+                    )}
+                  </NavLinks>
+                );
+              }
 
-          {isLoggedIn ? (
-            <>
-              <NavLink
-                className={location.pathname === "/profile" ? "active" : ""}
-                whileHover={{ scale: 1.05 }}
-              >
-                <Link to="/profile">Profile</Link>
+              return (
+                <NavLinks>
+                  <li key={items.id} className={location.pathname === items.path ? "active" : ""}>
+                    <NavLink whileHover={{ scale: 1.05 }}>
+                      <Link to={items.path}>{items.title}</Link>
+                    </NavLink>
+                  </li>
+                </NavLinks>
+              );
+            })}
+            <NavLinks>
+              <NavLink className={location.pathname === "/" ? "active" : ""} whileHover={{ scale: 1.05 }}>
+                <Link to="/">Home</Link>
               </NavLink>
-              <NavLink
-                className={location.pathname === "/cart" ? "active" : ""}
-                whileHover={{ scale: 1.05 }}
-              >
-                <Link to="/cart">Cart</Link>
-              </NavLink>
-              <NavLink
-                whileHover={{ scale: 1.05 }}
-                onClick={() => {
-                  handleLogout();
-                  setIsOpen(false); // Ensure mobile menu closes after logout
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                <span style={{ color: "#deb887" }}>Logout</span>
-              </NavLink>
-            </>
-          ) : (
-            <>
-              <NavLink
-                className={location.pathname === "/login" ? "active" : ""}
-                whileHover={{ scale: 1.05 }}
-              >
-                <Link to="/login">Login</Link>
-              </NavLink>
-              <NavLink
-                className={location.pathname === "/register" ? "active" : ""}
-                whileHover={{ scale: 1.05 }}
-              >
-                <Link to="/register">Register</Link>
-              </NavLink>
-            </>
-          )}
-        </NavLinks>
-        <MobileMenuButton
-          onClick={toggleMenu}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          {isOpen ? "×" : "☰"}
-        </MobileMenuButton>
+
+              <ShopLink className={location.pathname === "/shop" ? "active" : ""}>
+                <Link to="/shop">Shop</Link>
+                <DropdownMenu>
+                  <Link to="/shop/cake">Cakes</Link>
+                  <Link to="/shop/coffee">Coffee</Link>
+                  <Link to="/shop/soup">Soups</Link>
+                  <Link to="/shop/milkshake">Milkshakes</Link>
+                </DropdownMenu>
+              </ShopLink>
+
+             {/* removed unnecessary links that were already hidden and obsolete.  */}
+
+              {isLoggedIn ? (
+                <>
+                  <NavLink className={location.pathname === "/profile" ? "active" : ""} whileHover={{ scale: 1.05 }}>
+                    <Link to="/profile">Profile</Link>
+                  </NavLink>
+                  <NavLink className={location.pathname === "/cart" ? "active" : ""} whileHover={{ scale: 1.05 }}>
+                    <Link to="/cart">Cart</Link>
+                  </NavLink>
+                  <NavLink
+                    whileHover={{ scale: 1.05 }}
+                    onClick={() => {
+                      handleLogout();
+                      setIsOpen(false); // Ensure mobile menu closes after logout
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <span style={{ color: "#deb887" }}>Logout</span>
+                  </NavLink>
+                </>
+              ) : null}
+            </NavLinks>
+
+            <MobileMenuButton onClick={toggleMenu} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              {isOpen ? "×" : "☰"}
+            </MobileMenuButton>
+          </RightNav>
+        </ul>
       </NavbarContainer>
+
       <AnimatePresence>
         {isOpen && (
-          <MobileMenu
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
+          <MobileMenu initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
             <MobileNavLink whileHover={{ scale: 1.02 }}>
               <Link to="/" onClick={toggleMenu}>
                 Home

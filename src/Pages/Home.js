@@ -19,12 +19,19 @@ const HomeContainer = styled.div`
 
 const HeroSection = styled.section`
   display: flex;
+  padding:0;
+  margin:0;
+  top:-2rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   height: 100vh;
-  width: 100vw;
+
+  width: 100%;
+
+  gap:-0.5rem;
+
   background-image: linear-gradient(
       rgba(44, 19, 11, 0.7),
       rgba(44, 19, 11, 0.7)
@@ -49,8 +56,8 @@ const HeroSection = styled.section`
 
 const Title = styled(motion.h1)`
   font-size: 5rem;
-  margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  
+  
   font-family: "Playfair Display", serif;
   color: #ffe4b5;
 
@@ -61,23 +68,22 @@ const Title = styled(motion.h1)`
 
 const Subtitle = styled(motion.p)`
   font-size: 1.8rem;
-  margin-bottom: 2.5rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  
   font-family: "Poppins", sans-serif;
   color: #deb887;
   max-width: 600px;
-  line-height: 1.4;
+  
 
   @media (max-width: 768px) {
     font-size: 1.4rem;
-    padding: 0 20px;
+    
   }
 `;
 
 const StyledButton = styled(Button)`
   background: #d2691e;
   color: #ffe4b5;
-  padding: 1rem 2.5rem;
+  padding:0.8rem;
   font-size: 1.2rem;
   border-radius: 30px;
   border: 2px solid #8b4513;
@@ -91,6 +97,10 @@ const StyledButton = styled(Button)`
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
   }
+
+  @media (min-width: 783px) {
+  font-size:0.8rem;
+  padding: 0.5rem}
 `;
 
 const FeaturesSection = styled.section`
@@ -102,15 +112,7 @@ const FeaturesSection = styled.section`
   position: relative;
   overflow: visible;
 
-  &::before {
-    content: "☕";
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 3rem;
-    color: #8b4513;
-  }
+  
 
   @media (max-width: 768px) {
     padding: 4rem 2rem;
@@ -196,13 +198,26 @@ const SpecialtyImage = styled(motion.img)`
 
 const ScrollIndicator = styled(motion.div)`
   position: absolute;
-  bottom: 40px;
-  left: 50%;
+  bottom:9rem;
+  display:flex,
+  justify-content: center;
+  justify-items: center;
+  left: 49.6%;
   transform: translateX(-50%);
   color: #ffe4b5;
   font-size: 2rem;
   cursor: pointer;
   animation: bounce 2s infinite;
+
+  &::after {
+    content: "☕";
+    position: absolute;
+    top: 40px;
+    left: 56%;
+    transform: translateX(-45%);
+    font-size: 3rem;
+    color: #8b4513;
+  }
 
   @keyframes bounce {
     0%,
@@ -210,13 +225,13 @@ const ScrollIndicator = styled(motion.div)`
     50%,
     80%,
     100% {
-      transform: translateY(0) translateX(-50%);
+      transform: translateY(20%) translateX(-50%);
     }
     40% {
-      transform: translateY(-20px) translateX(-50%);
+      transform: translateY(-20%) translateX(-50%);
     }
     60% {
-      transform: translateY(-10px) translateX(-50%);
+      transform: translateY(20%) translateX(-50%);
     }
   }
 `;

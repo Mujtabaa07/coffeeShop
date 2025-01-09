@@ -1,0 +1,25 @@
+.product-submenu{
+    width:10rem;
+    position:absolute;
+    top:50px;
+    list-style: none;
+    text-align: start;
+}
+
+
+.product-submenu.clicked {
+    display: none;
+}
+
+
+
+.submenu-item {
+display: block;
+background-color:rgba(44, 19, 11, 0.95) ;
+width: 100%;
+height: 100%;
+text-decoration: none;
+color: #deb887;
+padding: 16px;
+
+}

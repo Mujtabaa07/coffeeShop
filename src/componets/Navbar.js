@@ -11,6 +11,7 @@ import {
   UsLoginDropdown,
   UsLogoutDropdown,
 } from "./Dropdown";
+import DarkLightModeToggle from "./DarkLight";
 
 const NavbarContainer = styled(motion.nav)`
   display: flex;
@@ -460,6 +461,7 @@ function Navbar() {
             >
               {isOpen ? "×" : "☰"}
             </MobileMenuButton>
+            <DarkLightModeToggle/>
           </RightNav>
         </ul>
       </NavbarContainer>

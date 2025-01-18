@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Button from "../componets/Button";
 import Faq from "../componets/faq";
 import "./Home.css";
-import DynamicText from "./dynamicText";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const HomeContainer = styled.div`
@@ -19,9 +19,9 @@ const HomeContainer = styled.div`
 
 const HeroSection = styled.section`
   display: flex;
-  padding: 0;
-  margin: 0;
-  top: -2rem;
+  padding:0;
+  margin:0;
+  top:-2rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -30,7 +30,7 @@ const HeroSection = styled.section`
 
   width: 100%;
 
-  gap: -0.5rem;
+  gap:-0.5rem;
 
   background-image: linear-gradient(
       rgba(44, 19, 11, 0.7),
@@ -56,7 +56,8 @@ const HeroSection = styled.section`
 
 const Title = styled(motion.h1)`
   font-size: 5rem;
-
+  
+  
   font-family: "Playfair Display", serif;
   color: #ffe4b5;
 
@@ -67,20 +68,22 @@ const Title = styled(motion.h1)`
 
 const Subtitle = styled(motion.p)`
   font-size: 1.8rem;
-
+  
   font-family: "Poppins", sans-serif;
   color: #deb887;
   max-width: 600px;
+  
 
   @media (max-width: 768px) {
     font-size: 1.4rem;
+    
   }
 `;
 
 const StyledButton = styled(Button)`
   background: #d2691e;
   color: #ffe4b5;
-  padding: 0.8rem;
+  padding:0.8rem;
   font-size: 1.2rem;
   border-radius: 30px;
   border: 2px solid #8b4513;
@@ -96,9 +99,8 @@ const StyledButton = styled(Button)`
   }
 
   @media (min-width: 783px) {
-    font-size: 0.8rem;
-    padding: 0.5rem;
-  }
+  font-size:0.8rem;
+  padding: 0.5rem}
 `;
 
 const FeaturesSection = styled.section`
@@ -109,6 +111,8 @@ const FeaturesSection = styled.section`
   background: linear-gradient(135deg, #fdf5e6, #ffe4b5);
   position: relative;
   overflow: visible;
+
+  
 
   @media (max-width: 768px) {
     padding: 4rem 2rem;
@@ -179,9 +183,9 @@ const SpecialtySection = styled.section`
   background: #2c130b;
   position: relative;
 
-  & h1 {
-    width: 100%;
-    text-align: center;
+  &::before {
+    content: "Our Specialties";
+    position: absolute;
     top: 2rem;
     left: 50%;
     transform: translateX(-50%);
@@ -298,7 +302,7 @@ function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-           <DynamicText text="Welcome to MsCafe" />
+          Welcome to MsCafe
         </Title>
         <Subtitle
           initial={{ opacity: 0, y: -30 }}
@@ -318,7 +322,6 @@ function Home() {
             src="https://img.freepik.com/free-photo/side-view-fresh-coffee-beans-falling-out-black-basket-red-background_141793-27586.jpg?t=st=1727759694~exp=1727763294~hmac=661c2c2b8c561df98b21f74effb9bb02a0875b0584c062f076bceafa5d6f7eda&w=1380"
             alt="Quality Beans"
           />
-
           <Link to="/premiumbeans">
             <FeatureTitle>Premium Beans</FeatureTitle>
           </Link>
@@ -350,22 +353,36 @@ function Home() {
         </FeatureCard>
       </FeaturesSection>
       <SpecialtySection ref={specialtyRef}>
-        <h1>Our Specialities</h1>
-        <SpecialtyImage
-          src="https://img.freepik.com/free-photo/brown-coffee-beans-seed_74190-6651.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid "
-          alt="Specialty Coffee 1"
-        />
-        <SpecialtyImage
-          src="https://img.freepik.com/free-photo/coffee-machine-making-perfect-cup-coffee_23-2151699675.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid"
-          alt="Specialty Coffee 2"
-        />
-        <SpecialtyImage
-          src="https://img.freepik.com/free-photo/coffee-cup-with-beans_23-2148453628.jpg?t=st=1727760337~exp=1727763937~hmac=c326eb236a78a478ea9d9703e1bdbb8b390dcc71cefb24d78ca7a85bcb1c1cc5&w=740"
-          alt="Specialty Coffee 3"
-        />
+        <div style={{ textAlign: 'center', margin: '1rem' }}>
+        <a href="/premiumbeans">
+          <SpecialtyImage
+            src="https://img.freepik.com/free-photo/brown-coffee-beans-seed_74190-6651.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid "
+            alt="Specialty Coffee 1"
+          />
+        </a>
+          <Subtitle style={{ fontSize: '1.5rem', fontFamily: 'Playfair Display, serif' }}>Premium Beans</Subtitle>
+        </div>
+        <div style={{ textAlign: 'center', margin: '1rem' }}>
+          <a href="/shop/coffee">
+          <SpecialtyImage
+            src="https://img.freepik.com/free-photo/coffee-machine-making-perfect-cup-coffee_23-2151699675.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid"
+            alt="Specialty Coffee 2"
+          />
+          </a>
+          <Subtitle style={{ fontSize: '1.5rem', fontFamily: 'Playfair Display, serif' }}>Special Flat White</Subtitle>
+        </div>
+        <div style={{ textAlign: 'center', margin: '1rem' }}>
+        <a href="/shop/coffee">
+          <SpecialtyImage
+            src="https://img.freepik.com/free-photo/coffee-cup-with-beans_23-2148453628.jpg?t=st=1727760337~exp=1727763937~hmac=c326eb236a78a478ea9d9703e1bdbb8b390dcc71cefb24d78ca7a85bcb1c1cc5&w=740"
+            alt="Specialty Coffee 3"
+          />
+        </a>
+          <Subtitle style={{ fontSize: '1.5rem', fontFamily: 'Playfair Display, serif' }}>Nitro Cold Brew</Subtitle>
+        </div>
       </SpecialtySection>
+      <Faq />
     </HomeContainer>
   );
 }
-
 export default Home;

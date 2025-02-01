@@ -687,7 +687,13 @@ function Shop() {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-    toast.success(`${product.name} added to cart!`);
+    toast.success(`${product.name} added to cart`);
+  };
+
+  const handleBuyNow = (product) => {
+    dispatch(addToCart(product));
+    toast.success(`${product.name} added to cart. Redirecting to checkout...`);
+    history.push('/checkout'); // Redirect to the checkout page
   };
 
   const handleClick = (value) => {

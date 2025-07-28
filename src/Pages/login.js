@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 import { useDispatch } from "react-redux";
 import { login } from "../Store/authSlice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+<ToastContainer position="top-center" autoClose={4000} />
 
 function LoginPage() {
   const [email, setEmail] = useState(""); 
@@ -9,17 +13,28 @@ function LoginPage() {
   const navigate = useNavigate(); 
   const dispatch = useDispatch(); // Add Redux dispatch
 
-  const handleSubmit = (e) => { 
-    e.preventDefault();
-    if (!email || !password) {
-      alert("Please fill in all fields.");
-      return;
-    }
+  
 
-    // FIXED: Used Redux instead of localStorage and now we can logout and login accordingly :)))
-    dispatch(login()); // This updates Redux state
-    navigate("/home"); // Navigate after successful login
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (!email || !password) {
+    toast.warning("Please fill in all fields.", {
+      position: "top-center",
+      autoClose: 5000,
+    });
+    return;
+  }
+
+  dispatch(login());
+  toast.success("Login successful! 🎉", {
+    position: "top-center",
+    autoClose: 4000,
+  });
+
+  navigate("/home");
+};
+
 
   return (
     <div className="flex items-center justify-center min-h-[90vh] md:min-h-screen bg-gray-100">

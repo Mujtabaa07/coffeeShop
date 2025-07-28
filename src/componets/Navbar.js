@@ -5,7 +5,7 @@ import { logout } from "../Store/authSlice";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCoffee, FaUser, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
-
+import { toast } from "react-toastify";
 const NavbarContainer = styled(motion.nav)`
   display: flex;
   justify-content: space-between;
@@ -310,10 +310,14 @@ function Navbar() {
   }, [isMobileMenuOpen]);
 
   const handleLogout = () => {
-    dispatch(logout());
-    navigate("/");
-    setIsMobileMenuOpen(false);
-  };
+  dispatch(logout());
+  toast.success("Logged out successfully!", {
+    position: "top-center",
+    autoClose: 4000, // you can increase/decrease duration
+  });
+  navigate("/");
+  setIsMobileMenuOpen(false);
+};
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);

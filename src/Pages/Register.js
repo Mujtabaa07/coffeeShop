@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignupPage() {
   const [name, setName] = useState("");
@@ -7,14 +9,39 @@ function SignupPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const isValidPassword = (pass) => {
+    const minLength = pass.length >= 8;
+    const hasUpper = /[A-Z]/.test(pass);
+    const hasLower = /[a-z]/.test(pass);
+    const hasDigitOrSymbol = /[\d\W]/.test(pass);
+    return minLength && hasUpper && hasLower && hasDigitOrSymbol;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
       alert("Please fill in all fields.");
       return;
     }
-    navigate("/home"); 
+
+    if (!isValidPassword(password)) {
+      toast.warn(
+        "Password must be at least 8 characters and include uppercase, lowercase, and a number or symbol.",
+        { autoClose: 5000 }
+      );
+      return;
+    }
+
+    toast.success("Registration successful!", {
+      position: "top-center",
+      autoClose: 2000,
+    });
+
+    setTimeout(() => {
+      navigate("/home");
+    }, 2000);
   };
+
 
   return (
     <div className="flex items-center justify-center min-h-[90vh] md:h-screen bg-gray-100">

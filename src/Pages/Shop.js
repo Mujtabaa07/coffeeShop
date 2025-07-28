@@ -21,12 +21,14 @@ const ShopContainer = styled.div`
 `;
 
 const Title = styled(motion.h1)`
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font size */
   margin-bottom: 3rem;
   margin-top: 2rem;
-  padding: 1rem;
+  padding: 0 1rem; /* Horizontal padding only */
   text-align: center;
   color: #78350f;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 `;
 
 const ProductGrid = styled.div`

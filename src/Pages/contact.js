@@ -65,15 +65,39 @@ const TextArea = styled.textarea`
     outline: none;
     }
 `;
-
+const ModalBackdrop=styled.div`
+  position:fixed;
+  cursor:inherit;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+`;
+const ModalBox=styled.div`
+z-index: 1000;
+  cursor:pointer;
+  background:#fff;
+  padding:2rem;
+  border-radius:10px;
+  text-align:center;
+  max-width: 400px;
+  max-height: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+`;
 
 function Contact() {
+  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
-
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -87,10 +111,21 @@ function Contact() {
     console.log('Form submitted:', formData);
     // Reset form after submission
     setFormData({ name: '', email: '', message: '' });
+    setShowModal(true);
   };
 
   return (
     <div className='page-container'>
+    {
+      showModal && (
+        <ModalBackdrop onClick={()=>setShowModal(false)}>
+          <ModalBox onClick={(e) => e.stopPropagation()}>
+            <h2 style={{marginBottom: "1rem", color: "#7c2214" }}>Your response has been submitted!</h2>
+            <Button onClick={()=>setShowModal(false)} style={{ cursor: 'pointer' }}>Close</Button>
+          </ModalBox>
+        </ModalBackdrop>
+      )
+    }
     <ContactContainer>
       <Title
         className = "mt-7"

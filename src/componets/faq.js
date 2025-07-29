@@ -62,16 +62,50 @@ const Answer = styled(motion.p)`
 `;
 
 const questionsAndAnswers = [
-  { question: "What is your coffee made of?", answer: "We use only the finest organic coffee beans sourced ethically from sustainable farms." },
-  { question: "Do you offer vegan options?", answer: "Yes! We have a range of plant-based milks and vegan pastries available." },
-  { question: "What are your working hours?", answer: "We are open from 7 AM to 9 PM every day." },
-  { question: "Do you have free Wi-Fi?", answer: "Yes, we offer free high-speed Wi-Fi to all our customers." },
-  { question: "Can I place an order online?", answer: "Absolutely! You can order through our website or mobile app." },
-  { question: "Do you have outdoor seating?", answer: "Yes, we have a cozy outdoor seating area for customers to enjoy their coffee." },
-  { question: "Are pets allowed?", answer: "Yes! We are a pet-friendly café, and we even offer special treats for dogs." },
-  { question: "Do you provide gift cards?", answer: "Yes, we have gift cards available in-store and online." },
-  { question: "Do you host events or workshops?", answer: "We regularly host coffee-tasting events and barista workshops." },
-  { question: "Is there a loyalty program?", answer: "Yes, join our rewards program and earn points for every purchase." }
+  {
+    question: "What is your coffee made of?",
+    answer:
+      "We use only the finest organic coffee beans sourced ethically from sustainable farms.",
+  },
+  {
+    question: "Do you offer vegan options?",
+    answer:
+      "Yes! We have a range of plant-based milks and vegan pastries available.",
+  },
+  {
+    question: "What are your working hours?",
+    answer: "We are open from 7 AM to 9 PM every day.",
+  },
+  {
+    question: "Do you have free Wi-Fi?",
+    answer: "Yes, we offer free high-speed Wi-Fi to all our customers.",
+  },
+  {
+    question: "Can I place an order online?",
+    answer: "Absolutely! You can order through our website or mobile app.",
+  },
+  {
+    question: "Do you have outdoor seating?",
+    answer:
+      "Yes, we have a cozy outdoor seating area for customers to enjoy their coffee.",
+  },
+  {
+    question: "Are pets allowed?",
+    answer:
+      "Yes! We are a pet-friendly café, and we even offer special treats for dogs.",
+  },
+  {
+    question: "Do you provide gift cards?",
+    answer: "Yes, we have gift cards available in-store and online.",
+  },
+  {
+    question: "Do you host events or workshops?",
+    answer: "We regularly host coffee-tasting events and barista workshops.",
+  },
+  {
+    question: "Is there a loyalty program?",
+    answer: "Yes, join our rewards program and earn points for every purchase.",
+  },
 ];
 
 const FAQ = () => {
@@ -105,7 +139,10 @@ const FAQ = () => {
           </h3>
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: activeIndex === index ? "auto" : 0, opacity: activeIndex === index ? 1 : 0 }}
+            animate={{
+              height: activeIndex === index ? "auto" : 0,
+              opacity: activeIndex === index ? 1 : 0,
+            }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
             style={{ overflow: "hidden" }}
           >

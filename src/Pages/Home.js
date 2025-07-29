@@ -1,47 +1,58 @@
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { FaCoffee, FaMugHot, FaGlassWhiskey } from "react-icons/fa";
 import Button from "../componets/Button";
 import Faq from "../componets/faq";
-import "./Home.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const HomeContainer = styled.div`
   padding: 0;
   max-width: 100%;
-  background-color: #fdf5e6;
-  color: #2c130b;
+  background: #f8efe4; /* Light cream */
+  color: #281a0d; /* Dark wood brown */
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f8efe4;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #8b4513; /* Saddle brown */
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #deb887; /* Burlywood */
+  }
+
+  ::selection {
+    background: #8b4513;
+    color: #f8efe4;
+  }
 `;
 
 const HeroSection = styled.section`
   display: flex;
-  padding:0;
-  margin:0;
-  top:-2rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 100vh;
-
-  width: 100%;
-
-  gap:-0.5rem;
-
-  background-image: linear-gradient(
-      rgba(44, 19, 11, 0.7),
-      rgba(44, 19, 11, 0.7)
-    ),
+  min-height: 100vh;
+  padding: 2rem 6%;
+  background: linear-gradient(rgba(40, 26, 13, 0.7), rgba(40, 26, 13, 0.7)),
     url("https://cdn.pixabay.com/photo/2024/03/22/18/30/ai-generated-8650286_1280.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  color: #ffe4b5;
+  color: #f8efe4;
   position: relative;
+  border-bottom: 1px solid rgba(139, 69, 19, 0.2); /* Saddle brown border */
 
   &::after {
     content: "";
@@ -50,16 +61,58 @@ const HeroSection = styled.section`
     left: 0;
     right: 0;
     height: 100px;
-    background: linear-gradient(to top, #fdf5e6, transparent);
+    background: linear-gradient(to top, #f8efe4, transparent);
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 4%;
+    min-height: 80vh;
+    background-attachment: scroll;
   }
 `;
 
 const Title = styled(motion.h1)`
-  font-size: 5rem;
-  
-  
+  font-size: 4.8rem;
   font-family: "Playfair Display", serif;
-  color: #ffe4b5;
+  font-weight: 800;
+  color: #f8efe4;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(
+    45deg,
+    #8b4513,
+    #deb887
+  ); /* Saddle brown to burlywood */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+
+  &::after {
+    content: "☕";
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: #deb887;
+    opacity: 0;
+    animation: steam 3s infinite;
+  }
+
+  @keyframes steam {
+    0% {
+      transform: translateY(0) translateX(-50%) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translateY(-20px) translateX(-50%) scale(1.2);
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(-40px) translateX(-50%) scale(1);
+      opacity: 0;
+    }
+  }
 
   @media (max-width: 768px) {
     font-size: 3rem;
@@ -67,121 +120,237 @@ const Title = styled(motion.h1)`
 `;
 
 const Subtitle = styled(motion.p)`
-  font-size: 1.8rem;
-  
-  font-family: "Poppins", sans-serif;
-  color: #deb887;
-  max-width: 600px;
-  
+  font-size: 1.7rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  color: #deb887; /* Burlywood */
+  max-width: 700px;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
-    font-size: 1.4rem;
-    
+    font-size: 1.3rem;
+    max-width: 90%;
   }
 `;
 
 const StyledButton = styled(Button)`
-  background: #d2691e;
-  color: #ffe4b5;
-  padding:0.8rem;
-  font-size: 1.2rem;
-  border-radius: 30px;
-  border: 2px solid #8b4513;
-  transition: all 0.3s ease;
-  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    45deg,
+    #8b4513,
+    #deb887
+  ); /* Saddle brown to burlywood */
+  color: #f8efe4;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  border-radius: 50px;
+  border: none;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+  position: relative;
+  overflow: hidden;
 
   &:hover {
-    background: #8b4513;
+    background: linear-gradient(45deg, #deb887, #8b4513);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+    box-shadow: 0 6px 18px rgba(139, 69, 19, 0.4);
   }
 
-  @media (min-width: 783px) {
-  font-size:0.8rem;
-  padding: 0.5rem}
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: 0.5s;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.7rem 1.8rem;
+    font-size: 0.95rem;
+  }
 `;
 
 const FeaturesSection = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 3rem;
-  padding: 6rem 4rem;
-  background: linear-gradient(135deg, #fdf5e6, #ffe4b5);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 6rem 6%;
+  background: linear-gradient(
+    135deg,
+    #f8efe4,
+    #f0e6d9
+  ); /* Light cream gradient */
   position: relative;
-  overflow: visible;
 
-  
+  &::before {
+    content: "Our Features";
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    color: #deb887; /* Burlywood */
+    background: linear-gradient(45deg, #8b4513, #deb887);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
 
   @media (max-width: 768px) {
-    padding: 4rem 2rem;
-    gap: 2rem;
+    padding: 4rem 4%;
+    gap: 1.5rem;
+
+    &::before {
+      font-size: 2rem;
+    }
   }
 `;
 
-const FeatureCard = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.9);
+const FeatureCard = styled.div`
+  background: rgba(248, 239, 228, 0.85); /* Creamier, less white */
   padding: 2.5rem;
-  border-radius: 15px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(210, 105, 30, 0.2);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(139, 69, 19, 0.2); /* Saddle brown border */
+  backdrop-filter: blur(12px);
   transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 340px; /* Taller cards */
 
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: rgba(248, 239, 228, 0.9); /* Slightly more opaque on hover */
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      #8b4513,
+      #deb887
+    ); /* Saddle brown to burlywood */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  .steam {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6rem;
+    color: #deb887; /* Burlywood */
+    pointer-events: none;
+    opacity: 0;
+    animation: steam 3s infinite;
+  }
+
+  &:hover .steam {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    min-height: 300px; /* Taller cards on mobile */
   }
 `;
 
-const FeatureIcon = styled.img`
+const ImageContainer = styled.div`
   width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
+  height: 120px; /* Taller image container */
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
 
-  &:hover {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ${FeatureCard}:hover & {
     transform: scale(1.1);
   }
 `;
 
 const FeatureTitle = styled.h3`
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  color: #8b4513;
-  transition: color 0.3s ease-in-out;
+  font-size: 1.6rem;
   font-family: "Playfair Display", serif;
+  font-weight: 700;
+  color: #281a0d; /* Dark wood brown */
+  margin-bottom: 0.8rem;
+  transition: color 0.3s ease-in-out;
 
   &:hover {
-    color: #e07a5f;
+    color: #deb887; /* Burlywood */
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
   }
 `;
 
 const FeatureDescription = styled.p`
-  font-size: 1.1rem;
-  color: #6b4423;
-  line-height: 1.6;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  color: #281a0d; /* Dark wood brown */
+  line-height: 1.5;
+  max-width: 240px;
+  margin: 0 auto;
   transition: color 0.3s ease-in-out;
-  font-family: "Poppins", sans-serif;
 
   &:hover {
-    color: #3d405b;
+    color: #deb887; /* Burlywood */
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
   }
 `;
 
 const SpecialtySection = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 6rem 2rem;
-  background: #2c130b;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 6rem 6%;
+  background: #281a0d; /* Dark wood brown */
   position: relative;
+  color: #f8efe4;
 
   &::before {
     content: "Our Specialties";
@@ -190,110 +359,136 @@ const SpecialtySection = styled.section`
     left: 50%;
     transform: translateX(-50%);
     font-size: 2.5rem;
-    color: #ffe4b5;
     font-family: "Playfair Display", serif;
+    font-weight: 700;
+    color: #deb887; /* Burlywood */
+    background: linear-gradient(45deg, #8b4513, #deb887);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    padding: 4rem 4%;
+    gap: 1.5rem;
+
+    &::before {
+      font-size: 2rem;
+    }
   }
 `;
 
-const SpecialtyImage = styled(motion.img)`
-  width: 280px;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 20px;
-  margin: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 3px solid #8b4513;
-  transition: all 0.4s ease;
+const SpecialtyCard = styled.div`
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2.5rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(139, 69, 19, 0.2); /* Saddle brown border */
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 280px;
 
   &:hover {
-    transform: scale(1.05) rotate(3deg);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      #8b4513,
+      #deb887
+    ); /* Saddle brown to burlywood */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  .steam {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6rem;
+    color: #deb887; /* Burlywood */
+    pointer-events: none;
+    opacity: 0;
+    animation: steam 3s infinite;
+  }
+
+  &:hover .steam {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    min-height: 240px;
   }
 `;
 
-const ScrollIndicator = styled(motion.div)`
-  position: absolute;
-  bottom:9rem;
-  display:flex,
-  justify-content: center;
-  justify-items: center;
-  left: 49.6%;
-  transform: translateX(-50%);
-  color: #ffe4b5;
-  font-size: 2rem;
-  cursor: pointer;
-  animation: bounce 2s infinite;
+const SpecialtyIcon = styled.div`
+  font-size: 3rem;
+  color: #deb887; /* Burlywood */
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
 
-  &::after {
-    content: "☕";
-    position: absolute;
-    top: 40px;
-    left: 56%;
-    transform: translateX(-45%);
-    font-size: 3rem;
-    color: #8b4513;
+  ${SpecialtyCard}:hover & {
+    transform: scale(1.1);
+  }
+`;
+
+const SpecialtyTitle = styled.h3`
+  font-size: 1.6rem;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  color: #f8efe4;
+  margin-bottom: 0.8rem;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #deb887; /* Burlywood */
   }
 
-  @keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateY(20%) translateX(-50%);
-    }
-    40% {
-      transform: translateY(-20%) translateX(-50%);
-    }
-    60% {
-      transform: translateY(20%) translateX(-50%);
-    }
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
+`;
+
+const SpecialtyDescription = styled.p`
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  color: #f8efe4;
+  line-height: 1.5;
+  max-width: 240px;
+  margin: 0 auto;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #deb887; /* Burlywood */
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
   }
 `;
 
 function Home() {
-  const featuresRef = useRef(null);
-  const specialtyRef = useRef(null);
-
-  useEffect(() => {
-    const features = featuresRef.current.children;
-    const specialties = specialtyRef.current.children;
-
-    gsap.fromTo(
-      features,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.2,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: featuresRef.current,
-          start: "top bottom-=100",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    gsap.fromTo(
-      specialties,
-      { scale: 0.8, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        stagger: 0.2,
-        duration: 1,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: specialtyRef.current,
-          start: "top bottom-=100",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  }, []);
-
   return (
     <HomeContainer>
       <HeroSection>
@@ -314,77 +509,101 @@ function Home() {
         <Link to="/shop">
           <StyledButton primary>Start Your Coffee Journey</StyledButton>
         </Link>
-        <ScrollIndicator>↓</ScrollIndicator>
       </HeroSection>
-      <FeaturesSection ref={featuresRef} className="hover:cursor-pointer">
+      <FeaturesSection>
         <FeatureCard>
-          <FeatureIcon
-            src="https://img.freepik.com/free-photo/side-view-fresh-coffee-beans-falling-out-black-basket-red-background_141793-27586.jpg?t=st=1727759694~exp=1727763294~hmac=661c2c2b8c561df98b21f74effb9bb02a0875b0584c062f076bceafa5d6f7eda&w=1380"
-            alt="Quality Beans"
-          />
+          <span className="steam">☕</span>
+          <ImageContainer>
+            <img
+              src="https://img.freepik.com/free-photo/side-view-fresh-coffee-beans-falling-out-black-basket-red-background_141793-27586.jpg?t=st=1727759694~exp=1727763294~hmac=661c2c2b8c561df98b21f74effb9bb02a0875b0584c062f076bceafa5d6f7eda&w=1380"
+              alt="Premium coffee beans"
+              loading="lazy"
+            />
+          </ImageContainer>
           <Link to="/premiumbeans">
             <FeatureTitle>Premium Beans</FeatureTitle>
           </Link>
           <FeatureDescription>
-            We source the finest coffee beans from around the world.
+            Savor the rich, bold flavors of our hand-selected, ethically sourced
+            beans.
           </FeatureDescription>
         </FeatureCard>
         <FeatureCard>
-          <FeatureIcon
-            src="https://img.freepik.com/free-vector/people-making-different-coffee-methods_23-2148659306.jpg?t=st=1727760094~exp=1727763694~hmac=1308757b9658b2965de4fa54acb3d847813ef088426f2fb78a05d8cb0be1b993&w=826"
-            alt="Expert Baristas"
-          />
+          <span className="steam">☕</span>
+          <ImageContainer>
+            <img
+              src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13"
+              alt="Expert barista crafting coffee"
+              loading="lazy"
+            />
+          </ImageContainer>
           <Link to="/expertbaristas">
             <FeatureTitle>Expert Baristas</FeatureTitle>
           </Link>
           <FeatureDescription>
-            Our skilled baristas craft each cup to perfection.
+            Our skilled baristas craft each cup with precision and passion.
           </FeatureDescription>
         </FeatureCard>
         <FeatureCard>
-          <FeatureIcon
-            src="https://img.freepik.com/free-photo/modern-coffee-shop-with-comfortable-chairs-elegant-decor-relaxing-ambiance-generated-by-artificial-intelligence_188544-150832.jpg?t=st=1727760180~exp=1727763780~hmac=5b12fc3782c57d5c5a04bcd60e2d275f3c18e52b87d6939948612e1cd4a76d68&w=1380"
-            alt="Cozy Ambiance"
-          />
+          <span className="steam">☕</span>
+          <ImageContainer>
+            <img
+              src="https://img.freepik.com/free-photo/modern-coffee-shop-with-comfortable-chairs-elegant-decor-relaxing-ambiance-generated-by-artificial-intelligence_188544-150832.jpg?t=st=1727760180~exp=1727763780~hmac=5b12fc3782c57d5c5a04bcd60e2d275f3c18e52b87d6939948612e1cd4a76d68&w=1380"
+              alt="Cozy cafe interior"
+              loading="lazy"
+            />
+          </ImageContainer>
           <Link to="/CozyAmbiance">
             <FeatureTitle>Cozy Ambiance</FeatureTitle>
           </Link>
           <FeatureDescription>
-            Enjoy your coffee in our warm and inviting atmosphere.
+            Enjoy your coffee in our warm, inviting atmosphere.
           </FeatureDescription>
         </FeatureCard>
       </FeaturesSection>
-      <SpecialtySection ref={specialtyRef}>
-        <div style={{ textAlign: 'center', margin: '2rem' }}>
-          <a href="/premiumbeans">
-            <SpecialtyImage
-              src="https://img.freepik.com/free-photo/brown-coffee-beans-seed_74190-6651.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid "
-              alt="Specialty Coffee 1"
-            />
-          </a>
-          <Subtitle style={{ fontSize: '1.5rem', fontFamily: 'Playfair Display, serif' }}>Premium Beans</Subtitle>
-        </div>
-        <div style={{ textAlign: 'center', margin: '1rem' }}>
-          <a href="/shop/coffee">
-            <SpecialtyImage
-              src="https://img.freepik.com/free-photo/coffee-machine-making-perfect-cup-coffee_23-2151699675.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid"
-              alt="Specialty Coffee 2"
-            />
-          </a>
-          <Subtitle style={{ fontSize: '1.5rem', fontFamily: 'Playfair Display, serif' }}>Special Flat White</Subtitle>
-        </div>
-        <div style={{ textAlign: 'center', margin: '1rem' }}>
-          <a href="/shop/coffee">
-            <SpecialtyImage
-              src="https://i.pinimg.com/736x/99/fd/89/99fd8916a0bd3440b89777567743905d.jpg"
-              alt="Specialty Coffee 3"
-            />
-          </a>
-          <Subtitle style={{ fontSize: '1.5rem', fontFamily: 'Playfair Display, serif' }}>Nitro Cold Brew</Subtitle>
-        </div>
+      <SpecialtySection>
+        <SpecialtyCard>
+          <span className="steam">☕</span>
+          <SpecialtyIcon>
+            <FaCoffee />
+          </SpecialtyIcon>
+          <Link to="/premiumbeans">
+            <SpecialtyTitle>Premium Beans</SpecialtyTitle>
+          </Link>
+          <SpecialtyDescription>
+            Savor the rich, bold flavors of our hand-selected, ethically sourced
+            beans.
+          </SpecialtyDescription>
+        </SpecialtyCard>
+        <SpecialtyCard>
+          <span className="steam">☕</span>
+          <SpecialtyIcon>
+            <FaMugHot />
+          </SpecialtyIcon>
+          <Link to="/shop/coffee">
+            <SpecialtyTitle>Special Flat White</SpecialtyTitle>
+          </Link>
+          <SpecialtyDescription>
+            A velvety masterpiece crafted with precision and passion.
+          </SpecialtyDescription>
+        </SpecialtyCard>
+        <SpecialtyCard>
+          <span className="steam">☕</span>
+          <SpecialtyIcon>
+            <FaGlassWhiskey />
+          </SpecialtyIcon>
+          <Link to="/shop/coffee">
+            <SpecialtyTitle>Nitro Cold Brew</SpecialtyTitle>
+          </Link>
+          <SpecialtyDescription>
+            Smooth, creamy, and refreshingly bold—a coffee experience like no
+            other.
+          </SpecialtyDescription>
+        </SpecialtyCard>
       </SpecialtySection>
       <Faq />
     </HomeContainer>
   );
 }
+
 export default Home;

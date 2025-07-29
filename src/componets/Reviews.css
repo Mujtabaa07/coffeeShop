@@ -1,0 +1,296 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap");
+
+.reviews-section {
+  padding: 6rem 6%; /* Matching Home.jsx sections */
+  background: linear-gradient(
+    135deg,
+    #f8efe4,
+    #f0e6d9
+  ); /* Light cream gradient */
+  position: relative;
+}
+
+.reviews-container {
+  max-width: 1280px; /* max-w-7xl */
+  margin: 0 auto;
+  padding: 0 1.5rem; /* sm:px-6 */
+}
+
+@media (min-width: 1024px) {
+  .reviews-container {
+    padding: 0 2rem; /* lg:px-8 */
+  }
+}
+
+.reviews-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reviews-subtitle {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 500; /* font-medium */
+  color: #6b4423; /* Dark coffee, matching Testimonial */
+  font-family: "Poppins", sans-serif;
+}
+
+.reviews-heading {
+  margin-top: 1rem; /* mt-4 */
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700; /* font-bold */
+  color: #78350f; /* Saddle brown variant */
+  font-family: "Playfair Display", serif;
+  background: linear-gradient(45deg, #8b4513, #deb887); /* Gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 640px) {
+  .reviews-heading {
+    font-size: 2.25rem; /* sm:text-4xl */
+  }
+}
+
+@media (min-width: 1280px) {
+  .reviews-heading {
+    font-size: 3rem; /* xl:text-5xl */
+  }
+}
+
+.reviews-link-container {
+  margin-top: 2rem; /* mt-8 */
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .reviews-link-container {
+    margin-top: 4rem; /* md:mt-16 */
+  }
+}
+
+.reviews-link {
+  font-size: 1rem; /* text-base */
+  font-weight: 700; /* font-bold */
+  color: #78350f; /* Saddle brown variant */
+  border-bottom: 2px solid #78350f; /* border-#78350f */
+  padding-bottom: 0.5rem; /* pb-2 */
+  transition: all 0.2s ease; /* transition-all duration-200 */
+  font-family: "Poppins", sans-serif;
+}
+
+.reviews-link:hover {
+  color: #deb887; /* Burlywood */
+  border-color: #deb887;
+}
+
+.reviews-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #78350f, 0 0 0 3px rgba(120, 53, 15, 0.2); /* focus:ring */
+}
+
+.reviews-grid-container {
+  position: relative;
+  margin-top: 2.5rem; /* mt-10 */
+}
+
+@media (min-width: 768px) {
+  .reviews-grid-container {
+    margin-top: 6rem; /* md:mt-24 */
+  }
+}
+
+.reviews-grid-background {
+  position: absolute;
+  top: 4rem; /* inset-y-16 */
+  left: -0.25rem; /* -inset-x-1 */
+  right: -0.25rem;
+  bottom: 4rem;
+  max-width: 1120px; /* max-w-5xl */
+  margin: 0 auto;
+  border-radius: 1.5rem; /* rounded-3xl */
+  opacity: 0.3;
+  filter: blur(20px); /* blur-lg */
+  background: linear-gradient(90deg, #8b4513, #deb887); /* Cozy gradient */
+}
+
+@media (min-width: 768px) {
+  .reviews-grid-background {
+    left: -0.5rem; /* md:-inset-x-2 */
+    top: -1.5rem; /* md:-inset-y-6 */
+    bottom: -1.5rem;
+  }
+}
+
+.reviews-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem; /* gap-6 */
+  max-width: 448px; /* max-w-lg */
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .reviews-grid {
+    grid-template-columns: repeat(3, 1fr); /* md:grid-cols-3 */
+    max-width: none; /* md:max-w-none */
+    gap: 2.5rem; /* lg:gap-10 */
+  }
+}
+
+.review-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgba(139, 69, 19, 0.2); /* Saddle brown border */
+  border-radius: 1.5rem 0 1.5rem 0; /* rounded-tl-3xl rounded-br-3xl */
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* transition-transform duration-300 */
+  background: rgba(248, 239, 228, 0.85); /* Creamier, matching FeatureCard */
+  backdrop-filter: blur(12px); /* Glassmorphism */
+}
+
+.review-card:hover {
+  transform: scale(1.05); /* hover:scale-105 */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04); /* hover:shadow-2xl */
+  background: rgba(248, 239, 228, 0.9);
+}
+
+.review-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    #8b4513,
+    #deb887
+  ); /* Saddle brown to burlywood */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.review-card:hover::before {
+  opacity: 1;
+}
+
+.review-card .steam {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.6rem;
+  color: #deb887; /* Burlywood */
+  pointer-events: none;
+  opacity: 0;
+  animation: steam 3s infinite;
+}
+
+.review-card:hover .steam {
+  opacity: 1;
+}
+
+@keyframes steam {
+  0% {
+    transform: translateY(0) translateX(-50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-20px) translateX(-50%) scale(1.2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-40px) translateX(-50%) scale(1);
+    opacity: 0;
+  }
+}
+
+.review-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #8b4513, #deb887); /* Cozy gradient */
+  border-radius: 1.5rem 0 1.5rem 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.review-card:hover .review-card-overlay {
+  opacity: 0.2; /* Subtle gradient on hover */
+}
+
+.review-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  padding: 1.5rem; /* p-6 */
+}
+
+@media (min-width: 1024px) {
+  .review-card-content {
+    padding: 2rem 1.75rem; /* lg:py-8 lg:px-7 */
+  }
+}
+
+.review-stars {
+  display: flex;
+  align-items: center;
+}
+
+.review-star-icon {
+  width: 1.25rem; /* w-5 */
+  height: 1.25rem; /* h-5 */
+  color: #deb887; /* Burlywood */
+}
+
+.review-text {
+  margin-top: 2rem; /* mt-8 */
+  flex: 1;
+}
+
+.review-text p {
+  font-size: 1.125rem; /* text-lg */
+  line-height: 1.75; /* leading-relaxed */
+  color: #281a0d; /* Dark wood brown */
+  font-family: "Poppins", sans-serif;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem; /* mt-8 */
+}
+
+.review-author-image {
+  flex-shrink: 0;
+  width: 2.75rem; /* w-11 */
+  height: 2.75rem; /* h-11 */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-author-details {
+  margin-left: 1rem; /* ml-4 */
+}
+
+.review-author-name {
+  font-size: 1rem; /* text-base */
+  font-weight: 700; /* font-bold */
+  color: #78350f; /* Saddle brown variant */
+  font-family: "Poppins", sans-serif;
+}
+
+.review-author-role {
+  margin-top: 0.125rem; /* mt-0.5 */
+  font-size: 0.875rem; /* text-sm */
+  color: #6b4423; /* Dark coffee */
+  font-family: "Poppins", sans-serif;
+}

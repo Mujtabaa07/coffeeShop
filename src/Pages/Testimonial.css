@@ -3,31 +3,49 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* Body Styling */
 body {
   padding-top: 90px;
-  background-color: #f9f9f9;
+  background-color: #f8efe4; /* Light cream, matching Home.jsx */
 }
 
 /* Testimonial Section */
 .testimonial {
-  background: linear-gradient(to bottom, #f5e3dc, #e5d0c3);
-  padding: 5%;
+  background: linear-gradient(
+    135deg,
+    #f8efe4,
+    #f0e6d9
+  ); /* Light cream gradient, matching FeaturesSection */
+  padding: 6rem 6%; /* Consistent with Home.jsx sections */
   text-align: center;
-  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
   background-blend-mode: overlay;
   background-size: cover;
+  position: relative;
 }
 
 /* Title Styling */
 h1 {
   font-size: 2.5rem;
-  color: #6f4e37;
+  color: #78350f; /* Saddle brown variant, matching FAQ */
   margin-bottom: 2rem;
   animation: fadeIn 1s ease-in-out;
+}
+
+.heading {
+  font-weight: 1000;
+  font-size: 50px;
+  background: linear-gradient(
+    45deg,
+    #8b4513,
+    #deb887
+  ); /* Saddle brown to burlywood */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Testimonial Row Styling */
@@ -51,10 +69,68 @@ h1 {
   align-items: center;
   justify-content: flex-start;
   padding-top: 70px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(
+    248,
+    239,
+    228,
+    0.85
+  ); /* Creamier, less white, matching FeatureCard */
+  border-radius: 16px; /* Consistent with Home.jsx */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(139, 69, 19, 0.2); /* Saddle brown border */
+  backdrop-filter: blur(12px); /* Glassmorphism */
   perspective: 1000px; /* Add perspective */
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02); /* Matching FeatureCard hover */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: rgba(248, 239, 228, 0.9);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      #8b4513,
+      #deb887
+    ); /* Saddle brown to burlywood */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  .steam {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6rem;
+    color: #deb887; /* Burlywood */
+    pointer-events: none;
+    opacity: 0;
+    animation: steam 3s infinite;
+  }
+
+  &:hover .steam {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 95%;
+  }
 }
 
 /* Inner card container for flipping */
@@ -72,7 +148,8 @@ h1 {
 }
 
 /* Front and Back Styling */
-.front, .back {
+.front,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -92,8 +169,8 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  border-radius: 10px;
+  background: rgba(248, 239, 228, 0.9); /* Matching FeatureCard hover */
+  border-radius: 16px;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -106,7 +183,7 @@ h1 {
   transform: translateX(-50%);
   width: 120px;
   height: 120px;
-  border: 5px solid #7c2214;
+  border: 5px solid #8b4513; /* Saddle brown */
   border-radius: 50%;
   overflow: hidden;
 }
@@ -132,19 +209,26 @@ h1 {
 .image-text h2 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #7c2214;
+  color: #78350f; /* Saddle brown variant, matching FAQ */
+}
+
+.name {
+  font-weight: 500;
 }
 
 /* Review Text Styling */
-.image-text p, .back p {
+.image-text p,
+.back p {
   font-size: 1rem;
-  color: #333;
+  color: #6b4423; /* Dark coffee, matching FAQ Answer */
 }
 
 /* Carousel Control Icons */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  filter: invert(1);
+  background-color: #deb887; /* Burlywood for visibility */
+  border-radius: 50%;
+  padding: 10px;
 }
 
 /* Keyframe Animations */
@@ -170,10 +254,33 @@ h1 {
   }
 }
 
+@keyframes steam {
+  0% {
+    transform: translateY(0) translateX(-50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-20px) translateX(-50%) scale(1.2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-40px) translateX(-50%) scale(1);
+    opacity: 0;
+  }
+}
+
 /* Responsive Styling for Tablets */
 @media (max-width: 768px) {
+  .testimonial {
+    padding: 4rem 4%;
+  }
+
   h1 {
     font-size: 2rem;
+  }
+
+  .heading {
+    font-size: 40px;
   }
 
   .testimonial-row {
@@ -181,10 +288,6 @@ h1 {
     align-items: center;
     gap: 1.5rem;
     padding: 3rem 0;
-  }
-
-  .single {
-    max-width: 90%; /* Adjust card width */
   }
 
   .image {
@@ -208,13 +311,12 @@ h1 {
     font-size: 1.8rem;
   }
 
-  .testimonial-row {
-    flex-direction: column;
-    gap: 1rem;
+  .heading {
+    font-size: 32px;
   }
 
-  .single {
-    max-width: 95%; /* Adjust card width */
+  .testimonial-row {
+    gap: 1rem;
   }
 
   .image {
@@ -230,12 +332,4 @@ h1 {
   .image-text p {
     font-size: 0.8rem;
   }
-}
-.heading{
-  font-weight: 1000;
-  font-size: 50px;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-}
-.name{
-  font-weight: 500;
 }

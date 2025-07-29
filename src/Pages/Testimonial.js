@@ -1,19 +1,20 @@
-import React from 'react';
-import './Testimonial.css';
+import React from "react";
+import "./Testimonial.css";
 
 function Testimonial() {
   return (
     <>
       <div className="testimonial">
         <div className="container">
-          <h1 className='heading'>What Our Customers Say</h1>
+          <h1 className="heading">What Our Customers Say</h1>
           <div className="carousel-container">
             <div
               id="carouselExampleSlidesOnly"
               className="carousel slide"
               data-bs-ride="carousel"
               data-bs-interval="3000"
-              data-bs-wrap="true">
+              data-bs-wrap="true"
+            >
               <div className="carousel-indicators">
                 <button
                   type="button"
@@ -80,16 +81,24 @@ function Testimonial() {
                 className="carousel-control-prev"
                 type="button"
                 data-bs-target="#carouselExampleSlidesOnly"
-                data-bs-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                data-bs-slide="prev"
+              >
+                <span
+                  className="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
                 <span className="visually-hidden">Previous</span>
               </button>
               <button
                 className="carousel-control-next"
                 type="button"
                 data-bs-target="#carouselExampleSlidesOnly"
-                data-bs-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                data-bs-slide="next"
+              >
+                <span
+                  className="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
@@ -111,18 +120,17 @@ function TestimonialCard({ name, image, rating, text }) {
           <div className="image-text">
             <br />
             <br />
-            <h2 className='name'>{name}</h2>
+            <h2 className="name">{name}</h2>
             <br />
             <p>{rating}</p>
           </div>
         </div>
         <div className="back">
-          <p className='content'>{text}</p>
+          <p className="content">{text}</p>
         </div>
       </div>
     </div>
   );
 }
-
 
 export default Testimonial;

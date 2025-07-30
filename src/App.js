@@ -35,6 +35,7 @@ import ExpertBaristas from './Pages/ExpertBaristas';
 import CozyAmbiance from './Pages/CozyAmbiance';
 import Feedback from './Pages/Feedback';
 import Favorites from './Pages/favorites';
+import Wishlist from './Pages/wishlist';
 import Reviews from './componets/Reviews';
 import AnimatedCursor from 'react-animated-cursor';
 
@@ -77,7 +78,7 @@ function App() {
             outerScale={5}
           />
 
-          <ToastContainer position="top-right" autoClose={3000} />
+          <ToastContainer position="top-right" autoClose={2000} />
 
           <ContentContainer>
             <Routes>
@@ -107,6 +108,7 @@ function App() {
               <Route path="/expertbaristas" element={<ExpertBaristas />} />
               <Route path="/cozyambiance" element={<CozyAmbiance />} />
               <Route path="/favorites" element={<Favorites />} />
+              <Route path="/wishlist" element={<Wishlist />} />
             </Routes>
           </ContentContainer>
 

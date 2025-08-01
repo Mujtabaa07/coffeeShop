@@ -18,7 +18,7 @@ const NavbarContainer = styled(motion.nav)`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 998;
   border-bottom: 1px solid rgba(210, 105, 30, 0.3);
   transition: all 0.3s ease;
 

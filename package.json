@@ -23,21 +23,34 @@
     "@jridgewell/sourcemap-codec": "^1.5.0",
     "@lottiefiles/dotlottie-react": "^0.12.0",
     "@mui/material": "^6.3.1",
+    "@react-oauth/google": "^0.12.2",
     "@reduxjs/toolkit": "^2.2.7",
     "@rollup/plugin-terser": "^0.4.4",
     "@tailwindcss/typography": "^0.5.15",
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.6.2",
     "babel-plugin-styled-components": "^2.1.4",
+    "connect-mongo": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "framer-motion": "^11.9.0",
     "fuse.js": "^7.1.0",
     "glob": "^11.0.0",
     "gsap": "^3.12.5",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.474.0",
     "mohamed-mujtaba-coffee-shop": "file:",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.0.3",
     "openai": "^4.78.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-jwt": "^4.0.1",
     "react": "^18.3.1",
     "react-animated-cursor": "^2.11.2",
     "react-dom": "^18.3.1",
@@ -56,7 +69,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "node server.js",
+    "dev": "concurrently \"npm run server\" \"npm start\"",
+    "install-server": "cd backend && npm install",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -78,10 +95,13 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "concurrently": "^8.2.2",
     "css-loader": "^7.1.2",
+    "nodemon": "^3.0.2",
     "postcss": "^8.4.47",
     "postcss-loader": "^8.1.1",
     "source-map-loader": "^5.0.0",
     "tailwindcss": "^3.4.13"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

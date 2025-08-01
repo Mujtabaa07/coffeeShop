@@ -116,7 +116,7 @@ body.menu-open {
   top: 0;
   width: 100%;
   background: #2C130B; 
-  z-index: 1000; 
+  z-index: 998; 
   padding: 10px 20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
   display: flex;

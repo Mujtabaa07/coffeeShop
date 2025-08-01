@@ -34,6 +34,8 @@ MsCafe is a web application that offers an elegant, user-friendly interface for 
 Before you begin, ensure you have installed the following:
 - [Node.js](https://nodejs.org/) (v14.x or higher)
 - [npm](https://www.npmjs.com/) (v6.x or higher)
+- MongoDB (local or Atlas)
+- Google Cloud Console project
 
 ### Setup
 Follow the steps below to set up the project locally:
@@ -55,16 +57,99 @@ git clone https://github.com/Mujtabaa07/coffeeShop.git
 # Navigate into the project directory
 cd coffeeShop
 ```
-```bash
-# Install the required npm packages
-npm install (or) npm i
-```
-```bash
 
-# Start the React development server
-npm start
+### Step 2: Google OAuth Setup
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing one
+3. Enable Google+ API
+4. Go to "Credentials" → "Create Credentials" → "OAuth 2.0 Client IDs"
+5. Set authorized JavaScript origins: `http://localhost:3000`
+6. Set authorized redirect URIs: `http://localhost:5001/api/auth/google/callback`
+7. Copy Client ID and Client Secret
+
+### Step 3: MongoDB Atlas Setup
+
+#### 1. Create Account
+- Go to MongoDB Atlas
+- Click "Try Free"
+- Sign up with email or Google
+- Verify your email address
+
+#### 2. Create Cluster
+- Choose deployment: Select "Shared" (Free tier)
+- Cloud Provider: Choose AWS, Google Cloud, or Azure
+- Region: Select closest to your location
+- Cluster Name: mscafe-cluster (or your preferred name)
+- Click "Create Cluster" (takes 3-5 minutes)
+
+#### 3. Create Database User
+- Go to "Database Access" in left sidebar
+- Click "Add New Database User"
+- Authentication Method: Password
+- Username: mscafe-admin
+- Password: Generate secure password or create your own
+- Database User Privileges: Select "Read and write to any database"
+- Click "Add User"
+
+#### 4. Configure Network Access
+- Go to "Network Access" in left sidebar
+- Click "Add IP Address"
+- For Development: Click "Allow Access from Anywhere" (0.0.0.0/0)
+- For Production: Add your server's specific IP
+- Click "Confirm"
+
+#### 5. Get Connection String
+- Go to "Clusters" and click "Connect"
+- Choose "Connect your application"
+- Driver: Node.js
+- Version: 4.1 or later
+- Copy connection string
+
+### Step 4: JWT_SECRET
+```bash
+# Run this cmd in your backend directory
+
+node -e "console.log('JWT_SECRET=' + require('crypto').randomBytes(64).toString('hex'))" 
+```
+
+### Step 5: SESSION_SECRET
+```bash
+# Run this cmd in your backend directory
+
+node -e "console.log('SESSION_SECRET=' + require('crypto').randomBytes(64).toString('hex'))"
+```
+
+## Installation
+### 1. Install frontend dependencies
+```bash
+  npm install
+```
+
+### 2. Install backend dependencies
+```bash
+cd backend
+npm install
+```
+
+### 3. Set up environment variables
+```bash
+cp .env.example .env
+# Fill in your Google OAuth credentials and MongoDB URI
+```
+
+### 4. Start MongoDB (if running locally)
+
+### 5. Run the application
+```bash
+# Run both frontend and backend
+npm run dev
+
+# Or run separately:
+# Backend: cd backend && npm run dev
+# Frontend: npm start
 ```
 Once the server is running, you can view the app at (http://localhost:3000).
+
 
 ## Usage
 **To use the app:**

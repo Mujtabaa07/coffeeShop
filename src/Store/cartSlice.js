@@ -1,9 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Load cart from localStorage if available
+const loadCartFromStorage = () => {
+  try {
+    const cartData = localStorage.getItem('mscafe_cart');
+    return cartData ? JSON.parse(cartData) : { items: [] };
+  } catch (error) {
+    console.error('Error loading cart from localStorage:', error);
+    return { items: [] };
+  }
+};
+
+// Load wishlist from localStorage if available
+const loadWishlistFromStorage = () => {
+  try {
+    const wishlistData = localStorage.getItem('mscafe_wishlist');
+    return wishlistData ? JSON.parse(wishlistData) : { items: [] };
+  } catch (error) {
+    console.error('Error loading wishlist from localStorage:', error);
+    return { items: [] };
+  }
+};
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    items: [],
+    items: loadCartFromStorage().items,
+    wishlist: loadWishlistFromStorage().items,
   },
   reducers: {
     addToCart: (state, action) => {
@@ -13,22 +36,84 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ ...action.payload, quantity: 1 });
       }
+      // Save to localStorage
+      localStorage.setItem('mscafe_cart', JSON.stringify({ items: state.items }));
     },
     removeFromCart: (state, action) => {
       state.items = state.items.filter(item => item.id !== action.payload);
+      // Save to localStorage
+      localStorage.setItem('mscafe_cart', JSON.stringify({ items: state.items }));
     },
     updateQuantity: (state, action) => {
       const { productId, quantity } = action.payload;
       const item = state.items.find(item => item.id === productId);
       if (item) {
-        item.quantity = quantity;
-      }  
+        if (quantity <= 0) {
+          // Remove item if quantity is 0 or less
+          state.items = state.items.filter(item => item.id !== productId);
+        } else {
+          item.quantity = quantity;
+        }
+        // Save to localStorage
+        localStorage.setItem('mscafe_cart', JSON.stringify({ items: state.items }));
+      }
     },
     clearCart: (state) => {
       state.items = [];
+      // Save to localStorage
+      localStorage.setItem('mscafe_cart', JSON.stringify({ items: state.items }));
+    },
+    // Wishlist functionality
+    addToWishlist: (state, action) => {
+      const existingItem = state.wishlist.find(item => item.id === action.payload.id);
+      if (!existingItem) {
+        state.wishlist.push({ ...action.payload, quantity: 1 });
+        // Save to localStorage
+        localStorage.setItem('mscafe_wishlist', JSON.stringify({ items: state.wishlist }));
+      }
+    },
+    removeFromWishlist: (state, action) => {
+      state.wishlist = state.wishlist.filter(item => item.id !== action.payload);
+      // Save to localStorage
+      localStorage.setItem('mscafe_wishlist', JSON.stringify({ items: state.wishlist }));
+    },
+    moveToWishlist: (state, action) => {
+      const itemToMove = state.items.find(item => item.id === action.payload);
+      if (itemToMove) {
+        // Add to wishlist
+        const existingWishlistItem = state.wishlist.find(item => item.id === action.payload);
+        if (!existingWishlistItem) {
+          state.wishlist.push({ ...itemToMove, quantity: 1 });
+        }
+        // Remove from cart
+        state.items = state.items.filter(item => item.id !== action.payload);
+        // Save both to localStorage
+        localStorage.setItem('mscafe_cart', JSON.stringify({ items: state.items }));
+        localStorage.setItem('mscafe_wishlist', JSON.stringify({ items: state.wishlist }));
+      }
+    },
+    // Buy Now functionality - adds item to cart and redirects
+    buyNow: (state, action) => {
+      const existingItem = state.items.find(item => item.id === action.payload.id);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.items.push({ ...action.payload, quantity: 1 });
+      }
+      // Save to localStorage
+      localStorage.setItem('mscafe_cart', JSON.stringify({ items: state.items }));
     },
   },
 });
 
-export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
+export const { 
+  addToCart, 
+  removeFromCart, 
+  updateQuantity, 
+  clearCart, 
+  addToWishlist, 
+  removeFromWishlist, 
+  moveToWishlist,
+  buyNow 
+} = cartSlice.actions;
 export default cartSlice.reducer;

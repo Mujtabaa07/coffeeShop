@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react"; // import useState, useRef hooks
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { addToCart } from "../Store/cartSlice";
+import { addToWishlist, removeFromWishlist } from "../Store/cartSlice";
 import Button from "../componets/Button";
+import EnhancedAddToCartButton from "../componets/AddToCartButton";
+import FloatingCart from "../componets/FloatingCart";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DynamicText from "./dynamicText";
@@ -126,28 +128,7 @@ const ProductPrice = styled.p`
   font-weight: 600;
 `;
 
-const StyledButton = styled.button`
-  background: linear-gradient(145deg, rgb(51, 15, 15), rgb(46, 22, 22));
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  border-radius: 20px;
-  cursor: pointer;
-  letter-spacing: 0.6px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease, transform 0.2s ease;
 
-  &:hover {
-    background: linear-gradient(145deg, #7d5858, #8e6a6a);
-    transform: scale(1.05);
-  }
-
-  &:active {
-    transform: scale(0.98);
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-  }
-`;
 
 const products = [
   {
@@ -790,270 +771,10 @@ const products = [
   },
 ];
 
-// Tea Section
-const product1 = [
-  {
-    id: 19,
-    name: "Chai",
-    price: 7.3,
-    image:
-      "https://img.freepik.com/free-photo/frappe-glass-slices-bread-with-seeds_23-2148623233.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid",
-    description:
-      "Spiced black tea brewed with milk and sweetened, aromatic and comforting.",
-  },
-  {
-    id: 20,
-    name: "Lemon Tea",
-    price: 4.1,
-    image:
-      "https://img.freepik.com/free-photo/cup-hot-mint-tea_144627-34462.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid ",
-    description:
-      "Refreshing black tea infused with lemon, perfect for a soothing experience.",
-  },
-  {
-    id: 21,
-    name: "Green Tea",
-    price: 3.4,
-    image:
-      "https://img.freepik.com/free-photo/cup-green-tea_144627-34463.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid ",
-    description:
-      "Light and delicate, made from unfermented tea leaves, rich in antioxidants.",
-  },
-  {
-    id: 22,
-    name: "Black Tea",
-    price: 4.5,
-    image:
-      "https://img.freepik.com/free-photo/cup-black-tea_144627-34464.jpg?ga=GA1.1.1542821208.1727756299&semt=ais_hybrid ",
-    description:
-      "Strong and full-bodied, made from fully oxidized tea leaves, classic and robust.",
-  },
-  {
-    id: 23,
-    name: "Herbal Tea",
-    price: 5.5,
-    image:
-      "https://img.freepik.com/premium-photo/black-tea-cup-glass-mint-tea-leaves-white-isolated_127657-17608.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid ",
-    description:
-      "Caffeine-free tea made from herbs, fruits, or spices, naturally soothing.",
-  },
-  {
-    id: 24,
-    name: "Iced Tea",
-    price: 5.6,
-    image:
-      "https://img.freepik.com/free-vector/long-island-ice-tea-cocktail-realistic_1284-3888.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid ",
-    description:
-      "Refreshing chilled tea, often sweetened and served with lemon, perfect for hot days.",
-  },
-];
-// Milkshake and Smothiee
-const product2 = [
-  {
-    id: 26,
-    name: "Strawberry smoothie",
-    price: 6.2,
-    image:
-      "https://www.eatingwell.com/thmb/TBp6lbiwoYPhRP4N__4sROiUDhA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/mixed-berry-breakfast-smoothie-7959466-1x1-e0ad2304222e49508cda7b73b21de921.jpg",
-    description:
-      "Creamy and sweet, made with fresh strawberries, yogurt, and a touch of honey.",
-  },
-  {
-    id: 27,
-    name: "Mango smoothie",
-    price: 3.2,
-    image:
-      "https://cdn.loveandlemons.com/wp-content/uploads/2023/05/mango-smoothie.jpg",
-    description:
-      "Tropical and refreshing, blended with ripe mangoes, banana, and coconut milk.",
-  },
-  {
-    id: 28,
-    name: "Strawberry banana smoothie",
-    price: 6.45,
-    image:
-      "https://www.purelykaylie.com/wp-content/uploads/2023/07/strawberry-banana-smoothie-bowl-5.jpg",
-    description:
-      "A classic combination of strawberries and bananas, creamy and naturally sweet.",
-  },
-  {
-    id: 29,
-    name: "Creamy, Nutty Coffee Smoothie",
-    price: 7.2,
-    image:
-      "https://www.seriouseats.com/thmb/dwKjOOPQu1ki3pSf1M4eB7FGVzI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20240206-SEA-Coffee-Smoothie-hero-27d1864a41cc411ea7ff0c64ada77a2e.jpg",
-    description:
-      "A rich blend of coffee, nuts, and cream, perfect for a morning energy boost.",
-  },
-  {
-    id: 30,
-    name: "Coffee Smoothie",
-    price: 6.3,
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-Y9in1wQf-XCl9sdyuw5pXWT_CrYn8P5j7A&s",
-    description:
-      "Creamy and caffeinated, made with cold brew, banana, and almond milk.",
-  },
-  {
-    id: 31,
-    name: "Chocolate Milkshake",
-    price: 5.2,
-    image:
-      "https://www.sharmispassions.com/wp-content/uploads/2012/07/chocolate-milkshake1.jpg",
-    description:
-      "Rich and indulgent, made with chocolate ice cream, milk, and whipped cream.",
-  },
-  {
-    id: 32,
-    name: "Oreo Milkshake",
-    price: 5.2,
-    image:
-      "https://www.solara.in/cdn/shop/articles/Oreo_Milkshake.jpg?v=1715757748&width=2048",
-    description:
-      "Creamy and delicious, blended with Oreo cookies, ice cream, and milk.",
-  },
-  {
-    id: 33,
-    name: "Strawberry Oreo Milkshake",
-    price: 2.6,
-    image:
-      "https://marleysmenu.com/wp-content/uploads/2021/08/Strawberry-Oreo-Milkshake-Featured-Image.jpg",
-    description:
-      "A sweet blend of strawberries, Oreo cookies, and ice cream, perfect for dessert lovers.",
-  },
-  {
-    id: 34,
-    name: "Mixed Nut and Fruit Milkshake",
-    price: 8.2,
-    image:
-      "https://images.mrcook.app/recipe-image/018d50f7-344f-7744-97e3-1f89e5a3cf29",
-    description:
-      "A nutritious blend of mixed nuts, fruits, and milk, creamy and satisfying.",
-  },
-  {
-    id: 35,
-    name: "Peanut Butter Milkshake",
-    price: 5.8,
-    image:
-      "https://www.julieseatsandtreats.com/wp-content/uploads/2021/08/Peanut-Butter-Milkshake-Square.jpg",
-    description:
-      "Rich and creamy, made with peanut butter, ice cream, and milk, a peanut butter lover's dream.",
-  },
-];
-// Cake Section
-const product3 = [
-  {
-    id: 36,
-    name: "Oreo cheese cake",
-    price: 9.2,
-    image:
-      "https://handletheheat.com/wp-content/uploads/2015/11/oreo-cheesecake-recipe-SQUARE.jpg",
-    description:
-      "Creamy cheesecake with an Oreo crust and topping, rich and indulgent.",
-  },
-  {
-    id: 37,
-    name: "Chocolate cake",
-    price: 7.2,
-    image:
-      "https://img.freepik.com/free-photo/chocolate-cake_1203-8942.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Moist and decadent, a classic chocolate cake perfect for any celebration.",
-  },
-  {
-    id: 38,
-    name: "Red velvet cake",
-    price: 4.2,
-    image:
-      "https://img.freepik.com/free-photo/top-view-red-strawberry-cake-delicious-with-tea-table-fruit-color-cake-biscuit-sweet_140725-28319.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Rich and velvety, a moist red cake with cream cheese frosting, elegant and delicious.",
-  },
-  {
-    id: 39,
-    name: "Cheese cake",
-    price: 8.2,
-    image:
-      "https://img.freepik.com/premium-photo/citrus-cheesecake-cake-with-kumquats_82780-1574.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Creamy and smooth, a classic cheesecake with a graham cracker crust, perfect for dessert.",
-  },
-  {
-    id: 40,
-    name: "Blueberry cake",
-    price: 3.2,
-    image:
-      "https://img.freepik.com/premium-photo/pieces-pie-from-cottage-cheese-blueberries_116441-1516.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Moist and bursting with blueberries, a sweet and tangy cake perfect for any occasion.",
-  },
-  {
-    id: 41,
-    name: "Strawberry cake",
-    price: 6,
-    image:
-      "https://img.freepik.com/free-photo/delicious-cake-with-strawberries_23-2150797874.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Light and fluffy, a sweet strawberry cake with creamy frosting, perfect for summer.",
-  },
-];
-// Soup Section
-const product4 = [
-  {
-    id: 42,
-    name: "Salad",
-    price: 7.3,
-    image:
-      "https://img.freepik.com/free-photo/dietary-salad-with-tomatoes-feta-lettuce-spinach-pine-nuts_2829-20128.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Fresh and healthy, a mix of greens, vegetables, and a tangy dressing, perfect for a light meal.",
-  },
-  {
-    id: 43,
-    name: "Tomato soup",
-    price: 6.7,
-    image:
-      "https://img.freepik.com/free-photo/portrait-shooting-tomato-soup-with-crackers-cheese-tomatoes-bread-table_141793-2858.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Warm and comforting, a classic tomato soup perfect for a cozy meal, often served with grilled cheese.",
-  },
-  {
-    id: 44,
-    name: "Chicken Noodle soup",
-    price: 8.2,
-    image:
-      "https://img.freepik.com/free-photo/delicious-noodle-soup-with-chicken-uncooked-pasta-small-brown-bowl-spoon-garlic-dark-background_140725-140085.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Hearty and soothing, a classic soup with chicken, noodles, and vegetables, perfect for cold days.",
-  },
-  {
-    id: 45,
-    name: "Miso soup",
-    price: 7.5,
-    image:
-      "https://img.freepik.com/free-photo/top-view-japanese-food-bowls-arrangement_23-2148809848.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Savory and umami-rich, a traditional Japanese soup made with miso paste and dashi broth.",
-  },
-  {
-    id: 46,
-    name: "Cold cucumber soup",
-    price: 7.34,
-    image:
-      "https://img.freepik.com/free-photo/cold-cucumber-soup-with-dried-tomatoes-mozzarella_2829-14287.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Refreshing and cool, a chilled soup made with cucumbers, yogurt, and herbs, perfect for summer.",
-  },
-  {
-    id: 47,
-    name: "Tom Yum Soup",
-    price: 9.2,
-    image:
-      "https://img.freepik.com/free-photo/tom-yum-kung-thai-hot-spicy-soup-shrimp-with-lemon-grass-lemon-galangal-chilli-wooden-table-thailand-food_1150-21078.jpg?ga=GA1.1.900909129.1729318722&semt=ais_hybrid",
-    description:
-      "Spicy and aromatic, a Thai soup with lemongrass, kaffir lime leaves, and chilies, often with shrimp.",
-  },
-];
+
+
+
+
 
 const SearchFilterContainer = styled.div`
   display: flex;
@@ -1093,8 +814,9 @@ const SearchButton = styled.button`
 
 function Shop() {
   const dispatch = useDispatch();
+  const wishlistItems = useSelector((state) => state.cart.wishlist);
   const [category, setCategory] = useState("hot");
-  const [searchQuery, setSearchQuery] = useState("");
+
 
   // Added useRef hooks to scroll to sections
   const hotBeveragesRef = useRef(null);
@@ -1122,47 +844,21 @@ function Shop() {
     }
   };
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-    toast.success(`${product.name} added to cart!`);
-  };
 
-  const handleClick = (value) => {
-    setCategory(value);
-  };
 
-  // Filter products based on search query or category
-  const filteredProducts = products.filter((product) => {
-    // Check if product matches the selected category
-    const matchesCategory = category === "all" || product.type === category;
-    // Check if product name matches the search query (case insensitive)
-    const matchesSearchQuery = product.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-
-    // If search query is provided, only show products matching the query and selected category
-    return searchQuery ? matchesSearchQuery : matchesCategory;
-  });
-
-  const [itemsNo, setItemsNo] = useState(9);
-
-  const [likedProducts, setLikedProducts] = useState({});
-
-  const toggleHeart = (productId) => {
-    setLikedProducts((prevState) => ({
-      ...prevState,
-      [productId]: !prevState[productId],
-    }));
-  };
-
-  const handleItemsNo = () => {
-    const s = products.length;
-    if (s == itemsNo) {
-      setItemsNo(9);
+  const toggleHeart = (product) => {
+    const isInWishlist = wishlistItems.some(item => item.id === product.id);
+    
+    if (isInWishlist) {
+      dispatch(removeFromWishlist(product.id));
+      toast.info(`${product.name} removed from wishlist!`, { autoClose: 2000 });
     } else {
-      setItemsNo(Math.min(itemsNo + 9, s));
+      dispatch(addToWishlist(product));
+      toast.success(`${product.name} added to wishlist!`, { autoClose: 2000 });
     }
   };
+
+
 
   // Group products by type (category)
   const groupedProducts = products.reduce((acc, product) => {
@@ -1173,6 +869,7 @@ function Shop() {
 
   return (
     <ShopContainer>
+      <FloatingCart />
       <Title
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -1186,8 +883,6 @@ function Shop() {
         <SearchInput
           type="text"
           placeholder="Search for ..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <SearchButton onClick={() => console.log("Search clicked!")}>
           Search
@@ -1260,15 +955,7 @@ function Shop() {
         {Object.keys(groupedProducts).map((section) => {
           const sectionProducts = groupedProducts[section];
 
-          // Only display the section if it matches the search query or if the search query is empty
-          const matchesSearchQuery = sectionProducts.some((product) =>
-            product.name.toLowerCase().includes(searchQuery.toLowerCase())
-          );
 
-          // Skip section if no products match the search query and the search query is not empty
-          if (searchQuery && !matchesSearchQuery) {
-            return null;
-          }
 
           return (
             <React.Fragment key={section}>
@@ -1298,17 +985,7 @@ function Shop() {
                 </Title>
               </div>
               <ProductGrid>
-                {sectionProducts.map((product) => {
-                  // If there's a search query, only show products that match
-                  if (
-                    searchQuery &&
-                    !product.name
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase())
-                  ) {
-                    return null;
-                  }
-                  return (
+                {sectionProducts.map((product) => (
                     <ProductCard
                       key={product.id}
                       initial={{ opacity: 0, scale: 0.9 }}
@@ -1319,20 +996,20 @@ function Shop() {
                         <ProductImage src={product.image} alt={product.name} />
 
                         <div
-                          onClick={() => toggleHeart(product.id)}
+                          onClick={() => toggleHeart(product)}
                           style={{
                             position: "absolute",
                             top: "10px",
                             right: "10px",
                             cursor: "pointer",
                             fontSize: "24px",
-                            color: likedProducts[product.id] ? "red" : "gray",
+                            color: wishlistItems.some(item => item.id === product.id) ? "red" : "gray",
                             zIndex: 2,
                           }}
                         >
                           <i
                             className={`fa-heart ${
-                              likedProducts[product.id] ? "fas" : "far"
+                              wishlistItems.some(item => item.id === product.id) ? "fas" : "far"
                             }`}
                           ></i>
                         </div>
@@ -1354,16 +1031,10 @@ function Shop() {
                       <ProductInfo>
                         <ProductName>{product.name}</ProductName>
                         <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
-                        <Button onClick={() => handleAddToCart(product)}>
-                          Add to Cart
-                        </Button>
-                        <Button onClick={() => handleAddToCart(product)}>
-                          Buy Now
-                        </Button>
+                        <EnhancedAddToCartButton product={product} />
                       </ProductInfo>
                     </ProductCard>
-                  );
-                })}
+                ))}
               </ProductGrid>
             </React.Fragment>
           );

@@ -1,18 +1,19 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromWishlist, addToCart } from '../Store/cartSlice';
+import { removeFromWishlist } from '../Store/cartSlice';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import EnhancedAddToCartButton from '../componets/AddToCartButton';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const WishlistContainer = styled.div`
   padding: 6rem 2rem 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   background-color: #fffbeb;
-  padding-top: 1.5rem;
   padding-top: 1.5rem;
 `;
 
@@ -107,6 +108,14 @@ const OverlayText = styled.p`
   text-align: center;
 `;
 
+const ItemName = styled.h3`
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  box-sizing: border-box;
+  color: #333;
+`;
+
 const ItemInfo = styled.div`
   padding: 1.25rem;
   background: url("https://png.pngtree.com/thumb_back/fh260/background/20231205/pngtree-creamy-textured-milk-colored-background-image_13815875.png");
@@ -118,61 +127,11 @@ const ItemInfo = styled.div`
   min-height: 200px;
 `;
 
-const ItemName = styled.h3`
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  box-sizing: border-box;
-  color: #333;
-`;
-
 const ItemPrice = styled.p`
   font-size: 1.1rem;
   color: #4a2c2a;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
-`;
-
-const ActionButtons = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-const ActionButton = styled(motion.button)`
-  flex: 1;
-  min-width: 90px;
-  background: linear-gradient(145deg, rgb(51, 15, 15), rgb(46, 22, 22));
-  color: white;
-  border: none;
-  padding: 0.8rem 1rem;
-  font-size: 0.85rem;
-  border-radius: 20px;
-  cursor: pointer;
-  letter-spacing: 0.6px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease, transform 0.2s ease;
-  font-weight: 600;
-  margin: 0 2px;
-
-  &:hover {
-    background: linear-gradient(145deg, #7d5858, #8e6a6a);
-    transform: scale(1.05);
-  }
-
-  &:active {
-    transform: scale(0.98);
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-  }
-
-  &.remove {
-    background: linear-gradient(145deg, #e74c3c, #c0392b);
-    &:hover {
-      background: linear-gradient(145deg, #c0392b, #a93226);
-    }
-  }
 `;
 
 function Wishlist() {
@@ -180,24 +139,9 @@ function Wishlist() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
-    dispatch(removeFromWishlist(item.id));
-    toast.success(`${item.name} moved to cart!`, { autoClose: 2000 });
-  };
-
   const handleRemoveFromWishlist = (itemId, itemName) => {
     dispatch(removeFromWishlist(itemId));
     toast.error(`${itemName} removed from wishlist!`, { autoClose: 2000 });
-  };
-
-  const handleBuyNow = (item) => {
-    dispatch(addToCart(item));
-    dispatch(removeFromWishlist(item.id));
-    toast.success(`${item.name} added to cart! Redirecting to checkout...`, { autoClose: 2000 });
-    setTimeout(() => {
-      window.location.href = '/cart';
-    }, 1000);
   };
 
   console.log('Wishlist items:', wishlistItems); // Debug log
@@ -248,6 +192,37 @@ function Wishlist() {
                 <div style={{ position: "relative" }}>
                   <ItemImage src={item.image} alt={item.name} />
                   
+                  <div
+                    onClick={() => handleRemoveFromWishlist(item.id, item.name)}
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "10px",
+                      cursor: "pointer",
+                      fontSize: "24px",
+                      color: "#e74c3c",
+                      zIndex: 2,
+                      background: "rgba(255, 255, 255, 0.9)",
+                      borderRadius: "50%",
+                      width: "40px",
+                      height: "40px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = "scale(1.1)";
+                      e.target.style.background = "rgba(255, 255, 255, 1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = "scale(1)";
+                      e.target.style.background = "rgba(255, 255, 255, 0.9)";
+                    }}
+                  >
+                    <i className="fas fa-minus"></i>
+                  </div>
+
                   <Overlay
                     className="overlay"
                     style={{
@@ -264,34 +239,9 @@ function Wishlist() {
                 </div>
                 
                 <ItemInfo>
-                  <div>
-                    <ItemName>{item.name}</ItemName>
-                    <ItemPrice>${item.price.toFixed(2)}</ItemPrice>
-                  </div>
-                  <ActionButtons>
-                    <ActionButton
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleAddToCart(item)}
-                    >
-                      Add to Cart
-                    </ActionButton>
-                    <ActionButton
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleBuyNow(item)}
-                    >
-                      Buy Now
-                    </ActionButton>
-                    <ActionButton
-                      className="remove"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleRemoveFromWishlist(item.id, item.name)}
-                    >
-                      Remove
-                    </ActionButton>
-                  </ActionButtons>
+                  <ItemName>{item.name}</ItemName>
+                  <ItemPrice>${item.price.toFixed(2)}</ItemPrice>
+                  <EnhancedAddToCartButton product={item} />
                 </ItemInfo>
               </WishlistItem>
             ))}

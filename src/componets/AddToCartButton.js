@@ -4,6 +4,7 @@ import { addToCart, updateQuantity } from '../Store/cartSlice';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -115,6 +116,7 @@ const EnhancedAddToCartButton = ({ product }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const [isInCart, setIsInCart] = useState(false);
+  const navigate = useNavigate();
 
   // Check if product is already in cart
   React.useEffect(() => {
@@ -143,7 +145,7 @@ const EnhancedAddToCartButton = ({ product }) => {
     toast.success(`${product.name} added to cart! Redirecting to checkout...`, { autoClose: 2000 });
     // Navigate to cart page after a short delay
     setTimeout(() => {
-      window.location.href = '/cart';
+      navigate('/cart');
     }, 1000);
   };
 

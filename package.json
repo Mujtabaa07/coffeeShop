@@ -44,7 +44,6 @@
     "jsonwebtoken": "^9.0.2",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.474.0",
-    "mohamed-mujtaba-coffee-shop": "file:",
     "mongodb": "^6.18.0",
     "mongoose": "^8.0.3",
     "openai": "^4.78.0",

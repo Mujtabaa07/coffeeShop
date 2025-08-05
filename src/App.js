@@ -140,8 +140,13 @@ const AppContent = () => {
 };
 
 function App() {
+  // Handle Google OAuth client ID for different environments
+  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || 
+                        process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || 
+                        "placeholder_client_id";
+
   return (
-    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID || "placeholder_client_id"}>
+    <GoogleOAuthProvider clientId={googleClientId}>
       <Provider store={store}>
         <Router>
           <ScrollToTop />

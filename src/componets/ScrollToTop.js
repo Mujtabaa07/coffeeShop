@@ -4,13 +4,14 @@ import styled from "styled-components";
 
 const ScrollButton = styled.button`
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #7c2214;
+  bottom: 20px;
+  right: px;
+  background-color: #4d2b26ff;
+  // background:transparent;
   color: white;
   border: none;
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 16px;
   cursor: pointer;
   display: ${({ visible }) => (visible ? "block" : "none")};
@@ -54,7 +55,7 @@ const { pathname } = useLocation();
 
   return (
     <ScrollButton onClick={scrollToTop} visible={visible} aria-label="Scroll to top">
-      ↑ Top
+      ↑ scroll up
     </ScrollButton>
   );
 };

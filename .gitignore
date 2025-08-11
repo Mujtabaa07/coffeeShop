@@ -15,8 +15,11 @@
 # Environment variables (hide from git but keep locally)
 .env
 .env.local
+.env.production
+.env.local.example
 .env.development.local
 .env.test.local
+.env.development
 .env.production.local
 /backend/.env
 /backend/.env.local

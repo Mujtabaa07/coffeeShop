@@ -1,10 +1,10 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, updateQuantity, clearCart } from '../Store/cartSlice';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart, updateQuantity, clearCart } from "../Store/cartSlice";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CartContainer = styled.div`
   padding: 2rem;
@@ -116,16 +116,16 @@ function Cart() {
 
   const handleRemoveFromCart = (productId) => {
     dispatch(removeFromCart(productId));
-    toast.error('Item removed from cart!');
+    toast.error("Item removed from cart!");
   };
 
   const handleUpdateQuantity = (productId, quantity) => {
     if (quantity <= 0) {
-      toast.warn('Quantity must be greater than 0');
+      toast.warn("Quantity must be greater than 0");
       return;
     }
     dispatch(updateQuantity({ productId, quantity: parseInt(quantity) }));
-    toast.info('Cart updated!');
+    toast.info("Cart updated!");
   };
 
   const totalPrice = cartItems.reduce(
@@ -138,14 +138,38 @@ function Cart() {
   const finalPrice = totalPrice + SGST + CGST;
 
   const handleProceedToPayment = () => {
-    alert('Payment is processing...');
+    alert("Payment is processing...");
     dispatch(clearCart());
-    toast.success('Thank you for your purchase!');
+    toast.success("Thank you for your purchase!");
   };
 
   return (
     <CartContainer>
       <h1>Your Cart</h1>
+      <RemoveButton
+  whileHover={{ scale: cartItems.length > 0 ? 1.05 : 1 }}
+  whileTap={{ scale: cartItems.length > 0 ? 0.95 : 1 }}
+  onClick={() => {
+    if (cartItems.length === 0) return;
+    const confirmClear = window.confirm(
+      "Are you sure you want to remove all items from the cart?"
+    );
+    if (confirmClear) {
+      dispatch(clearCart());
+      toast.info("All items removed from cart!");
+    }
+  }}
+  disabled={cartItems.length === 0}
+  style={{
+    marginBottom: "1rem",
+    backgroundColor: cartItems.length === 0 ? "#ccc" : "#7c2214",
+    color: cartItems.length === 0 ? "#666" : "#fff",
+    cursor: cartItems.length === 0 ? "not-allowed" : "pointer",
+  }}
+>
+  Clear Cart
+</RemoveButton>
+
       {cartItems.length === 0 ? (
         <p>Your cart is empty. Please add some items!</p>
       ) : (
@@ -177,6 +201,7 @@ function Cart() {
           </CartItem>
         ))
       )}
+
       <SummaryTable>
         <tbody>
           <SummaryRow>

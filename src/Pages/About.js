@@ -31,12 +31,13 @@ const Title = styled(motion.h1)`
   font-size: 3rem;
   margin-bottom: 3rem;
   text-align: center;
+  margin-top: 4rem;
 
   color: color: #5e2e0d;
   font-weight: bolder;
 
   color: #7c2214;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
@@ -51,18 +52,24 @@ const Content = styled(motion.div)`
   
   @media (min-width: 768px) {
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
+    gap: 2rem;
   }
 `;
 
 const TextContent = styled(motion.div)`
   flex: 1;
   p {
-    color:color: #5e2e0d;
+    color: #5e2e0d;
     font-size: 1.2rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
     font-weight:bold;
+  }
+  .center-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
   }
 `;
 
@@ -71,8 +78,17 @@ const ImageContent = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 0px;
   position: relative; /* To contain the overlay */
+  overflow: hidden;
+  border-radius: 0px;
+  img {
+    max-height: 100%;
+    width: auto;
+    border-radius: inherit;
+    display: block;
+
+  }
 `;
 
 const HoverImage = styled(motion.div)`
@@ -80,7 +96,7 @@ const HoverImage = styled(motion.div)`
   width: 100%;
   height: 100%;
   max-width: 100%; /* Prevent image from overflowing */
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 
@@ -98,6 +114,7 @@ const HoverImage = styled(motion.div)`
     width: 100%;
     height: auto;
     transition: transform 0.5s ease; /* Smooth image scaling */
+    object-fit: cover;
   }
   /* Overlay effect */
   .overlay {
@@ -109,6 +126,7 @@ const HoverImage = styled(motion.div)`
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 
   filter: grayscale(100%) ;
   transition: all 0.3s ease;
@@ -144,7 +162,9 @@ function About() {
           <p>
             We source our beans from sustainable farms around the world, ensuring that every cup of coffee you enjoy is not only delicious but also ethically produced.
           </p>
+          <div class="center-button">
           <Button primary>Learn More</Button>
+          </div>
         </TextContent>
         <ImageContent
           initial={{ opacity: 0, x: 50 }}

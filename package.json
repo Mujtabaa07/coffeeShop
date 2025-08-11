@@ -73,7 +73,7 @@
     "server": "node server.js",
     "dev": "concurrently \"npm run server\" \"npm start\"",
     "install-server": "cd backend && npm install",
-    "deploy:aws-backend": "powershell -ExecutionPolicy Bypass -File deploy-aws-backend.ps1"
+    "prod": "npm run build && cd backend && npm start"
   },
   "eslintConfig": {
     "extends": [

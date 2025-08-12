@@ -183,7 +183,7 @@ function Cart() {
             <ItemInfo>
               <ItemImage src={item.image} alt={item.name} />
               <ItemName>{item.name}</ItemName>
-              <ItemPrice>${item.price.toFixed(2)}</ItemPrice>
+              <ItemPrice>₹{item.price.toFixed(2)}</ItemPrice>
             </ItemInfo>
             <QuantityInput
               type="number"
@@ -206,19 +206,19 @@ function Cart() {
         <tbody>
           <SummaryRow>
             <SummaryCell>Total:</SummaryCell>
-            <SummaryCell>${totalPrice.toFixed(2)}</SummaryCell>
+            <SummaryCell>₹{totalPrice.toFixed(2)}</SummaryCell>
           </SummaryRow>
           <SummaryRow>
             <SummaryCell>SGST (9%):</SummaryCell>
-            <SummaryCell>${SGST.toFixed(2)}</SummaryCell>
+            <SummaryCell>₹{SGST.toFixed(2)}</SummaryCell>
           </SummaryRow>
           <SummaryRow>
             <SummaryCell>CGST (9%):</SummaryCell>
-            <SummaryCell>${CGST.toFixed(2)}</SummaryCell>
+            <SummaryCell>₹{CGST.toFixed(2)}</SummaryCell>
           </SummaryRow>
           <SummaryRow>
             <SummaryCell>Final Price:</SummaryCell>
-            <SummaryCell>${finalPrice.toFixed(2)}</SummaryCell>
+            <SummaryCell>₹{finalPrice.toFixed(2)}</SummaryCell>
           </SummaryRow>
         </tbody>
       </SummaryTable>

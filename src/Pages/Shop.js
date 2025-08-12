@@ -800,7 +800,7 @@ function Shop() {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-    toast.success(`${product.name} added to cart!`);
+    toast.success(`₹{product.name} added to cart!`);
   };
 
 
@@ -985,7 +985,7 @@ function Shop() {
                           }}
                         >
                           <i
-                            className={`fa-heart ${
+                            className={`fa-heart ₹{
                               likedProducts[product.id] ? "fas" : "far"
                             }`}
                           ></i>
@@ -1007,7 +1007,7 @@ function Shop() {
                       </div>
                       <ProductInfo>
                         <ProductName>{product.name}</ProductName>
-                        <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
+                        <ProductPrice>₹{product.price.toFixed(2)}</ProductPrice>
                         <Button onClick={() => handleAddToCart(product)}>
                           Add to Cart
                         </Button>

@@ -135,7 +135,7 @@ function Checkout() {
           {cartItems.map((item) => (
             <div key={item.id}>
               <p>{item.name} x {item.quantity}</p>
-              <p>${(item.price * item.quantity).toFixed(2)}</p>
+              <p>₹{(item.price * item.quantity).toFixed(2)}</p>
             </div>
           ))}
           <h3>Total: ${totalPrice.toFixed(2)}</h3>

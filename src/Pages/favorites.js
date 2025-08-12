@@ -158,7 +158,7 @@ function Favorites() {
                     <FavoriteCard key={item.id}>
                         <img src={item.image} alt={item.name} />
                         <h3>{item.name}</h3>
-                        <p className="price">${item.price}</p>
+                        <p className="price">₹{item.price}</p>
                         <button 
                             className="remove-btn"
                             onClick={() => removeFromFavorites(item.id)}

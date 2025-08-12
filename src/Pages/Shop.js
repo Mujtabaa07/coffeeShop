@@ -1,16 +1,16 @@
 import React, { useState, useRef } from "react"; // import useState, useRef hooks
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { addToCart } from "../Store/cartSlice";
+import { addToWishlist, removeFromWishlist } from "../Store/cartSlice";
 import Button from "../componets/Button";
+import EnhancedAddToCartButton from "../componets/AddToCartButton";
+import FloatingCart from "../componets/FloatingCart";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DynamicText from "./dynamicText";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
 import ButtonGroup from "@mui/material/ButtonGroup";
-
 const ShopContainer = styled.div`
   padding: 6rem 2rem 4rem 2rem;
   max-width: 1200px;
@@ -19,7 +19,6 @@ const ShopContainer = styled.div`
   padding-top: 1.5rem;
   padding-top: 1.5rem; /* Adjusted padding for top */
 `;
-
 const Title = styled(motion.h1)`
   font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font size */
   margin-bottom: 3rem;
@@ -30,7 +29,6 @@ const Title = styled(motion.h1)`
   word-wrap: break-word;
   overflow-wrap: break-word;
 `;
-
 const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
@@ -39,7 +37,6 @@ const ProductGrid = styled.div`
   margin: 0 auto;
   margin-top: 50px;
 `;
-
 const ProductCard = styled(motion.div)`
  
   background: linear-gradient(145deg, #ffffff, #e6e6e6);
@@ -52,17 +49,14 @@ const ProductCard = styled(motion.div)`
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 8px rgba(255, 255, 255, 0.8);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-
   &:hover {
     transform: translateY(-5px);
     box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15), -4px -4px 12px rgba(255, 255, 255, 0.9);
   }
-
   &:hover .overlay {
     opacity: 1;
   }
 `;
-
 const ProductImage = styled(motion.img)`
   width: 100%;
   height: 220px;
@@ -73,7 +67,6 @@ const ProductImage = styled(motion.img)`
   background-color: #f5f5f5; /* subtle warm base behind images */
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease,
     filter 0.4s ease;
-
   &:hover {
     transform: scale(1.05);
     border-color: #6d4c41; /* rich coffee brown */
@@ -81,7 +74,6 @@ const ProductImage = styled(motion.img)`
     filter: brightness(1.03) contrast(1.05); /* gently brighten */
   }
 `;
-
 const Overlay = styled.div`
   position: absolute;
   top: 0;
@@ -97,20 +89,17 @@ const Overlay = styled.div`
   padding: 1rem;
   text-align: center;
 `;
-
 const ProductName = styled.h3`
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
   box-sizing: border-box;
 `;
-
 const OverlayText = styled.p`
   font-size: 1rem;
   color: #333;
   text-align: center;
 `;
-
 const ProductInfo = styled.div`
   padding: 1.25rem;
   background: url("https://png.pngtree.com/thumb_back/fh260/background/20231205/pngtree-creamy-textured-milk-colored-background-image_13815875.png");
@@ -118,7 +107,6 @@ const ProductInfo = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
-
 const ProductPrice = styled.p`
   font-size: 1.1rem;
   color: #4a2c2a;
@@ -594,7 +582,6 @@ const products = [
       "Spicy and aromatic, a Thai soup with lemongrass, kaffir lime leaves, and chilies, often with shrimp.",
     type: "food",
   },
-
   {
     id: 1,
     name: "Espresso",
@@ -755,7 +742,6 @@ const products = [
     description:
       "Espresso served with sweetened condensed milk, creating a layered effect.",
   },
-
   {
     id: 25,
     name: "Irish Coffee",
@@ -767,16 +753,47 @@ const products = [
   },
 ];
 
+const SearchFilterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+`;
+const SearchInput = styled.input`
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid brown; /* Updated border width and color */
+  border-radius: 20px; /* Increased roundness */
+  outline: none;
+  width: 300px;
+  margin-right: 1rem; /* Added margin on the right */
+  &:focus {
+    border-color: #6b4f4f; /* Focus state border color */
+  }
+`;
+const SearchButton = styled.button`
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background: linear-gradient(145deg, #6b4f4f, #7d5858);
+  color: white;
+  border: none;
+  border-radius: 15px 15px 15px 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  &:hover {
+    background: linear-gradient(145deg, #7d5858, #8e6a6a);
+  }
+`;
+
 function Shop() {
   const dispatch = useDispatch();
+  const wishlistItems = useSelector((state) => state.cart.wishlist);
   const [category, setCategory] = useState("hot");
-  const [searchQuery, setSearchQuery] = useState("");
 
-  // Added useRef hooks to scroll to sections
+   // Added useRef hooks to scroll to sections
   const hotBeveragesRef = useRef(null);
   const coldBeveragesRef = useRef(null);
   const foodRef = useRef(null);
-
   const scrollToSection = (sectionType) => {
     let ref;
     switch (sectionType) {
@@ -792,27 +809,30 @@ function Shop() {
       default:
         return;
     }
-
     if (ref && ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
+
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
     toast.success(`₹{product.name} added to cart!`);
+
+  
+  const toggleHeart = (product) => {
+    const isInWishlist = wishlistItems.some(item => item.id === product.id);
+
+    if (isInWishlist) {
+      dispatch(removeFromWishlist(product.id));
+      toast.info(`${product.name} removed from wishlist!`, { autoClose: 2000 });
+    } else {
+      dispatch(addToWishlist(product));
+      toast.success(`${product.name} added to wishlist!`, { autoClose: 2000 });
+    }
+
   };
 
-
-
-  const [likedProducts, setLikedProducts] = useState({});
-
-  const toggleHeart = (productId) => {
-    setLikedProducts((prevState) => ({
-      ...prevState,
-      [productId]: !prevState[productId],
-    }));
-  };
 
   // Group products by type (category)
   const groupedProducts = products.reduce((acc, product) => {
@@ -823,6 +843,7 @@ function Shop() {
 
   return (
     <ShopContainer>
+      <FloatingCart />
       <Title
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -831,23 +852,15 @@ function Shop() {
       >
         <DynamicText text="Welcome to MsCafe Shop" />
       </Title>
-
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', margin: '20px 0' }}>
-        <input
+      <SearchFilterContainer>
+        <SearchInput
           type="text"
           placeholder="Search for ..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
-        />
-        <button 
-          onClick={() => console.log("Search clicked!")}
-          style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', backgroundColor: '#8B4513', color: 'white', cursor: 'pointer' }}
-        >
+                  />
+        <SearchButton onClick={() => console.log("Search clicked!")}>
           Search
-        </button>
-      </div>
-
+        </SearchButton>
+      </SearchFilterContainer>
       <Title
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -855,7 +868,6 @@ function Shop() {
       >
         Our Coffee Selection
       </Title>
-
       <ButtonGroup
         variant="text"
         aria-label="Basic button group"
@@ -908,23 +920,12 @@ function Shop() {
           Food
         </Button>
       </ButtonGroup>
-
       {/* Dynamically render sections */}
       <div>
         {Object.keys(groupedProducts).map((section) => {
           const sectionProducts = groupedProducts[section];
 
-          // Only display the section if it matches the search query or if the search query is empty
-          const matchesSearchQuery = sectionProducts.some((product) =>
-            product.name.toLowerCase().includes(searchQuery.toLowerCase())
-          );
-
-          // Skip section if no products match the search query and the search query is not empty
-          if (searchQuery && !matchesSearchQuery) {
-            return null;
-          }
-
-          return (
+    return (
             <React.Fragment key={section}>
               <div
                 ref={
@@ -952,17 +953,7 @@ function Shop() {
                 </Title>
               </div>
               <ProductGrid>
-                {sectionProducts.map((product) => {
-                  // If there's a search query, only show products that match
-                  if (
-                    searchQuery &&
-                    !product.name
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase())
-                  ) {
-                    return null;
-                  }
-                  return (
+                  {sectionProducts.map((product) => (
                     <ProductCard
                       key={product.id}
                       initial={{ opacity: 0, scale: 0.9 }}
@@ -972,25 +963,31 @@ function Shop() {
                       <div style={{ position: "relative" }}>
                         <ProductImage src={product.image} alt={product.name} />
 
-                        <div
-                          onClick={() => toggleHeart(product.id)}
-                          style={{
+                        <div 
+                        onClick={() => toggleHeart(product)}
+                         style={{
                             position: "absolute",
                             top: "10px",
                             right: "10px",
                             cursor: "pointer",
                             fontSize: "24px",
-                            color: likedProducts[product.id] ? "red" : "gray",
+                            color: wishlistItems.some(item => item.id === product.id) ? "red" : "gray",
                             zIndex: 2,
                           }}
                         >
                           <i
+
                             className={`fa-heart ₹{
                               likedProducts[product.id] ? "fas" : "far"
                             }`}
                           ></i>
-                        </div>
 
+                            className={`fa-heart ${
+                            wishlistItems.some(item => item.id === product.id) ? "fas" : "far"
+                          }`}
+                        ></i>
+
+                        </div>
                         <Overlay
                           className="overlay"
                           style={{
@@ -1007,6 +1004,7 @@ function Shop() {
                       </div>
                       <ProductInfo>
                         <ProductName>{product.name}</ProductName>
+
                         <ProductPrice>₹{product.price.toFixed(2)}</ProductPrice>
                         <Button onClick={() => handleAddToCart(product)}>
                           Add to Cart
@@ -1014,19 +1012,20 @@ function Shop() {
                         <Button onClick={() => handleAddToCart(product)}>
                           Buy Now
                         </Button>
+
+                        <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
+                        <EnhancedAddToCartButton product={product} />
+
                       </ProductInfo>
                     </ProductCard>
-                  );
-                })}
+                        ))}
               </ProductGrid>
             </React.Fragment>
           );
         })}
       </div>
-
       <ToastContainer />
     </ShopContainer>
   );
 }
-
 export default Shop;

@@ -15,6 +15,7 @@ import Footer from './componets/footer';
 import Home from './Pages/Home';
 import Login from './Pages/login';
 import Register from './Pages/Register';
+import Menu from './Pages/Menu';
 import Shop from './Pages/Shop';
 import Cart from './Pages/cart';
 import About from './Pages/About';
@@ -204,6 +205,7 @@ const AppContent = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/forget-password" element={<ForgetPassword />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/menu" element={<Menu />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/about" element={<About />} />
@@ -216,10 +218,10 @@ const AppContent = () => {
               <Route path="/profile" element={<SafeProfileRoute />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/faq" element={<Faq />} />
-              <Route path="/shop/cake" element={<Cake />} />
-              <Route path="/shop/coffee" element={<Coffee />} />
-              <Route path="/shop/soup" element={<Soup />} />
-              <Route path="/shop/milkshake" element={<Milkshakes />} />
+              <Route path="/menu/cakes" element={<Cake />} />
+              <Route path="/menu/coffee" element={<Coffee />} />
+              <Route path="/menu/soups" element={<Soup />} />
+              <Route path="/menu/milkshakes" element={<Milkshakes />} />
               <Route path="/premiumbeans" element={<PremiumBeans />} />
               <Route path="/feedback" element={<Feedback />} />
               <Route path="/expertbaristas" element={<ExpertBaristas />} />
@@ -236,6 +238,11 @@ const AppContent = () => {
 
           <Footer />
         </AppContainer>
+      </Router>
+    </Provider>
+
+      <Footer />
+    </AppContainer>
   );
 };
 
@@ -250,6 +257,7 @@ function App() {
         </Router>
       </Provider>
     </GoogleOAuthProvider>
+
   );
 }
 

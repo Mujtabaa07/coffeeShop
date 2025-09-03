@@ -20,19 +20,19 @@ import { addToCart } from "../Store/cartSlice"; // assuming you have this action
 
 const ShopContainer = styled.div`
   padding: 6rem 2rem 4rem 2rem;
-  max-width: 1200px;
+  max-width: max;
   margin: 0 auto;
-  background-color: #fffbeb;
+  background-color: #e8e1c8ff;
   padding-top: 1.5rem;
-  padding-top: 1.5rem; /* Adjusted padding for top */
+  padding-top: 5rem; /* Adjusted padding for top */
 `;
 const Title = styled(motion.h1)`
   font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font size */
-  margin-bottom: 3rem;
+  margin-bottom: rem;
   margin-top: 2rem;
   padding: 0 1rem; /* Horizontal padding only */
   text-align: center;
-  color: #78350f;
+  color: #653a24ff;
   word-wrap: break-word;
   overflow-wrap: break-word;
 `;
@@ -47,29 +47,29 @@ const ProductGrid = styled.div`
 const ProductCard = styled(motion.div)`
  
   background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   position: relative;
   flex-direction: column;
-    justify-content: space-between;
-  height : 250px
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 8px rgba(255, 255, 255, 0.8);
+  justify-content: space-between;
+  height : 470px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 8px rgba(233, 180, 180, 0.8);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15), -4px -4px 12px rgba(255, 255, 255, 0.9);
+    box-shadow: 6px 6px 15px rgba(16, 15, 15, 0.15), -4px -4px 12px rgba(137, 125, 125, 0.9);
   }
   &:hover .overlay {
-    opacity: 1;
+    opacity: 0.9;
   }
 `;
 const ProductImage = styled(motion.img)`
   width: 100%;
   height: 220px;
   object-fit: cover;
-  border: 2px solid rgb(65, 21, 5); /* light coffee border */
-  border-radius: 12px;
+  border: 2px solid rgba(77, 39, 26, 1); /* light coffee border */
+  border-radius: 10px;
   box-sizing: border-box;
   background-color: #f5f5f5; /* subtle warm base behind images */
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease,
@@ -97,18 +97,18 @@ const Overlay = styled.div`
   text-align: center;
 `;
 const ProductName = styled.h3`
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
   font-weight: 600;
   box-sizing: border-box;
 `;
 const OverlayText = styled.p`
   font-size: 1rem;
-  color: #333;
+  color: #33;
   text-align: center;
 `;
 const ProductInfo = styled.div`
-  padding: 1.25rem;
+  padding: 1.2rem;
   background: url("https://png.pngtree.com/thumb_back/fh260/background/20231205/pngtree-creamy-textured-milk-colored-background-image_13815875.png");
   background-size: cover;
   flex-direction: column;
@@ -116,10 +116,17 @@ const ProductInfo = styled.div`
 `;
 const ProductPrice = styled.p`
   font-size: 1.1rem;
-  color: #4a2c2a;
-  margin-bottom: 1rem;
+  color: #5f2c29ff;
+  margin-bottom: 0.5rem;
   font-weight: 600;
 `;
+<div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
+  <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt6907cb09IN8IbOZpYPEMfIHxeQfrrBR8DifbvKmmumwVJ4wplXIpxxDCDofqbvxJ3bY&usqp=CAU"
+    alt="Coffee"
+    style={{ maxWidth: "100%", maxHeight: "400px", borderRadius: "10px" }}
+  />
+</div>
 
 const products = [
   {
@@ -834,6 +841,60 @@ function Shop() {
   };
 
 
+
+
+  const [likedProducts, setLikedProducts] = useState({});
+
+  const toggleHeart = (productId) => {
+    setLikedProducts((prevState) => ({
+      ...prevState,
+      [productId]: !prevState[productId],
+    }));
+  };
+  const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px;
+    background-image: url("https://5.imimg.com/data5/SELLER/Default/2021/9/WK/WS/VC/5504430/fresh-roasted-coffee-beans-500x500.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    height: 450px;
+    color: white;
+  `;
+
+ const TextContent = styled.div`
+   background-color: rgba(0, 0, 0, 0.6);
+   padding: 30px;
+   border-radius: 8px;
+   max-width: 600px; // increased from 500px
+   color: #fff;
+
+   h1 {
+     margin-bottom: 10px;
+   }
+     p{
+     font-style: script;
+     color: #f0efdc;
+     font-size: 1.2rem;
+     
+     }
+ `;
+
+const Wrapper1 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px;
+  background-image: url("https://5.imimg.com/data5/SELLER/Default/2021/9/WK/WS/VC/5504430/fresh-roasted-coffee-beans-500x500.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  height: 100vh; // changed from fixed 400px
+  min-height: 400px;
+  color: white;
+`;
   // Group products by type (category)
   const groupedProducts = products.reduce((acc, product) => {
     if (!acc[product.type]) acc[product.type] = [];
@@ -847,6 +908,14 @@ const todaysDeals = [
 
   return (
     <ShopContainer>
+      <Wrapper>
+        <TextContent>
+          <h1>Welcome to MsCafe Shop</h1>
+          <p>Start your day with the perfect brew.</p>
+        </TextContent>
+      </Wrapper>
+      {/* <Title
+
       <FloatingCart />
       {/* Coffee of the Day Widget */}
 
@@ -858,12 +927,48 @@ const todaysDeals = [
 
 
       <Title
+
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         text-weight="bold-800"
       >
         <DynamicText text="Welcome to MsCafe Shop" />
+      </Title> */}
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "10px",
+          margin: "10px 0",
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Search for "
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            padding: "10px",
+            borderRadius: "20px",
+            border: "1px solid #ccc",
+            width: "300px",
+          }}
+        />
+        <button
+          onClick={() => console.log("Search clicked!")}
+          style={{
+            padding: "5px 15px",
+            borderRadius: "5px",
+            border: "none",
+            backgroundColor: "#6c3d36ff",
+            color: "white",
+            cursor: "pointer",
+          }}
+        >
+
       </Title>
       <SearchFilterContainer>
         <SearchInput
@@ -871,6 +976,7 @@ const todaysDeals = [
           placeholder="Search for ..."
                   />
         <SearchButton onClick={() => console.log("Search clicked!")}>
+
           Search
         </SearchButton>
       </SearchFilterContainer>
@@ -890,8 +996,8 @@ const todaysDeals = [
           alignItems: "center", //to align buttons in center
           flexDirection: { xs: "column", sm: "column", md: "row" }, //to make button group adjust to different screen size
           justifyContent: "center",
-          borderRadius: "8px",
-          padding: "4px",
+          borderRadius: "6px",
+          padding: "2px",
         }}
       >
         <Button
@@ -900,8 +1006,8 @@ const todaysDeals = [
             setTimeout(() => scrollToSection("hot"), 100); // added Smooth scroll to section
           }}
           style={{
-            width: "200px",
-            backgroundColor: category === "hot" ? "#f0efdc" : "#7c2414",
+            width: "180px",
+            backgroundColor: category === "hot" ? "#f0efdc" : "#6c3d36ff",
             color: category === "hot" ? "black" : "white",
           }}
         >
@@ -913,8 +1019,8 @@ const todaysDeals = [
             setTimeout(() => scrollToSection("cold"), 100);
           }}
           style={{
-            width: "200px",
-            backgroundColor: category === "cold" ? "#f0efdc" : "#7c2414",
+            width: "180px",
+            backgroundColor: category === "cold" ? "#f0efdc" : "#6c3d36ff",
             color: category === "cold" ? "black" : "white",
           }}
         >
@@ -926,8 +1032,8 @@ const todaysDeals = [
             setTimeout(() => scrollToSection("food"), 100);
           }}
           style={{
-            width: "200px",
-            backgroundColor: category === "food" ? "#f0efdc" : "#7c2414",
+            width: "180px",
+            backgroundColor: category === "food" ? "#f0efdc" : "#6c3d36ff",
             color: category === "food" ? "black" : "white",
           }}
         >
@@ -985,6 +1091,7 @@ const todaysDeals = [
                             right: "10px",
                             cursor: "pointer",
                             fontSize: "24px",
+                            color: likedProducts[product.id] ? "red" : "brown",
                             color: wishlistItems.some(item => item.id === product.id) ? "red" : "gray",
                             zIndex: 2,
                           }}

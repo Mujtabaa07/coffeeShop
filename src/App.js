@@ -8,6 +8,7 @@ import { Provider, useSelector, useDispatch } from 'react-redux';
 import { store } from './Store/index';
 import { getCurrentUser } from './Store/authSlice';
 import styled from 'styled-components';
+import { useState } from "react";
 
 import Navbar from './componets/Navbar';
 import Footer from './componets/footer';
@@ -44,6 +45,7 @@ import Reviews from './componets/Reviews';
 import AnimatedCursor from 'react-animated-cursor';
 
 import Chatbot from "./componets/Chatbot";
+<div className="min-h-screen bg-white dark:bg-black text-black dark:text-white"></div>;
 
 // Styled Containers
 const AppContainer = styled.div`
@@ -51,7 +53,9 @@ const AppContainer = styled.div`
   flex-direction: column;
   min-height: 100vh;
   color: #7c2214;
-`;
+`
+  
+  ;
 
 const ContentContainer = styled.div`
   flex: 1;
@@ -99,16 +103,10 @@ const AppContent = () => {
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth); 
 
-  useEffect(() => {
-    if (token && !user) {
-      dispatch(getCurrentUser());
-    }
-  }, [token, user, dispatch]);
 
   return (
     <AppContainer>
       <Navbar />
-
       <AnimatedCursor
         innerSize={20}
         outerSize={20}
@@ -118,8 +116,8 @@ const AppContent = () => {
         outerScale={4}
       />
 
-      <ToastContainer 
-        position="top-right" 
+      <ToastContainer
+        position="top-right"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -160,41 +158,41 @@ const AppContent = () => {
 
           {/* Protected Routes */}
           <Route path="/profile" element={<SafeProfileRoute />} />
-          <Route 
-            path="/cart" 
+          <Route
+            path="/cart"
             element={
               <ProtectedRoute>
                 <Cart />
               </ProtectedRoute>
-            } 
+            }
           />
-          <Route 
-            path="/checkout" 
+          <Route
+            path="/checkout"
             element={
               <ProtectedRoute>
                 <Checkout />
               </ProtectedRoute>
-            } 
+            }
           />
-          <Route 
-            path="/favorites" 
+          <Route
+            path="/favorites"
             element={
               <ProtectedRoute>
                 <Favorites />
               </ProtectedRoute>
-            } 
+            }
           />
-          <Route 
-            path="/feedback" 
+          <Route
+            path="/feedback"
             element={
               <ProtectedRoute>
                 <Feedback />
               </ProtectedRoute>
-            } 
+            }
           />
         </Routes>
       </ContentContainer>
-
+      {/* </div> */}
       <Reviews />
 
       {/* Add Chatbot so it floats on every page */}
@@ -208,15 +206,21 @@ const AppContent = () => {
 // ✅ Main App Component with Google OAuth Provider
 function App() {
   return (
-    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-      <Provider store={store}>
-        <Router>
-          <ScrollToTop />
-          <AppContent />
-        </Router>
-      </Provider>
-    </GoogleOAuthProvider>
+    <div>
+      <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+        <Provider store={store}>
+          <Router>
+            <ScrollToTop />
+            <AppContent />
+          </Router>
+        </Provider>
+      </GoogleOAuthProvider>
+      
+        
+      </div>
+    
   );
 }
+
 
 export default App;

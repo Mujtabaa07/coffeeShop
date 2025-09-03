@@ -4,6 +4,13 @@
 .App {
   text-align: center;
 }
+body {
+  @apply bg-white text-black;
+}
+
+.dark body {
+  @apply bg-gray-900 text-white;
+}
 
 .App-logo {
   height: 40vmin;

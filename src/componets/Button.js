@@ -3,13 +3,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled(motion.button)`
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.7rem;
   margin: 1rem 30px 1rem 0;
   font-size: 1rem;
-  background-color: ${props => props.primary ? '#7c2214' : '#7c2214'};
-  color: ${props => props.primary ? 'white' : 'white'};
-  border: 2px solid #7c2214;
-  border-radius: 4px;
+  background-color: ${(props) => (props.primary ? "#5b342eff" : "#6c3d36ff")};
+  color: ${(props) => (props.primary ? "white" : "white")};
+  border: 2px solid #5e3731ff;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-right: 30px;
@@ -17,15 +17,13 @@ const StyledButton = styled(motion.button)`
   font-weight: bold;
   letter-spacing: 1px;
 
-    margin-right: ${props => props.noMargin ? '0' : '10px'}; /* Add margin for spacing */
-
-
+  margin-right: ${(props) =>
+    props.noMargin ? "0" : "10px"}; /* Add margin for spacing */
 
   &:hover {
-    background-color: ${props => props.primary ? '#9c1904' : 'white'};
-    color: ${props => props.primary ? 'white' : '#7c2214'};
+    background-color: ${(props) => (props.primary ? "#6c3d36ff" : "white")};
+    color: ${(props) => (props.primary ? "white" : "#6c3d36ff")};
     text-shadow: 5px 5px 9px rgba(0, 0, 0, 0.8);
-    
   }
 `;
 const ButtonContainer = styled.div`

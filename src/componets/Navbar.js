@@ -69,7 +69,7 @@ const NavItem = styled(motion.div)`
   position: relative;
   padding: 0.5rem 0;
 
-  a {
+  a, span {
     color: #e6d5b8;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
@@ -102,7 +102,7 @@ const NavItem = styled(motion.div)`
     }
   }
 
-  &.active a {
+  &.active a, &.active span {
     color: #d2691e;
     font-weight: 600;
 
@@ -127,7 +127,7 @@ const DropdownMenu = styled(motion.div)`
   gap: 0.8rem;
   z-index: 1001;
 
-  a {
+  a, span {
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: all 0.3s ease;

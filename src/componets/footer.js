@@ -336,55 +336,7 @@ function Footer() {
     <FooterContainer>
       <FooterContent>
         {/* Social Icons */}
-        <SocialIcons>
-          <SocialMediaIcon
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            aria-label="Facebook">
-            <i className="fab fa-facebook-f"></i>
-          </SocialMediaIcon>
-
-          <SocialMediaIcon
-            href="https://www.linkedin.com/in/mohamed-mujtaba-290885249/"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            aria-label="LinkedIn"
-            role="link">
-            <i className="fab fa-linkedin-in"></i>
-          </SocialMediaIcon>
-
-          <SocialMediaIcon
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            aria-label="Twitter"
-            role="link">
-            <i className="fab fa-x-twitter"></i>
-          </SocialMediaIcon>
-
-          <SocialMediaIcon
-            href="https://www.instagram.com/hy.mujtaba/"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            aria-label="Instagram">
-            <i className="fab fa-instagram"></i>
-          </SocialMediaIcon>
-
-          <SocialMediaIcon
-            href="https://github.com/Mujtabaa07/coffeeShop"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            aria-label="GitHub"
-            role="link">
-            <i className="fab fa-github"></i>
-          </SocialMediaIcon>
-        </SocialIcons>
+        
 
         {/* Divider */}
         <Divider />
@@ -479,6 +431,55 @@ function Footer() {
             </InfoColumn>
           </div>
         </InfoSection>
+        <SocialIcons>
+          <SocialMediaIcon
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            aria-label="Facebook">
+            <i className="fab fa-facebook-f"></i>
+          </SocialMediaIcon>
+
+          <SocialMediaIcon
+            href="https://www.linkedin.com/in/mohamed-mujtaba-290885249/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            aria-label="LinkedIn"
+            role="link">
+            <i className="fab fa-linkedin-in"></i>
+          </SocialMediaIcon>
+
+          <SocialMediaIcon
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            aria-label="Twitter"
+            role="link">
+            <i className="fab fa-x-twitter"></i>
+          </SocialMediaIcon>
+
+          <SocialMediaIcon
+            href="https://www.instagram.com/hy.mujtaba/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            aria-label="Instagram">
+            <i className="fab fa-instagram"></i>
+          </SocialMediaIcon>
+
+          <SocialMediaIcon
+            href="https://github.com/Mujtabaa07/coffeeShop"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            aria-label="GitHub"
+            role="link">
+            <i className="fab fa-github"></i>
+          </SocialMediaIcon>
+        </SocialIcons>
 
         {/* Footer Text */}
         <CopyrightSection>

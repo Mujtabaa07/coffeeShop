@@ -2,11 +2,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from "@react-oauth/google";
 import { login, googleLogin, clearError } from "../Store/authSlice";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import PasswordChecklist from "./PasswordChecklist";
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5001/api";
 
 function SignupPage() {
   const [name, setName] = useState("");
@@ -15,12 +16,14 @@ function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   // Get auth state from Redux
-  const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
+  const { loading, error, isAuthenticated } = useSelector(
+    (state) => state.auth
+  );
 
   // Clear any existing errors when component mounts
   React.useEffect(() => {
@@ -33,82 +36,85 @@ function SignupPage() {
       navigate("/home");
     }
   }, [isAuthenticated, navigate]);
-// Password validation function
+  // Password validation function
 
-const validatePassword = (password) => {
-  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-  return regex.test(password);
-};
+  const validatePassword = (password) => {
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return regex.test(password);
+  };
 
   // Handle traditional form signup
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!name || !email || !password || !confirmPassword) {
-    toast.error("Please fill in all fields.");
-    return;
-  }
-
-  if (password !== confirmPassword) {
-    toast.error("Passwords do not match.");
-    return;
-  }
-
-  if (!validatePassword(password)) {
-    toast.error(
-      "Password must be at least 6 characters and include uppercase, lowercase, number, and special character."
-    );
-    return;
-  }
-
-  if (!acceptTerms) {
-    toast.error("Please accept the Terms and Conditions.");
-    return;
-  }
-
-  setIsLoading(true);
-
-  try {
-    const response = await fetch(`${API_URL}/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      dispatch(login(data.user));
-      toast.success("Account created successfully! Welcome to MsCafe!");
-      navigate("/home");
-    } else {
-      toast.error(data.message || "Registration failed. Please try again.");
+    if (!name || !email || !password || !confirmPassword) {
+      toast.error("Please fill in all fields.");
+      return;
     }
-  } catch (error) {
-    toast.error("Registration failed. Please check your connection.");
-    console.error("Registration error:", error);
-  } finally {
-    setIsLoading(false);
-  }
-};
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match.");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      toast.error(
+        "Password must be at least 6 characters and include uppercase, lowercase, number, and special character."
+      );
+      return;
+    }
+
+    if (!acceptTerms) {
+      toast.error("Please accept the Terms and Conditions.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${API_URL}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        dispatch(login(data.user));
+        toast.success("Account created successfully! Welcome to MsCafe!");
+        navigate("/home");
+      } else {
+        toast.error(data.message || "Registration failed. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Registration failed. Please check your connection.");
+      console.error("Registration error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Handle Google Authentication
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      const result = await dispatch(googleLogin(credentialResponse.credential)).unwrap();
+      const result = await dispatch(
+        googleLogin(credentialResponse.credential)
+      ).unwrap();
       toast.success(`Welcome to MsCafe, ${result.user.name}! 🎉`);
       navigate("/home");
     } catch (error) {
       toast.error("Google sign-up failed. Please try again.");
-      console.error('Google sign-up failed:', error);
+      console.error("Google sign-up failed:", error);
     }
   };
 
   const handleGoogleError = () => {
     toast.error("Google sign-up failed. Please try again.");
-    console.error('Google sign-up failed');
+    console.error("Google sign-up failed");
   };
 
   return (
@@ -122,20 +128,20 @@ const validatePassword = (password) => {
             className="w-full h-full object-cover"
           />
         </div>
-        
+
         {/* Right Side: Signup Form */}
         <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-white">
           <h2 className="text-3xl font-bold text-[#4E342E] text-center mb-6">
             Join MsCafe Family
           </h2>
-          
+
           {/* Display error if any */}
           {error && (
             <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg text-sm text-center">
               {error}
             </div>
           )}
-          
+
           {/* Google Sign-up Section */}
           <div className="mb-6">
             <GoogleLogin
@@ -149,17 +155,19 @@ const validatePassword = (password) => {
               disabled={loading || isLoading}
             />
           </div>
-          
+
           {/* Divider */}
           <div className="relative mb-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500">Or create account with email</span>
+              <span className="px-4 bg-white text-gray-500">
+                Or create account with email
+              </span>
             </div>
           </div>
-          
+
           {/* Email/Password Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="mb-4">
@@ -179,7 +187,7 @@ const validatePassword = (password) => {
                 disabled={loading || isLoading}
               />
             </div>
-            
+
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-medium mb-2"
@@ -197,7 +205,7 @@ const validatePassword = (password) => {
                 disabled={loading || isLoading}
               />
             </div>
-            
+
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-medium mb-2"
@@ -214,8 +222,10 @@ const validatePassword = (password) => {
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={loading || isLoading}
               />
+              {/* ✅ Password rules live checker */}
+              {password && <PasswordChecklist password={password} />}
             </div>
-            
+
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-medium mb-2"
@@ -233,7 +243,7 @@ const validatePassword = (password) => {
                 disabled={loading || isLoading}
               />
             </div>
-            
+
             {/* Terms and Conditions */}
             <div className="mb-4">
               <label className="flex items-start space-x-3">
@@ -246,17 +256,17 @@ const validatePassword = (password) => {
                 />
                 <span className="text-sm text-gray-700">
                   I agree to the{" "}
-                  <a 
-                    href="/terms" 
+                  <a
+                    href="/terms"
                     className="text-[#6D4C41] font-medium hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     Terms and Conditions
-                  </a>
-                  {" "}and{" "}
-                  <a 
-                    href="/privacy" 
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="/privacy"
                     className="text-[#6D4C41] font-medium hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -266,17 +276,33 @@ const validatePassword = (password) => {
                 </span>
               </label>
             </div>
-            
+
             <button
               type="submit"
               disabled={loading || isLoading || !acceptTerms}
               className="w-full bg-[#4E342E] text-white py-2 px-4 rounded-lg hover:bg-[#3E2723] transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
             >
-              {(loading || isLoading) ? (
+              {loading || isLoading ? (
                 <>
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Creating Account...
                 </>
@@ -285,7 +311,7 @@ const validatePassword = (password) => {
               )}
             </button>
           </form>
-          
+
           {/* Login Link */}
           <p className="text-sm text-gray-600 text-center mt-6">
             Already have an account?{" "}
@@ -296,10 +322,12 @@ const validatePassword = (password) => {
               Log In
             </a>
           </p>
-          
+
           {/* Welcome Benefits */}
           <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
-            <h3 className="text-sm font-semibold text-amber-800 mb-2">🎉 Welcome Benefits</h3>
+            <h3 className="text-sm font-semibold text-amber-800 mb-2">
+              🎉 Welcome Benefits
+            </h3>
             <ul className="text-xs text-amber-700 space-y-1">
               <li>• Get 100 loyalty points for signing up</li>
               <li>• Free welcome drink on your first visit</li>

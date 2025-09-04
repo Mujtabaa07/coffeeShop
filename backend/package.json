@@ -18,6 +18,7 @@
     "deploy": "npm ci --only=production && pm2 restart ecosystem.config.js"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "bcrypt": "^6.0.0",
     "connect-mongo": "^5.1.0",
     "cors": "^2.8.5",
@@ -33,15 +34,19 @@
     "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10",
+    "@jest/globals": "^29.7.0",
     "jest": "^29.7.0",
-    "supertest": "^6.3.4",
-    "@jest/globals": "^29.7.0"
+    "nodemon": "^3.1.10",
+    "supertest": "^6.3.4"
   },
   "jest": {
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["<rootDir>/__tests__/setup.js"],
-    "testMatch": ["**/__tests__/**/*.test.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/setup.js"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ],
     "collectCoverageFrom": [
       "routes/**/*.js",
       "models/**/*.js",

@@ -405,7 +405,7 @@ function Footer() {
               </p>
             </InfoColumn>
 
-            <InfoColumn>
+            <InfoColumn style={{marginLeft:'2rem',marginRight:'1rem'}}>
               <h3>Quick Links</h3>
               <Link to="/">Home</Link>
               <Link to="/shop">Shop</Link>

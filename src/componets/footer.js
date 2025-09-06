@@ -408,7 +408,7 @@ function Footer() {
             <InfoColumn style={{marginLeft:'2rem',marginRight:'1rem'}}>
               <h3 style={{textAlign:'center'}}>Quick Links</h3>
               <Link to="/" style={{textAlign:'center'}}>Home</Link>
-              <Link to="/shop">Shop</Link>
+              <Link to="/shop" style={{textAlign:'center'}}>Shop</Link>
               <Link to="/about">About</Link>
               <Link to="/blog">Blog</Link>
               <Link to="/contact">Contact</Link>

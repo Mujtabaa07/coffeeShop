@@ -396,7 +396,7 @@ function Footer() {
           </div>
 
           <div className="info-wrapper">
-            <InfoColumn>
+            <InfoColumn style={{marginLeft:'1rem',marginRight:'1rem'}}>
               <h3>About Us</h3>
               <p style={{textAlign:'justify'}}>
                 Founded in 2010, MsCafe is dedicated to serving the finest coffee

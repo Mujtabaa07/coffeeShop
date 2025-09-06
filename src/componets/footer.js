@@ -409,7 +409,7 @@ function Footer() {
               <h3 style={{textAlign:'center'}}>Quick Links</h3>
               <Link to="/" style={{textAlign:'center'}}>Home</Link>
               <Link to="/shop" style={{textAlign:'center'}}>Shop</Link>
-              <Link to="/about">About</Link>
+              <Link to="/about" style={{textAlign:'center'}}>About</Link>
               <Link to="/blog">Blog</Link>
               <Link to="/contact">Contact</Link>
               <Link to="/testimonial">Testimonial</Link>

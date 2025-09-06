@@ -126,8 +126,12 @@ const InfoColumn = styled.div`
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    transition:font-size 0.2s ease-in;
   }
-
+  h3:hover{
+  color: #f7d6b3ff;
+  font-size:20px
+  }
   p {
     font-size: 0.9rem;
     color: #fffbeb;
@@ -396,7 +400,7 @@ function Footer() {
           </div>
 
           <div className="info-wrapper">
-            <InfoColumn style={{marginLeft:'2rem',marginRight:'1rem'}}>
+            <InfoColumn style={{marginLeft:'2rem',marginRight:'1rem'}} className="t">
               <h3>About Us</h3>
               <p style={{textAlign:'justify'}}>
                 Founded in 2010, MsCafe is dedicated to serving the finest coffee

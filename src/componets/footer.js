@@ -412,7 +412,7 @@ function Footer() {
               <Link to="/about" style={{textAlign:'center'}}>About</Link>
               <Link to="/blog" style={{textAlign:'center'}}>Blog</Link>
               <Link to="/contact" style={{textAlign:'center'}}>Contact</Link>
-              <Link to="/testimonial">Testimonial</Link>
+              <Link to="/testimonial" style={{textAlign:'center'}}>Testimonial</Link>
               <Link to="/contributor">Contributors</Link>
             </InfoColumn>
 

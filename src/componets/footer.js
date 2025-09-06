@@ -398,7 +398,7 @@ function Footer() {
           <div className="info-wrapper">
             <InfoColumn>
               <h3>About Us</h3>
-              <p>
+              <p style={{textAlign:'justify'}}>
                 Founded in 2010, MsCafe is dedicated to serving the finest coffee
                 with passion and expertise. We source our beans from sustainable
                 farms across the globe.

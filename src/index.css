@@ -1,6 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Theme variables: light defaults, dark overrides below */
+:root {
+  /* Backgrounds and surfaces */
+  --bg: #FAF9F6; /* off-white */
+  --surface: #FFFFFF;
+
+  /* Text */
+  --text: #111827; /* very dark gray */
+  --muted: #6B7280;
+
+  /* Accent / brand */
+  --primary: #d2691e; /* coffee brown */
+  --accent: #f4a460;
+
+  /* Borders and UI */
+  --border: rgba(0,0,0,0.08);
+  --nav-bg: linear-gradient(135deg, rgba(44, 19, 11, 0.98) 0%, rgba(66, 33, 11, 0.98) 100%);
+  --nav-surface: rgba(44, 19, 11, 0.98);
+}
+
+/* Dark theme overrides */
+.dark {
+  --bg: #0b1220; /* dark navy */
+  --surface: #0f1724;
+  --text: #E6E6E6;
+  --muted: #9CA3AF;
+  --primary: #D9A15A; /* lighter accent for dark */
+  --accent: #f4a460;
+  --border: rgba(255,255,255,0.06);
+  --nav-bg: linear-gradient(135deg, rgba(6, 7, 14, 0.85) 0%, rgba(16, 20, 30, 0.85) 100%);
+  --nav-surface: rgba(6, 7, 14, 0.9);
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -8,6 +40,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 code {
@@ -22,8 +56,8 @@ code {
   bottom: 20px;
   right: 20px;
   z-index: 99;
-  background-color: #6F4E37; /* Coffee Brown */
-  color: #FAF9F6; /* Off-White */
+  background-color: var(--primary);
+  color: var(--surface);
   border: none;
   outline: none;
   cursor: pointer;
@@ -36,8 +70,8 @@ code {
 
 /* Hover effect */
 #scrollToTop:hover {
-  background-color: #D4A373; /* Golden Yellow */
-  color: #4B4B4B; /* Charcoal Gray */
+  background-color: var(--accent);
+  color: var(--text);
   transform: scale(1.1); /* Slightly enlarge the button */
 }
 

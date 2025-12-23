@@ -22,7 +22,7 @@ router.post('/', authMiddleware, async (req, res) => {
       if (!product || !product.available) {
         return res.status(400).json({ 
           success: false, 
-          message: `Product ${item.product} is not available` 
+          message: `Product ₹{item.product} is not available` 
         });
       }
 

@@ -126,8 +126,12 @@ const InfoColumn = styled.div`
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    transition:font-size 0.2s ease-in;
   }
-
+  h3:hover{
+  color: #f7d6b3ff;
+  font-size:20px
+  }
   p {
     font-size: 0.9rem;
     color: #fffbeb;
@@ -391,36 +395,36 @@ function Footer() {
 
         {/* Informational Sections */}
         <InfoSection>
-          <div className="logo-section">
+          <div className="logo-section " style={{marginLeft:'0.1rem'}}>
             <img src={FooterImg} alt="Footer" className="infoimg"/>
           </div>
 
           <div className="info-wrapper">
-            <InfoColumn>
+            <InfoColumn style={{marginLeft:'2rem',marginRight:'1rem'}} className="t">
               <h3>About Us</h3>
-              <p>
+              <p style={{textAlign:'justify'}}>
                 Founded in 2010, MsCafe is dedicated to serving the finest coffee
                 with passion and expertise. We source our beans from sustainable
                 farms across the globe.
               </p>
             </InfoColumn>
 
-            <InfoColumn>
-              <h3>Quick Links</h3>
-              <Link to="/">Home</Link>
-              <Link to="/shop">Shop</Link>
-              <Link to="/about">About</Link>
-              <Link to="/blog">Blog</Link>
-              <Link to="/contact">Contact</Link>
-              <Link to="/testimonial">Testimonial</Link>
-              <Link to="/contributor">Contributors</Link>
+            <InfoColumn style={{marginLeft:'2rem',marginRight:'1rem'}}>
+              <h3 style={{textAlign:'center'}}>Quick Links</h3>
+              <Link to="/" style={{textAlign:'center'}}>Home</Link>
+              <Link to="/shop" style={{textAlign:'center'}}>Shop</Link>
+              <Link to="/about" style={{textAlign:'center'}}>About</Link>
+              <Link to="/blog" style={{textAlign:'center'}}>Blog</Link>
+              <Link to="/contact" style={{textAlign:'center'}}>Contact</Link>
+              <Link to="/testimonial" style={{textAlign:'center'}}>Testimonial</Link>
+              <Link to="/contributor" style={{textAlign:'center'}}>Contributors</Link>
             </InfoColumn>
 
-            <InfoColumn>
+            <InfoColumn >
               <h3>Contact Us</h3>
               <p><a href="mailto:contact@mscafe.com">✉️ contact@mscafe.com</a></p>
               <p><a href="tel:+11234567890">☎️ (123) 456-7890</a></p>
-
+              <br/>
               <h3>We Accept</h3>
               <PaymentIcons>
                 <PaymentIcon
@@ -465,7 +469,7 @@ function Footer() {
               </PaymentIcons>
             </InfoColumn>
 
-            <InfoColumn>
+            <InfoColumn  style={{marginLeft:'2rem'}}>
               <h3>Location</h3>
               <p>123 Coffee St, Bean Town, USA</p>
               <p>

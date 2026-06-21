@@ -470,10 +470,20 @@ function Footer() {
               <p>123 Coffee St, Bean Town, USA</p>
               <p>
                 <a
-                  href="https://www.google.com/maps"
+                  href="https://www.google.com/maps?q=YOUR_LAT,YOUR_LNG"
                   target="_blank"
-                  rel="noopener noreferrer">
-                  📍 View on Map
+                  rel="noopener noreferrer"
+                  style={{ display: 'inline-block' }}
+                >
+                  <div style={{ width: '250px', height: '250px', borderRadius: '12px', overflow: 'hidden' }}>
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE_HERE"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0, pointerEvents: 'none' }}
+                      title="MsCafe Location Map"
+                    ></iframe>
+                  </div>
                 </a>
               </p>
             </InfoColumn>

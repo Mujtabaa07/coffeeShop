@@ -5,13 +5,20 @@ import styled from "styled-components";
 const ScrollButton = styled.button`
   position: fixed;
   bottom: 30px;
-  right: 30px;
+  right: 20px;
   background-color: #7c2214;
   color: white;
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
-  font-size: 16px;
+  font-size:20px;
+  font-weight:bold;
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
+  transition:background-color 0.3s ease, transform 0.3s ease;
+  &:hover{
+  background-color:#a8322b;
+  transform:translateY(-2px);}
+
   cursor: pointer;
   display: ${({ visible }) => (visible ? "block" : "none")};
   z-index: 1000;
@@ -54,7 +61,7 @@ const { pathname } = useLocation();
 
   return (
     <ScrollButton onClick={scrollToTop} visible={visible} aria-label="Scroll to top">
-      ↑ Top
+      ↑ 
     </ScrollButton>
   );
 };

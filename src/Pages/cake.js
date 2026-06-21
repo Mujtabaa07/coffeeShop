@@ -350,7 +350,7 @@ function Cake() {
             </div>
             <ProductInfo>
               <ProductName>{product.name}</ProductName>
-              <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
+              <ProductPrice>₹{product.price.toFixed(2)}</ProductPrice>
               {!quantities[product.id] ? (
                 <>
                   <Button onClick={() => handleAddToCart(product)}>

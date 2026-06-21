@@ -820,6 +820,12 @@ function Shop() {
       ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
+
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    toast.success(`₹{product.name} added to cart!`);
+
   
   const toggleHeart = (product) => {
     const isInWishlist = wishlistItems.some(item => item.id === product.id);
@@ -831,6 +837,7 @@ function Shop() {
       dispatch(addToWishlist(product));
       toast.success(`${product.name} added to wishlist!`, { autoClose: 2000 });
     }
+
   };
 
 
@@ -990,10 +997,17 @@ const todaysDeals = [
                           }}
                         >
                           <i
+
+                            className={`fa-heart ₹{
+                              likedProducts[product.id] ? "fas" : "far"
+                            }`}
+                          ></i>
+
                             className={`fa-heart ${
                             wishlistItems.some(item => item.id === product.id) ? "fas" : "far"
                           }`}
                         ></i>
+
                         </div>
                         <Overlay
                           className="overlay"
@@ -1011,8 +1025,18 @@ const todaysDeals = [
                       </div>
                       <ProductInfo>
                         <ProductName>{product.name}</ProductName>
+
+                        <ProductPrice>₹{product.price.toFixed(2)}</ProductPrice>
+                        <Button onClick={() => handleAddToCart(product)}>
+                          Add to Cart
+                        </Button>
+                        <Button onClick={() => handleAddToCart(product)}>
+                          Buy Now
+                        </Button>
+
                         <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
                         <EnhancedAddToCartButton product={product} />
+
                       </ProductInfo>
                     </ProductCard>
                         ))}

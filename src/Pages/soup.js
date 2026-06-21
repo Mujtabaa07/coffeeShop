@@ -293,14 +293,14 @@ function Soup() {
                 }}
               >
                 <i
-                  className={`fa-heart ${likedProducts[product.id] ? 'fas' : 'far'
+                  className={`fa-heart ₹{likedProducts[product.id] ? 'fas' : 'far'
                     }`}
                 ></i>
               </div>
             </div>
             <ProductInfo>
               <ProductName>{product.name}</ProductName>
-              <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
+              <ProductPrice>₹{product.price.toFixed(2)}</ProductPrice>
               {!quantities[product.id] ? (
                 <Button onClick={() => handleAddToCart(product)}>
                   Add to Cart

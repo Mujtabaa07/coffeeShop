@@ -4,14 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Store/authSlice";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaCoffee, FaUser, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
+import { FaCoffee, FaUser, FaShoppingCart, FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 
 const NavbarContainer = styled(motion.nav)`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 5%;
-  background: linear-gradient(135deg, rgba(44, 19, 11, 0.98) 0%, rgba(66, 33, 11, 0.98) 100%);
+  background: var(--nav-bg);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   position: fixed;
@@ -19,7 +19,7 @@ const NavbarContainer = styled(motion.nav)`
   left: 0;
   right: 0;
   z-index: 998;
-  border-bottom: 1px solid rgba(210, 105, 30, 0.3);
+  border-bottom: 1px solid var(--border);
   transition: all 0.3s ease;
 
   &.scrolled {
@@ -70,7 +70,7 @@ const NavItem = styled(motion.div)`
   padding: 0.5rem 0;
 
   a,span {
-    color: #e6d5b8;
+    color: var(--text);
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 1.1rem;
@@ -83,7 +83,7 @@ const NavItem = styled(motion.div)`
     padding: 0.5rem 0;
 
     &:hover {
-      color: #f4a460;
+      color: var(--accent);
     }
 
     &::after {
@@ -103,7 +103,7 @@ const NavItem = styled(motion.div)`
   }
 
   &.active a {
-    color: #d2691e;
+    color: var(--primary);
     font-weight: 600;
 
     &::after {
@@ -121,7 +121,7 @@ const DropdownMenu = styled(motion.div)`
   padding: 1rem;
   min-width: 200px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(210, 105, 30, 0.3);
+  border: 1px solid var(--border);
   display: none;
   flex-direction: column;
   gap: 0.8rem;
@@ -133,7 +133,7 @@ const DropdownMenu = styled(motion.div)`
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(210, 105, 30, 0.2);
+      background: rgba(210, 105, 30, 0.12);
       transform: translateX(5px);
     }
   }
@@ -168,17 +168,17 @@ const AuthButton = styled(motion.button)`
 
   &.login {
     background: transparent;
-    color: #e6d5b8;
-    border: 1px solid #d2691e;
+    color: var(--text);
+    border: 1px solid var(--primary);
 
     &:hover {
-      background: rgba(210, 105, 30, 0.2);
+      background: rgba(210, 105, 30, 0.12);
     }
   }
 
   &.register {
-    background: linear-gradient(to right, #d2691e, #cd853f);
-    color: white;
+    background: linear-gradient(to right, var(--primary), #cd853f);
+    color: var(--surface);
     box-shadow: 0 4px 15px rgba(210, 105, 30, 0.4);
 
     &:hover {
@@ -189,13 +189,27 @@ const AuthButton = styled(motion.button)`
 
   &.logout {
     background: transparent;
-    color: #e6d5b8;
-    border: 1px solid #8b0000;
+    color: var(--text);
+    border: 1px solid rgba(139, 0, 0, 0.25);
 
     &:hover {
-      background: rgba(139, 0, 0, 0.2);
+      background: rgba(139, 0, 0, 0.08);
     }
   }
+`;
+
+const ThemeToggleButton = styled(motion.button)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0;
 `;
 
 const MobileMenuButton = styled(motion.button)`
@@ -291,6 +305,14 @@ function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  // Theme state: we reflect the presence of the `.dark` class on the <html> element
+  const [isDark, setIsDark] = useState(() => {
+    try {
+      return document.documentElement.classList.contains('dark');
+    } catch (e) {
+      return false;
+    }
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -308,6 +330,22 @@ function Navbar() {
       document.body.style.overflow = '';
     }
   }, [isMobileMenuOpen]);
+
+  // Toggle theme and persist preference
+  const toggleTheme = () => {
+    try {
+      const willBeDark = !document.documentElement.classList.contains('dark');
+      if (willBeDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      localStorage.setItem('themeMode', willBeDark ? 'dark' : 'light');
+      setIsDark(willBeDark);
+    } catch (e) {
+      // ignore
+    }
+  };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -407,6 +445,16 @@ function Navbar() {
         </NavLinks>
 
         <AuthButtons>
+          <ThemeToggleButton
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            aria-pressed={isDark}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {isDark ? <FaSun /> : <FaMoon />}
+          </ThemeToggleButton>
           {isLoggedIn ? (
             <>
               <NavItem>
@@ -470,6 +518,18 @@ function Navbar() {
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
           >
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+              <ThemeToggleButton
+                onClick={() => { toggleTheme(); setIsMobileMenuOpen(false); }}
+                aria-label="Toggle theme"
+                aria-pressed={isDark}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {isDark ? <FaSun /> : <FaMoon />}
+              </ThemeToggleButton>
+            </div>
             {navItems.map((item) => (
               <React.Fragment key={item.path || item.title}>
                 <MobileNavItem
